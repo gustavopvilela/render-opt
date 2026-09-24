@@ -1,0 +1,13 @@
+.venv/
+.idea/
+__pycache__/
+build/
+cmake-build-release-visual-studio/
+*.pyc
+data/raw/jsonl/
+data/raw/**/*.blend
+data/processed/*.parquet
+experiments/**/output_render/
+.pytest_cache/
+data/raw/*.zip
+data/raw/**/*.tar.bz2

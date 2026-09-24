@@ -1,0 +1,14 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=2.13"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "render-opt"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26"]
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+cmake.build-type = "Release"
