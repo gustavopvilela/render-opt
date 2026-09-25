@@ -88,3 +88,44 @@ def test_erros_viram_valueerror ():
     inst = instancia_aleatoria()
     with pytest.raises(ValueError, match="aparece mais de uma vez"):
         sa_core.simulated_annealing(inst, solucao_inicial=[[0, 0]] + [[]] * 3, verbose=False)
+
+def test_delta_insercao_bate_com_recalculo ():
+    inst = instancia_aleatoria(jobs=12, maquinas=3)
+    sequencia = [4, 0, 7, 2]
+    for maquina in range(inst.maquinas):
+        antes = tempo_maquina(sequencia, maquina, inst)
+        for job in (1, 5, 11):
+            for pos in range(len(sequencia) + 1):
+                nova = sequencia[:pos] + [job] + sequencia[pos:]
+                esperado = tempo_maquina(nova, maquina, inst) - antes
+                obtido = sa_core.calcular_delta_insercao(job, maquina, pos, sequencia, inst)
+                assert obtido == pytest.approx(esperado)
+
+    assert sa_core.calcular_delta_insercao(3, 0, 0, [], inst) == pytest.approx(inst.matriz_processamento[3, 0])
+
+@pytest.mark.parametrize("alpha", [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+def test_solucao_inicial_valida(alpha):
+    inst = instancia_aleatoria()
+    for semente in range(5):
+        solucao = sa_core.gerar_solucao_inicial(inst, alpha, semente=semente)
+        assert len(solucao) == inst.maquinas
+        assert sorted(j for seq in solucao for j in seq) == list(range(inst.jobs))
+
+def test_solucao_inicial_reprodutivel ():
+    inst = instancia_aleatoria()
+    assert sa_core.gerar_solucao_inicial(inst, semente=7) == sa_core.gerar_solucao_inicial(inst, semente=7)
+
+def test_alpha_constrola_gulosidade ():
+    inst = instancia_aleatoria()
+
+    def makespan_medio (alpha):
+        return np.mean([
+            sa_core.calcular_tempos_maquinas(inst, sa_core.gerar_solucao_inicial(inst, alpha, semente=s)).max() for s in range(20)
+        ])
+
+    assert makespan_medio(0.0) < makespan_medio(1.0)
+
+def test_alpha_invalido ():
+    inst = instancia_aleatoria()
+    with pytest.raises(ValueError, match="Alpha"):
+        sa_core.gerar_solucao_inicial(inst, alpha=1.5)
