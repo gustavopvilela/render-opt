@@ -42,10 +42,15 @@ namespace {
             }
         }
 
-        for (int j = 0; j > instancia.jobs; ++j) {
+        for (int j = 0; j < instancia.jobs; ++j) {
             if (!visto[j])
                 throw std::invalid_argument(std::format("Job {} não foi alocado", j));
         }
+    }
+
+    void validarAlpha (double alpha) {
+        if (!(alpha >= 0.0 && alpha <= 1.0))
+            throw std::invalid_argument("Alpha deve estar em [0, 1]");
     }
 
     template <typename T>
@@ -67,6 +72,7 @@ namespace {
         std::optional<std::uint64_t> semente,
         std::optional<SimulatedAnnealing::Solucao> solucaoInicial,
         long long intervaloHistorico,
+        double alphaConstrucao,
         bool verbose
     ) {
         ArrayD processamento, setup;
@@ -82,6 +88,7 @@ namespace {
             throw std::invalid_argument("intervalo_historico_deve ser >= 1");
         if (solucaoInicial)
             validarSolucao(*solucaoInicial, inst);
+        validarAlpha(alphaConstrucao);
 
         SimulatedAnnealing::ParametrosSimulatedAnnealing par;
         par.temperaturaInicial = temperaturaInicial;
@@ -93,6 +100,7 @@ namespace {
         par.maxIteracoesSemMelhoria = maxIteracoesSemMelhoria;
         par.semente = semente;
         par.intervaloHistorico = intervaloHistorico;
+        par.alphaConstrucao = alphaConstrucao;
 
         SimulatedAnnealing::ResultadoSimulatedAnnealing res;
         {
@@ -119,6 +127,35 @@ namespace {
         validarSolucao(solucao, inst);
         return paraNumpy(SimulatedAnnealing::calcularTemposMaquinas(solucao, inst));
     }
+
+    SimulatedAnnealing::Solucao gerarSolucaoInicialPy (const py::object& instancia, double alpha, std::optional<std::uint64_t> semente) {
+        ArrayD processamento, setup;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        validarAlpha(alpha);
+        SimulatedAnnealing::Rng rng(semente ? *semente : std::random_device{}());
+        py::gil_scoped_release semGIL;
+        return SimulatedAnnealing::gerarSolucaoInicial(inst, alpha, rng);
+    }
+
+    double calcularDeltaInsercaoPy (int job, int maquina, int pos, const std::vector<int>& sequencia, const py::object& instancia) {
+        ArrayD processamento, setup;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        auto fora = [](int x, int fim) { return x < 0 || x >= fim; };
+
+        if (fora(job, inst.jobs))
+            throw std::invalid_argument(std::format("job {} fora do intervalo", job));
+        if (fora(maquina, inst.maquinas))
+            throw std::invalid_argument(std::format("máquina {} fora do intervalo", maquina));
+        if (fora(pos, static_cast<int>(sequencia.size()) + 1))
+            throw std::invalid_argument(std::format("pos deve estar entre 0 e {}", sequencia.size()));
+
+        for (int j : sequencia) {
+            if (fora(j, inst.jobs))
+                throw std::invalid_argument(std::format("job {} fora do intervalo", j));
+        }
+
+        return SimulatedAnnealing::calcularDeltaInsercao(job, maquina, pos, sequencia, inst);
+    }
 }
 
 PYBIND11_MODULE(sa_core, m) {
@@ -138,6 +175,7 @@ PYBIND11_MODULE(sa_core, m) {
         py::arg("semente") = py::none(),
         py::arg("solucao_inicial") = py::none(),
         py::arg("intervalo_historico") = 1,
+        py::arg("alpha_construcao") = 0.3,
         py::arg("verbose") = true,
         "Executa o SA e devolve (melhor_solucao, melhor_makespan, historico)."
     );
@@ -147,5 +185,22 @@ PYBIND11_MODULE(sa_core, m) {
         py::arg("instancia"),
         py::arg("solucao"),
         "Tempo de conclusão de cada máquina para a solução dada."
+    );
+
+    m.def("gerar_solucao_inicial", &gerarSolucaoInicialPy,
+        py::arg("instancia"),
+        py::arg("alpha") = 0.3,
+        py::kw_only(),
+        py::arg("semente") = py::none(),
+        "Construção gulosa aleatorizada do GRASP. Devolve uma solução."
+    );
+
+    m.def("calcular_delta_insercao", &calcularDeltaInsercaoPy,
+        py::arg("job"),
+        py::arg("maquina"),
+        py::arg("pos"),
+        py::arg("sequencia"),
+        py::arg("instancia"),
+        "Aumento do tempo da máquina ao inserir \'job\' na posição \'pos\' da sequência."
     );
 }

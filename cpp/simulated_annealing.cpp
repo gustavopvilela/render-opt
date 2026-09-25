@@ -1,10 +1,10 @@
 #include "simulated_annealing.hpp"
 #include <algorithm>
 #include <chrono>
-#include <cmath>
 #include <format>
 #include <limits>
 #include <random>
+#include <numeric>
 
 namespace SimulatedAnnealing {
     double calcularTempoMaquina(const std::vector<int> &sequencia, int maquina, const Instancia &instancia) {
@@ -26,30 +26,8 @@ namespace SimulatedAnnealing {
         return tempos;
     }
 
-    Solucao gerarSolucaoInicial(const Instancia &instancia) {
-        Solucao solucao(instancia.maquinas);
-        std::vector<double> tempos(instancia.maquinas, 0.0);
-        for (int j = 0; j < instancia.jobs; ++j) {
-            int melhor = 0;
-            double melhorFim = std::numeric_limits<double>::infinity();
-            for (int k = 0; k < instancia.maquinas; ++k) {
-                const double setup = solucao[k].empty() ? 0.0 : instancia.tempoSetup(k, solucao[k].back(), j);
-                const double fim = tempos[k] + setup + instancia.tempoProcessamento(j, k);
-                if (fim < melhorFim) {
-                    melhorFim = fim;
-                    melhor = k;
-                }
-            }
-            solucao[melhor].push_back(j);
-            tempos[melhor] = melhorFim;
-        }
-
-        return solucao;
-    }
-
     /* Operações de vizinhança */
     namespace {
-        using Rng = std::mt19937_64;
         enum class TipoMovimento { Shift, Swap };
 
         struct Movimento {
@@ -148,6 +126,81 @@ namespace SimulatedAnnealing {
         }
     }
 
+    double calcularDeltaInsercao(int job, int maquina, int pos, const std::vector<int> &sequencia, const Instancia &instancia) {
+        const int anterior = pos > 0 ? sequencia[pos - 1] : -1;
+        const int proximo = pos < static_cast<int>(sequencia.size()) ? sequencia[pos] : -1;
+        double delta = instancia.tempoProcessamento(job, maquina);
+        if (anterior >= 0)
+            delta += instancia.tempoSetup(maquina, anterior, job);
+        if (proximo >= 0)
+            delta += instancia.tempoSetup(maquina, job, proximo);
+        if (anterior >= 0 && proximo >= 0)
+            delta -= instancia.tempoSetup(maquina, anterior, proximo);
+        return delta;
+    }
+
+    Solucao gerarSolucaoInicial(const Instancia &instancia, double alpha, Rng& rng) {
+        struct Candidato {
+            int maquina;
+            int pos;
+            double makespan;
+            double aumento;
+        };
+
+        Solucao solucao(instancia.maquinas);
+        std::vector<double> tempos(instancia.maquinas, 0.0);
+        std::vector<int> jobsNaoAlocados(instancia.jobs);
+        std::iota(jobsNaoAlocados.begin(), jobsNaoAlocados.end(), 0);
+        std::shuffle(jobsNaoAlocados.begin(), jobsNaoAlocados.end(), rng);
+        std::vector<Candidato> custos;
+        std::vector<int> rcl;
+
+        for (int job : jobsNaoAlocados) {
+            int maisDemorada = 0;
+            double maior = -std::numeric_limits<double>::infinity();
+            double segundo = maior;
+
+            for (int k = 0; k < instancia.maquinas; ++k) {
+                if (tempos[k] > maior) {
+                    segundo = maior;
+                    maior = tempos[k];
+                    maisDemorada = k;
+                }
+                else if (tempos[k] > segundo) {
+                    segundo = tempos[k];
+                }
+            }
+
+            custos.clear();
+            for (int m = 0; m < instancia.maquinas; ++m) {
+                const double maiorOutras = (m == maisDemorada) ? segundo : maior;
+                for (int pos = 0; pos <= static_cast<int>(solucao[m].size()); ++pos) {
+                    const double aumento = calcularDeltaInsercao(job, m, pos, solucao[m], instancia);
+                    const double makespanVizinho = std::max(tempos[m] + aumento, maiorOutras);
+                    custos.push_back({.maquina = m, .pos = pos, .makespan = makespanVizinho, .aumento = aumento});
+                }
+            }
+
+            const auto [itMin, itMax] = std::minmax_element(custos.begin(), custos.end(), [](const Candidato& a, const Candidato& b) {
+                return a.makespan < b.makespan;
+            });
+            const double limite = itMin->makespan + alpha * (itMax->makespan - itMin->makespan) + 1e-5;
+
+            rcl.clear();
+            for (int i = 0; i < static_cast<int>(custos.size()); ++i) {
+                if (custos[i].makespan <= limite) rcl.push_back(i);
+            }
+            if (rcl.empty()) rcl.push_back(0);
+
+            const Candidato& escolhido = custos[rcl[sortearInt(rng, 0, static_cast<int>(rcl.size()) - 1)]];
+            auto& seq = solucao[escolhido.maquina];
+            seq.insert(seq.begin() + escolhido.pos, job);
+            tempos[escolhido.maquina] += escolhido.aumento;
+        }
+
+        return solucao;
+    }
+
     /* Simulated Annealing principal */
     ResultadoSimulatedAnnealing simulatedAnnealing(const Instancia &instancia, const ParametrosSimulatedAnnealing &parametros, std::optional<Solucao> solucaoInicial) {
         using Relogio = std::chrono::steady_clock;
@@ -158,7 +211,7 @@ namespace SimulatedAnnealing {
 
         Rng rng(parametros.semente ? *parametros.semente : std::random_device{}());
 
-        Solucao atual = solucaoInicial ? std::move(*solucaoInicial) : gerarSolucaoInicial(instancia);
+        Solucao atual = solucaoInicial ? std::move(*solucaoInicial) : gerarSolucaoInicial(instancia, parametros.alphaConstrucao, rng);
         std::vector<double> tempos = calcularTemposMaquinas(atual, instancia);
         double makespanAtual = *std::max_element(tempos.begin(), tempos.end());
 

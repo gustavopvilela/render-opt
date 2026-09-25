@@ -2,11 +2,13 @@
 
 #include <cstdint>
 #include <optional>
+#include <random>
 #include <string>
 #include <vector>
 
 namespace SimulatedAnnealing {
     using Solucao = std::vector<std::vector<int>>;
+    using Rng = std::mt19937_64;
 
     struct Instancia {
         int jobs;
@@ -33,6 +35,7 @@ namespace SimulatedAnnealing {
         std::optional<long long> maxIteracoesSemMelhoria;
         std::optional<std::uint64_t> semente;
         long long intervaloHistorico = 1;
+        double alphaConstrucao = 0.3;
     };
 
     struct Historico {
@@ -53,6 +56,7 @@ namespace SimulatedAnnealing {
 
     double calcularTempoMaquina (const std::vector<int>& sequencia, int maquina, const Instancia& instancia);
     std::vector<double> calcularTemposMaquinas (const Solucao& solucao, const Instancia& instancia);
-    Solucao gerarSolucaoInicial (const Instancia& instancia);
+    double calcularDeltaInsercao (int job, int maquina, int pos, const std::vector<int>& sequencia, const Instancia& instancia);
+    Solucao gerarSolucaoInicial (const Instancia& instancia, double alpha, Rng& rng);
     ResultadoSimulatedAnnealing simulatedAnnealing (const Instancia& instancia, const ParametrosSimulatedAnnealing& parametros, std::optional<Solucao> solucaoInicial);
 }
