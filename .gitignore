@@ -11,3 +11,5 @@ experiments/**/output_render/
 .pytest_cache/
 data/raw/*.zip
 data/raw/**/*.tar.bz2
+docs/
+experiments/irace/instancias
