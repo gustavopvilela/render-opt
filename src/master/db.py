@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS trabalhadores (
     versoes_blender     TEXT NOT NULL,
     dispositivo         TEXT NOT NULL,
     estado              TEXT NOT NULL,      -- DISPONIVEL | INDISPONIVEL
-    ultimo_heartbeat    REAL NOT NULL,
+    ultimo_heartbeat    REAL NOT NULL
 );
     
 CREATE TABLE IF NOT EXISTS lotes (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS lotes (
     versao_cena TEXT NOT NULL,
     criado_em REAL NOT NULL,
     inicio REAL, -- primeiro job entregue
-    fim REAL, -- ultimo job concluído
+    fim REAL -- ultimo job concluído
 );
     
 CREATE TABLE IF NOT EXISTS jobs (
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     evitar TEXT, -- última máquina que abortou/falhou este job
     tempo_real_s REAL
 );
-CREATE INDEX IF NOT EXIST ix_fila ON jobs(estado, maquina, posicao);
+CREATE INDEX IF NOT EXISTS ix_fila ON jobs(estado, maquina, posicao);
     
 CREATE TABLE IF NOT EXISTS estimativas (
     job_id TEXT NOT NULL REFERENCES jobs(id),
@@ -78,3 +78,72 @@ class DB:
     def _maior_evento(self) -> int:
         (n,) = self.conexao.execute("SELECT COALESCE(MAX(id, 0) FROM eventos").fetchone()
         return n
+
+    @contextmanager
+    def transacao(self) -> Iterator[sqlite3.Connection]:
+        with self._trava:
+            self.conexao.execute("BEGIN IMMEDIATE")
+            try:
+                yield self.conexao
+            except BaseException:
+                self.conexao.execute("ROLLBACK")
+                raise
+            self.conexao.execute("COMMIT")
+            self.ultimo_evento = self._maior_evento()
+
+def fila (conexao: sqlite3.Connection, maquina: str) -> list[sqlite3.Row]:
+    return conexao.execute(
+        "SELECT * FROM jobs WHERE estado = 'PENDENTE' AND maquina = ? ORDER BY posicao",
+        (maquina,),
+    ).fetchall()
+
+def colocar_no_fim (conexao: sqlite3.Connection, job_id: str, maquina: str) -> None:
+    (ultima,) = conexao.execute(
+        "SELECT COALESCE(MAX(posicao), 0) FROM jobs WHERE estado = 'PENDENTE' AND maquina = ?",
+        (maquina,),
+    ).fetchone()
+    conexao.execute(
+        "UPDATE jobs SET estado = 'PENDENTE', maquina = ?, posicao = ?, token = NULL, inicio = NULL WHERE id = ?",
+        (maquina, ultima + 1, job_id)
+    )
+
+def estimativas_do_job (conexao: sqlite3.Connection, job_id: str) -> dict[str, float]:
+    linhas = conexao.execute(
+        "SELECT maquina, segundos FROM estimativas WHERE job_id = ?",
+        (job_id,)
+    )
+    return {m: s for m, s in linhas}
+
+def maquinas_disponiveis (conexao: sqlite3.Connection) -> list[str]:
+    linhas = conexao.execute(
+        "SELECT id FROM trabalhadores WHERE estado = 'DISPONIVEL' ORDER BY id"
+    )
+    return [m for (m,) in linhas]
+
+def carga_pendente (conexao: sqlite3.Connection, maquina: str) -> float:
+    (total,) = conexao.execute(
+        "SELECT COALESCE(SUM(e.sugendos), 0) FROM jobs j "
+        "JOIN estimativas e ON e.job_id = j.id AND e.maquina = j.maquina "
+        "WHERE j.estado = 'PENDENTE' AND j.maquina = ?",
+        (maquina,),
+    ).fetchone()
+    return total
+
+def eventos_depois (conexao: sqlite3.Connection, id_evento: int, limite: int = 500) -> list[sqlite3.Row]:
+    return conexao.execute(
+        "SELECT * FROM eventos WHERE id > ? ORDER BY id LIMIT ?",
+        (id_evento, limite),
+    ).fetchall()
+
+def registrar_evento(
+    conexao: sqlite3.Connection,
+    t: float,
+    tipo: str,
+    job_id: Optional[str] = None,
+    maquina: Optional[str] = None,
+    dados: Optional[str] = None
+) -> None:
+    conexao.execute(
+        "INSERT INTO eventos (t, tipo, job_id, maquina, dados) VALUES (?, ?, ?, ?, ?)",
+        (t, tipo, job_id, maquina, dados),
+    )
