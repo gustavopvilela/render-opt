@@ -24,3 +24,5 @@ httpx>=0.27
 
 # --- Desenvolvimento
 pytest>=8.0
+
+pydantic

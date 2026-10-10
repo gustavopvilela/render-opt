@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Annotated, Literal, Optional
 from pydantic import AfterValidator, BaseModel, Field
+from comum.enums import StatusRelatorio
 from comum.util import validar_id
 
 Id = Annotated[str, AfterValidator([validar_id])]
@@ -66,7 +67,7 @@ class Relatorio (BaseModel):
     job_id: Id
     token: str
     trabalhador_id: Id
-    status: Literal["concluido", "abortado", "falha"]
+    status: StatusRelatorio
     motivo: Optional[str] = None
 
     cena_id: Id
