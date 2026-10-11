@@ -12,7 +12,7 @@ class ConfigMestre (BaseModel):
     port: int = 9678
     token: Optional[str] = None
     pasta_dados: Path
-    blender: Optional[str] = None # Blender do mestre usado para empacotar as cenas
+    blender: dict[str, str] = {} # Versão -> Blender do mestre usado para empacotar as cenas
 
     intervalo_heartbeat_s: float = 10
     intervalo_ocioso_s: float = 5

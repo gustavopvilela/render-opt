@@ -6,6 +6,7 @@ python src/master/submit.py D:/cenas --lote L001 --config config/mestre.yaml
 
 from __future__ import annotations
 import argparse
+import gzip
 import re
 import subprocess
 import sys
@@ -15,10 +16,40 @@ from typing import Optional
 sys.path[0] = str(Path(__file__).resolve().parents[1])
 
 import httpx
-from comum.util import sha256_arquivo, validar_id
+import zstandard
+from comum.util import sha256_arquivo, validar_id, versao_tupla
 from master.config import carregar_config
 
 SCRIPT_EMPACOTAR = Path(__file__).with_name("zip_scene.py")
+
+def versao_do_arquivo (caminho: Path) -> str:
+    """
+    Lê no cabeçalho do .blend a versão que o gravou, sem abrir o Blender.
+    """
+    with caminho.open("rb") as arquivo:
+        inicio = arquivo.read(4)
+        arquivo.seek(0)
+        if inicio[:2] == b"\x1f\x8b":
+            cabecalho = gzip.GzipFile(fileobj=arquivo).read(17)
+        elif inicio == b"\x28\xb5\x2f\xfd":
+            cabecalho = zstandard.ZstdDecompressor().stream_reader(arquivo).read(17)
+        else:
+            cabecalho = arquivo.read(17)
+    # Até o 4.x: BLENDER-v405; a partir do 5.0: BLENDER17-01v0501
+    achado = re.match(rb"BLENDER(?:[_-][vV](\d)(\d\d)|\d\d-\d\d[vV](\d\d)(\d\d))", cabecalho)
+    if achado is None:
+        raise SystemExit(f"{caminho} não é um .blend")
+    maior, menor = (int(g) for g in achado.groups() if g is not None)
+    return f"{maior}.{menor}"
+
+def escolher_blender (blenders: dict[str, str], versao: str) -> str:
+    """
+    Blender de menor versão que ainda abre a cena, assim a cópia mantém a série dela.
+    """
+    compativeis = sorted((v for v in blenders if versao_tupla(v) >= versao_tupla(versao)), key=versao_tupla)
+    if not compativeis:
+        raise SystemExit(f"Nenhum Blender do mestre abre uma cena {versao}")
+    return blenders[compativeis[0]]
 
 def empacotar (blender: str, origem: Path, destino: Path) -> tuple[str, list[int]]:
     """
@@ -78,8 +109,9 @@ def main (argv: Optional[list[str]] = None) -> int:
     for arquivo in arquivos:
         cena_id = validar_id(re.sub(r"[^A-Za-z0-9_.-]", "_", arquivo.stem))
         destino = cfg.pasta_cenas / f"{cena_id}.blend"
-        versao, frames = empacotar(cfg.blender, arquivo, destino)
-        print(f"{cena_id}: frames {frames[0]}-{frames[-1]} ({len(frames)}), Blender {versao}")
+        original = versao_do_arquivo(arquivo)
+        versao, frames = empacotar(escolher_blender(cfg.blender, original), arquivo, destino)
+        print(f"{cena_id}: frames {frames[0]}-{frames[-1]} ({len(frames)}), gravada no {original}, empacotada no {versao}")
         cenas.append({
             "cena_id": cena_id,
             "cena_sha256": sha256_arquivo(destino),
