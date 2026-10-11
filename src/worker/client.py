@@ -14,7 +14,7 @@ import random
 import time
 from pathlib import Path
 from typing import Callable, Optional
-import httpx
+import httpx2
 from comum.protocolo import (
     ConsultaExcesso, DecisaoExcesso, Hardware, Heartbeat, Job, Progresso,
     Registro, Relatorio, RespostaRegistro
@@ -34,13 +34,13 @@ class EntregaObsoleta(Exception):
 class ClienteMestre:
     def __init__(self, url_mestre: str, trabalhador_id: str, token: Optional[str]):
         self.trabalhador_id = trabalhador_id
-        self.http = httpx.Client(
+        self.http = httpx2.Client(
             base_url=url_mestre,
             headers={"X-Token": token} if token else {},
-            timeout=httpx.Timeout(10.0, read=60.0),
+            timeout=httpx2.Timeout(10.0, read=60.0),
         )
 
-    def _pedir(self, fazer: Callable[[], httpx.Response], tentativas: Optional[int] = None) -> httpx.Response:
+    def _pedir(self, fazer: Callable[[], httpx2.Response], tentativas: Optional[int] = None) -> httpx2.Response:
         """
         Executa `fazer()` repetindo em falha de rede ou 5xx.
         :param tentativas: se igual a None, insiste para sempre.
@@ -52,7 +52,7 @@ class ClienteMestre:
                 if resposta.status_code < 500:
                     return resposta
                 problema = f"Mestre respondeu {resposta.status_code}"
-            except httpx.TransportError as erro:
+            except httpx2.TransportError as erro:
                 problema = f"{type(erro).__name__}: {erro}"
 
             n += 1
@@ -65,7 +65,7 @@ class ClienteMestre:
             espera = min(espera * 2, 60.0)
 
     @staticmethod
-    def _checar(resposta: httpx.Response) -> httpx.Response:
+    def _checar(resposta: httpx2.Response) -> httpx2.Response:
         if resposta.status_code == 404 and "registre-se" in resposta.text:
             raise PrecisaRegistrar()
         if resposta.status_code == 409:
@@ -94,7 +94,7 @@ class ClienteMestre:
                 lambda: self.http.post(
                     f"/trabalhadores/{self.trabalhador_id}/proximo-job",
                     params={"espera_s": espera_s},
-                    timeout=httpx.Timeout(10.0, read=espera_s + 30.0)
+                    timeout=httpx2.Timeout(10.0, read=espera_s + 30.0)
                 )
             )
         )
@@ -126,7 +126,7 @@ class ClienteMestre:
                 acao="abortar",
                 motivo="O mestre já reatribuiu este job"
             )
-        except (ConnectionError, httpx.HTTPStatusError):
+        except (ConnectionError, httpx2.HTTPStatusError):
             return None
         return DecisaoExcesso.model_validate_json(resposta.content)
 
@@ -135,7 +135,7 @@ class ClienteMestre:
         Envia o JSON final e, se houver, a imagem. Insiste até o mestre responder.
         """
 
-        def fazer() -> httpx.Response:
+        def fazer() -> httpx2.Response:
             dados = {"relatorio": relatorio.model_dump_json()}
             if imagem is None:
                 return self.http.post(
@@ -147,7 +147,7 @@ class ClienteMestre:
                     f"/jobs/{relatorio.job_id}/resultado",
                     data=dados,
                     files={"imagem": (imagem.name, arquivo, "image/png")},
-                    timeout=httpx.Timeout(10.0, write=300.0, read=60.0)
+                    timeout=httpx2.Timeout(10.0, write=300.0, read=60.0)
                 )
 
         self._checar(self._pedir(fazer))
@@ -160,12 +160,12 @@ class ClienteMestre:
         destino.parent.mkdir(parents=True, exist_ok=True)
         parcial = destino.with_name(destino.name + ".parcial")
 
-        def fazer() -> httpx.Response:
+        def fazer() -> httpx2.Response:
             h = hashlib.sha256()
             with self.http.stream(
                     "GET",
                     f"/cenas/{job.cena_id}",
-                    timeout=httpx.Timeout(10.0, read=300.0)
+                    timeout=httpx2.Timeout(10.0, read=300.0)
             ) as resposta:
                 if resposta.status_code != 200:
                     resposta.read()
@@ -177,7 +177,7 @@ class ClienteMestre:
 
             if h.hexdigest() != job.cena_sha256:
                 parcial.unlink(missing_ok=True)
-                raise httpx.ReadError("SHA-256 de cena não confere (download corrompido)")
+                raise httpx2.ReadError("SHA-256 de cena não confere (download corrompido)")
             return resposta
 
         self._checar(self._pedir(fazer, tentativas=5))

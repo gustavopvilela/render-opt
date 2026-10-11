@@ -16,7 +16,7 @@ def main (argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--config", type=Path, required=True, help="Arquivo YAML de configuração.")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s $(levelname)s %(name)s: %(messsage)s")
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     cfg = carregar_config(args.config)
     uvicorn.run(criar_app(cfg), host=cfg.host, port=cfg.port, timeout_graceful_shutdown=5)
     return 0

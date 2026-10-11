@@ -69,7 +69,7 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         checar_id(trabalhador_id)
         prazo = time.monotonic() + min(max(espera_s, 0.0), config.espera_longa_s)
         while True:
-            visto = db.ultimo_evento()
+            visto = db.ultimo_evento
             job = await run_in_threadpool(entregar, config, db, trabalhador_id)
             if job is not None:
                 return job

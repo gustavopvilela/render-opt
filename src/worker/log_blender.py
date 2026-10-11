@@ -22,7 +22,7 @@ RE_AMOSTRA = re.compile(r"Sample (\d+)/(\d+)")
 RE_MEMORIA = re.compile(r"Mem: ?([\d.]+)M")
 RE_SALVO = re.compile(r"Saved: '(.+)'")
 RE_TEMPO_FINAL = re.compile(r"Time: ((?:\d+:)?\d+:\d+(?:\.\d+)?) \(Saving: ((?:\d+:)?\d+:\d+(?:\.\d+)?)\)")
-RE_VERSAO = re.compile(r"^Blender: (\d+\.\d+)")
+RE_VERSAO = re.compile(r"^Blender (\d+\.\d+)")
 
 def segundos (texto: str) -> float:
     """

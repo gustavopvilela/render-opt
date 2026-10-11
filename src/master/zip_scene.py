@@ -2,9 +2,9 @@
 Roda dentro do Blender. Grava uma cópia autossuficiente
 do .blend aberto. Comando:
 
-blender --factory=startup -noaudio -b original.blend -P zip_scene.py --destino.blend
+blender --factory-startup -noaudio -b original.blend -P zip_scene.py -- destino.blend
 
-Autossuficiente: texturas e bibliotexas associadas vão
+Autossuficiente: texturas e bibliotecas associadas vão
 para dentro do arquivo. Sem isso, a cena aponta para um
 caminho que não existe no trabalhador ao procurar.
 """

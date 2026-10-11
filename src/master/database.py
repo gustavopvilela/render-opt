@@ -76,7 +76,7 @@ class DB:
         self.ultimo_evento = self._maior_evento()
 
     def _maior_evento(self) -> int:
-        (n,) = self.conexao.execute("SELECT COALESCE(MAX(id, 0) FROM eventos").fetchone()
+        (n,) = self.conexao.execute("SELECT COALESCE(MAX(id), 0) FROM eventos").fetchone()
         return n
 
     @contextmanager

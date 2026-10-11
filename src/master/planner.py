@@ -10,7 +10,7 @@ from typing import Optional, Sequence
 import numpy as np
 from comum.protocolo import DecisaoExcesso, Progresso
 from comum.util import versao_tupla
-from config import ConfigMestre
+from master.config import ConfigMestre
 
 @dataclass
 class Maquina:
@@ -63,7 +63,7 @@ def gerar_plano_renderizacao (P: np.ndarray, semente: Optional[int] = None) -> l
     for i in ordem:
         k = int(np.argmin(fim + P[i]))
         plano[k].append(int(i))
-        fim += P[i, k]
+        fim[k] += P[i, k]
     return plano
 
 def projetar_total (decorrido: float, progresso: Progresso) -> Optional[float]:

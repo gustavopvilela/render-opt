@@ -23,7 +23,7 @@ from typing import Optional
 
 sys.path[0] = str(Path(__file__).resolve().parents[1])
 
-import httpx
+import httpx2
 from comum.protocolo import Job, Progresso, Relatorio
 from comum.util import agora_utc, escrever_json_atomico, sha256_arquivo, versao_tupla
 from worker import blender
@@ -124,7 +124,7 @@ def enviar_pendente (cliente: ClienteMestre, cfg: ConfigTrabalhador, pasta_job: 
         log.info(f"Job {relatorio.job_id}: {relatorio.status} em {relatorio.tempo_total_s:.1f} s (previsto {relatorio.tempo_previsto_s:.1f} s)")
     except EntregaObsoleta:
         log.info(f"Job {relatorio.job_id} já foi entregue a outra máquina, resultado descartado")
-    except httpx.HTTPStatusError as erro:
+    except httpx2.HTTPStatusError as erro:
         log.error(f"Mestre recusou o resultado de {relatorio.job_id}: {erro.response.text}")
         destino = cfg.pasta_trabalho / "recusados" / pasta_job.name
         destino.parent.mkdir(parents=True, exist_ok=True)
@@ -147,7 +147,7 @@ def processar (cliente: ClienteMestre, cfg: ConfigTrabalhador, job: Job) -> None
     else:
         try:
             cena = garantir_cena(cliente, cfg, job)
-        except (ConnectionError, httpx.HTTPError) as erro:
+        except (ConnectionError, httpx2.HTTPError) as erro:
             execucao = falha(f"Não foi possível baixar a cena: {erro}")
         else:
             def consultar (decorrido: float, analise: AnaliseLog):

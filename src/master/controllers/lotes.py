@@ -74,7 +74,7 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
             "filas": {maquinas[k].id: len(seq) for k, seq in enumerate(plano)},
         }
 
-    @router.get("lotes/{lote_id")
+    @router.get("/lotes/{lote_id}")
     def status_do_lote (lote_id: str) -> dict:
         with db.transacao() as conexao:
             lote = lotes_sql.buscar(conexao, lote_id)

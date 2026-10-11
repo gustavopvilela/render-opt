@@ -13,7 +13,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 from typing import Iterator, Optional
-import httpx
+import httpx2
 
 def assinar (url_mestre: str, token: Optional[str], desde: Optional[int] = None) -> Iterator[dict]:
     """
@@ -26,11 +26,11 @@ def assinar (url_mestre: str, token: Optional[str], desde: Optional[int] = None)
         if ultimo is not None:
             cabecalhos["Last-Event-ID"] = str(ultimo)
         try:
-            with httpx.stream(
+            with httpx2.stream(
                 "GET",
                 f"{url_mestre}/eventos",
                 headers=cabecalhos,
-                timeout=httpx.Timeout(10.0, read=60.0)
+                timeout=httpx2.Timeout(10.0, read=60.0)
             ) as resposta:
                 resposta.raise_for_status()
                 campos: dict[str, str] = {}
@@ -43,7 +43,7 @@ def assinar (url_mestre: str, token: Optional[str], desde: Optional[int] = None)
                     elif not linha.startswith(":"): # : no início = comentário (ping)
                         nome, _, valor = linha.partition(":")
                         campos[nome] = valor.removeprefix(" ")
-        except httpx.TransportError as erro:
+        except httpx2.TransportError as erro:
             print(f"Conexão perdida ({type(erro).__name__}); reconectando em 3 s", file=sys.stderr)
             time.sleep(3)
 

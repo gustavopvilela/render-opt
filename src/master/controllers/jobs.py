@@ -88,7 +88,7 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
                 escrever_json_atomico(pasta_lote / "relatorios" / f"{job_id}_{rel.token[:8]}.json", rel.model_dump())
 
                 if rel.status == StatusRelatorio.CONCLUIDO:
-                    extensao = Path(rel.image_nome or "").suffix.lower()
+                    extensao = Path(rel.imagem_nome or "").suffix.lower()
                     if not re.fullmatch(r"\.[a-z0-9]{1,5}", extensao):
                         extensao = ".png"
                     destino = pasta_lote / "frames" / job["cena_id"] / f"frame_{job['frame']:06d}{extensao}"

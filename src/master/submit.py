@@ -15,7 +15,7 @@ from typing import Optional
 
 sys.path[0] = str(Path(__file__).resolve().parents[1])
 
-import httpx
+import httpx2
 import zstandard
 from comum.util import sha256_arquivo, validar_id, versao_tupla
 from master.config import carregar_config
@@ -122,7 +122,7 @@ def main (argv: Optional[list[str]] = None) -> int:
     corpo = {"lote_id": lote_id, "cenas": cenas}
     cabecalho = {"X-Token": cfg.token} if cfg.token else {}
     host = "127.0.0.1" if cfg.host in ("0.0.0.0", "::") else cfg.host
-    resposta = httpx.post(
+    resposta = httpx2.post(
         f"http://{host}:{cfg.port}/lotes",
         json=corpo,
         headers=cabecalho,

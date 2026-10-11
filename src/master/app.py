@@ -5,11 +5,11 @@ import time
 from contextlib import asynccontextmanager
 from typing import Optional
 from fastapi import Depends, FastAPI, Header, HTTPException
-import database
-from config import ConfigMestre
-from controllers import cenas, eventos, jobs, lotes, trabalhadores
-from queries import trabalhadores as trabalhadores_sql
-from services.trabalhadores import vigiar
+import master.database as database
+from master.config import ConfigMestre
+from master.controllers import cenas, eventos, jobs, lotes, trabalhadores
+from master.queries import trabalhadores as trabalhadores_sql
+from master.services.trabalhadores import vigiar
 
 def criar_app (config: ConfigMestre) -> FastAPI:
     db = database.DB(config.caminho_db)
@@ -25,7 +25,7 @@ def criar_app (config: ConfigMestre) -> FastAPI:
         yield
         parar.set()
 
-    def verificar_token (x_token: Optional[str] = Header(deafult=None)) -> None:
+    def verificar_token (x_token: Optional[str] = Header(default=None)) -> None:
         if config.token and not secrets.compare_digest((x_token or "").encode(), config.token.encode()):
             raise HTTPException(401, "Token inválido")
 
