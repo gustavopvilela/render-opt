@@ -1,0 +1,7 @@
+mestre: "http://192.168.0.10:9678"
+trabalhador_id: "lab-pc02"
+token: "F3PwuoP7DEANk3ImJ_PeJmfsiNppnkHB2sUNE46loVmGl5MS58E7uliuM-agQXTnY8TcJw3Kb8TMEq34GDqjIA"
+dispositivo: "CPU"
+pasta_trabalho: "/var/tmp/render-opt"
+blender:
+  "5.1": "/opt/blender-5.1/blender"

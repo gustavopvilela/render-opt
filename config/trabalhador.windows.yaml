@@ -1,0 +1,7 @@
+mestre: "http://192.168.0.10:9678"
+trabalhador_id: "lab-pc01"
+token: "F3PwuoP7DEANk3ImJ_PeJmfsiNppnkHB2sUNE46loVmGl5MS58E7uliuM-agQXTnY8TcJw3Kb8TMEq34GDqjIA"
+dispositivo: "CPU"
+pasta_trabalho: "C:/render-opt/trabalhador"
+blender:
+  "5.1": "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe"

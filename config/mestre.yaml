@@ -1,0 +1,20 @@
+host: "0.0.0.0"
+port: 9678
+token: "F3PwuoP7DEANk3ImJ_PeJmfsiNppnkHB2sUNE46loVmGl5MS58E7uliuM-agQXTnY8TcJw3Kb8TMEq34GDqjIA"
+pasta_dados: "C:/render-opt/mestre"
+blender:
+  "5.1": "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe"
+
+intervalo_heartbeat_s: 10
+intervalo_ocioso_s: 5
+espera_longa_s: 25
+limite_silencio_s: 60
+max_tentativas: 3
+
+politica_excesso: "comparar"
+fator_excesso: 1.5
+folga_minima_s: 60
+vantagem_minima: 1.25
+max_adiamentos: 1
+fator_teto: 4.0
+limite_sem_saida_s: 600
