@@ -116,16 +116,15 @@ def entregar (config: ConfigMestre, db: database.DB, trabalhador_id: str) -> Opt
         token = uuid.uuid4().hex
         jobs_sql.marcar_executando(conexao, job["id"], trabalhador_id, token, agora)
         lotes_sql.marcar_inicio(conexao, job["lote_id"], agora)
-        lote = lotes_sql.buscar(conexao, job["id"])
         eventos_sql.registrar_evento(conexao, agora, TipoEvento.ENTREGUE, job["id"], trabalhador_id)
 
     return Job(
         job_id=job["id"],
         token=token,
-        lote_id=lote["id"],
-        cena_id=lote["cena_id"],
-        cena_sha256=lote["cena_sha256"],
-        versao_cena=lote["versao_cena"],
+        lote_id=job["lote_id"],
+        cena_id=job["cena_id"],
+        cena_sha256=job["cena_sha256"],
+        versao_cena=job["versao_cena"],
         frame=job["frame"],
         tempo_previsto_s=previsto,
         checkpoint_s=checkpoint,

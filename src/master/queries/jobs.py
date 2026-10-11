@@ -43,8 +43,8 @@ def executando_na_maquina (conexao: sqlite3.Connection, maquina: str) -> list[st
 
 def pendentes_sem_estimativa (conexao: sqlite3.Connection, maquina: str) -> list[sqlite3.Row]:
     return conexao.execute(
-        "SELECT j.id, j.lote_id, j.frame FROM jobs j WHERE j.estado = ? AND NOT EXISTS "
-        "(SELECT 1 FROM estimativas e WHERE e.job_id = j.id AND e.maquinas = ?) ORDER BY j.lote_id",
+        "SELECT j.id, j.cena_id, j.versao_cena, j.frame FROM jobs j WHERE j.estado = ? AND NOT EXISTS "
+        "(SELECT 1 FROM estimativas e WHERE e.job_id = j.id AND e.maquina = ?) ORDER BY j.cena_id",
         (EstadoJob.PENDENTE, maquina)
     ).fetchall()
 
@@ -55,10 +55,21 @@ def restantes_do_lote (conexao: sqlite3.Connection, lote_id: str) -> int:
     ).fetchone()
     return restantes
 
-def inserir (conexao: sqlite3.Connection, job_id: str, lote_id: str, frame: int, maquina: str, posicao: int) -> None:
+def inserir (
+    conexao: sqlite3.Connection,
+    job_id: str,
+    lote_id: str,
+    cena_id: str,
+    cena_sha256: str,
+    versao_cena: str,
+    frame: int,
+    maquina: str,
+    posicao: int
+) -> None:
     conexao.execute(
-        "INSERT INTO jobs (id, lote_id, frame, estado, maquina, posicao) VALUES (?, ?, ?, ?, ?, ?)",
-        (job_id, lote_id, frame, EstadoJob.PENDENTE, maquina, posicao)
+        "INSERT INTO jobs (id, lote_id, cena_id, cena_sha256, versao_cena, frame, estado, maquina, posicao) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (job_id, lote_id, cena_id, cena_sha256, versao_cena, frame, EstadoJob.PENDENTE, maquina, posicao)
     )
 
 def colocar_no_fim (conexao: sqlite3.Connection, job_id: str, maquina: str) -> None:

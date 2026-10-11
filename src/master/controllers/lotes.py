@@ -20,13 +20,18 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
 
     @router.post("/lotes")
     def criar_lote (novo: NovoLote) -> dict:
-        caminho = config.pasta_cenas / f"{novo.cena_id}.blend"
-        if not caminho.is_file():
-            raise HTTPException(404, f"cena {novo.cena_id} nao está em {config.pasta_cenas}")
-        if sha256_arquivo(caminho) != novo.cena_sha256:
-            raise HTTPException(422, "O SHA-256 da cena no mestre difere do informado")
+        if len({c.cena_id for c in novo.cenas}) != len(novo.cenas):
+            raise HTTPException(422, "Cena repetida no lote")
+        cenas, jobs = [], [] # jobs[i] = (cena, frame) da linha i de P
+        for c in novo.cenas:
+            caminho = config.pasta_cenas / f"{c.cena_id}.blend"
+            if not caminho.is_file():
+                raise HTTPException(404, f"cena {c.cena_id} nao está em {config.pasta_cenas}")
+            if sha256_arquivo(caminho) != c.cena_sha256:
+                raise HTTPException(422, f"O SHA-256 da cena {c.cena_id} no mestre difere do informado")
+            cenas.append(planner.Cena(id=c.cena_id, caminho=str(caminho), versao=c.versao_cena))
+            jobs += [(c, f) for f in sorted(set(c.frames))]
 
-        frames = sorted(set(novo.frames))
         with db.transacao() as conexao:
             if lotes_sql.existe(conexao, novo.lote_id):
                 raise HTTPException(409, "Lote já existe")
@@ -35,25 +40,25 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         if not maquinas:
             raise HTTPException(409, "Nenhum trabalhador disponível.")
 
-        cena = planner.Cena(id=novo.cena_id, caminho=str(caminho), versao=novo.versao_cena)
-        P = planner.estimar_matriz_p(cena, frames, maquinas)
+        P = np.vstack([planner.estimar_matriz_p(cena, sorted(set(c.frames)), maquinas) for cena, c in zip(cenas, novo.cenas)])
 
         try:
             plano = planner.gerar_plano_renderizacao(P)
         except ValueError as erro:
             raise HTTPException(422, str(erro)) from None
 
-        if sorted(i for seq in plano for i in seq) != list(range(len(frames))):
+        if sorted(i for seq in plano for i in seq) != list(range(len(jobs))):
             raise HTTPException(500, "O plano não cobre cada frame exatamente uma vez")
 
         agora = time.time()
         with db.transacao() as conexao:
-            lotes_sql.inserir(conexao, novo.lote_id, novo.cena_id, novo.cena_sha256, novo.versao_cena, agora)
+            lotes_sql.inserir(conexao, novo.lote_id, agora)
 
             for k, sequencia in enumerate(plano):
                 for posicao, i in enumerate(sequencia, start=1):
-                    job_id = f"{novo.lote_id}-f{frames[i]:06d}"
-                    jobs_sql.inserir(conexao, job_id, novo.lote_id, frames[i], maquinas[k].id, posicao)
+                    c, frame = jobs[i]
+                    job_id = f"{novo.lote_id}-{c.cena_id}-f{frame:06d}"
+                    jobs_sql.inserir(conexao, job_id, novo.lote_id, c.cena_id, c.cena_sha256, c.versao_cena, frame, maquinas[k].id, posicao)
                     estimativas_sql.inserir(
                         conexao,
                         [(job_id, maquinas[c].id, float(P[i, c])) for c in range(len(maquinas)) if np.isfinite(P[i, c])]
@@ -64,7 +69,7 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         tempos = [float(sum(P[i, k] for i in seq)) for k, seq in enumerate(plano)]
         return {
             "lote_id": novo.lote_id,
-            "jobs": len(frames),
+            "jobs": len(jobs),
             "makespan_estimado_s": max(tempos),
             "filas": {maquinas[k].id: len(seq) for k, seq in enumerate(plano)},
         }

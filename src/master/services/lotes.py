@@ -8,13 +8,12 @@ from master.queries import eventos as eventos_sql
 from master.queries import jobs as jobs_sql
 from master.queries import lotes as lotes_sql
 
-def cena_do_lote (config: ConfigMestre, conexao: sqlite3.Connection, lote_id: str) -> planner.Cena:
-    lote = lotes_sql.buscar(conexao, lote_id)
-    caminho = config.pasta_cenas / f"{lote['cena_id']}.blend"
+def cena_do_job (config: ConfigMestre, job: sqlite3.Row) -> planner.Cena:
+    caminho = config.pasta_cenas / f"{job['cena_id']}.blend"
     return planner.Cena(
-        id=lote["cena_id"],
+        id=job["cena_id"],
         caminho=str(caminho),
-        versao=lote["versao_cena"]
+        versao=job["versao_cena"]
     )
 
 def verificar_fim_do_lote (conexao: sqlite3.Connection, lote_id: str) -> None:

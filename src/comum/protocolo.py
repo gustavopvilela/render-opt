@@ -96,9 +96,12 @@ class Relatorio (BaseModel):
     fim_utc: str
     log_final: list[str] = [] # Ultimas linhas do Blender, para diagnóstico
 
-class NovoLote (BaseModel):
-    lote_id: Id
+class CenaDoLote (BaseModel):
     cena_id: Id
     cena_sha256: str
     versao_cena: Versao
     frames: list[int] = Field(min_length=1)
+
+class NovoLote (BaseModel):
+    lote_id: Id
+    cenas: list[CenaDoLote] = Field(min_length=1)

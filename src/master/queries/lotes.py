@@ -11,17 +11,10 @@ def buscar (conexao: sqlite3.Connection, lote_id: str) -> Optional[sqlite3.Row]:
 def existe (conexao: sqlite3.Connection, lote_id: str) -> bool:
     return conexao.execute("SELECT 1 FROM lotes WHERE id = ?", (lote_id,)).fetchone() is not None
 
-def inserir (
-    conexao: sqlite3.Connection,
-    lote_id: str,
-    cena_id: str,
-    cena_sha256: str,
-    versao_cena: str,
-    criado_em: float
-) -> None:
+def inserir (conexao: sqlite3.Connection, lote_id: str, criado_em: float) -> None:
     conexao.execute(
-        "INSERT INTO lotes (id, cena_id, cena_sha256, versao_cena, criado_em) VALUES (?, ?, ?, ?, ?)",
-        (lote_id, cena_id, cena_sha256, versao_cena, criado_em)
+        "INSERT INTO lotes (id, criado_em) VALUES (?, ?)",
+        (lote_id, criado_em)
     )
 
 def marcar_inicio (conexao: sqlite3.Connection, lote_id: str, agora: float) -> None:

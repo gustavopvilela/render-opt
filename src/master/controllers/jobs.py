@@ -91,7 +91,7 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
                     extensao = Path(rel.image_nome or "").suffix.lower()
                     if not re.fullmatch(r"\.[a-z0-9]{1,5}", extensao):
                         extensao = ".png"
-                    destino = pasta_lote / "frames" / f"frame_{job['frame']:06d}{extensao}"
+                    destino = pasta_lote / "frames" / job["cena_id"] / f"frame_{job['frame']:06d}{extensao}"
                     destino.parent.mkdir(parents=True, exist_ok=True)
                     os.replace(temporario, destino)
                     temporario = None

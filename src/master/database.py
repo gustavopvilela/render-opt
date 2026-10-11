@@ -23,9 +23,6 @@ CREATE TABLE IF NOT EXISTS trabalhadores (
     
 CREATE TABLE IF NOT EXISTS lotes (
     id TEXT PRIMARY KEY,
-    cena_id TEXT NOT NULL,
-    cena_sha256 TEXT NOT NULL,
-    versao_cena TEXT NOT NULL,
     criado_em REAL NOT NULL,
     inicio REAL, -- primeiro job entregue
     fim REAL -- ultimo job concluído
@@ -34,6 +31,9 @@ CREATE TABLE IF NOT EXISTS lotes (
 CREATE TABLE IF NOT EXISTS jobs (
     id TEXT PRIMARY KEY,
     lote_id TEXT NOT NULL REFERENCES lotes(id),
+    cena_id TEXT NOT NULL,
+    cena_sha256 TEXT NOT NULL,
+    versao_cena TEXT NOT NULL,
     frame INTEGER NOT NULL,
     estado TEXT NOT NULL, -- PENDENTE | EXECUTANDO | CONCLUIDO | FALHA_DEFINITIVA
     maquina TEXT, -- dona da fila (PENDENTE) ou quem executa (EXECUTANDO)

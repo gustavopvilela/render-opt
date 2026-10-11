@@ -36,3 +36,5 @@ for caminho in ainda_ligados:
 bpy.ops.wm.save_as_mainfile(filepath=destino, copy=True, compress=True)
 versao = bpy.app.version
 print(f"RENDEROPT_VERSAO {versao[0]}.{versao[1]}")
+cena = bpy.context.scene
+print(f"RENDEROPT_FRAMES {cena.frame_start} {cena.frame_end} {cena.frame_step}")
