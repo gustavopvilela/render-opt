@@ -4,7 +4,7 @@ from pydantic import AfterValidator, BaseModel, Field
 from comum.enums import StatusRelatorio
 from comum.util import validar_id
 
-Id = Annotated[str, AfterValidator([validar_id])]
+Id = Annotated[str, AfterValidator(validar_id)]
 Versao = Annotated[str, Field(pattern=r"^\d+\.\d+$")]
 
 class Hardware (BaseModel):
@@ -13,7 +13,7 @@ class Hardware (BaseModel):
     cpu: str
     threads: int
     ram_gb: Optional[float] = None
-    gpus = list[str] = []
+    gpus: list[str] = []
     fator_velocidade: Optional[float] = None
 
 class Registro (BaseModel):
