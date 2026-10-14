@@ -18,3 +18,7 @@ vantagem_minima: 1.25
 max_adiamentos: 1
 fator_teto: 4.0
 limite_sem_saida_s: 600
+
+# IA (docs/modulo-preditivo.md §18.4): descomente depois de rodar o predict.treinar
+modelo: "C:/Users/gusta/Documents/TCC/Projeto/render-opt/models/2026-10-14-publico"
+estimativa_conservadora: false
