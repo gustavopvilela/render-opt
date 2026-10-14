@@ -6,12 +6,14 @@ from contextlib import asynccontextmanager
 from typing import Optional
 from fastapi import Depends, FastAPI, Header, HTTPException
 import master.database as database
+import master.planner as planner
 from master.config import ConfigMestre
 from master.controllers import cenas, eventos, jobs, lotes, trabalhadores
 from master.queries import trabalhadores as trabalhadores_sql
 from master.services.trabalhadores import vigiar
 
 def criar_app (config: ConfigMestre) -> FastAPI:
+    planner.configurar_ia(config)
     db = database.DB(config.caminho_db)
     config.pasta_cenas.mkdir(parents=True, exist_ok=True)
     config.pasta_resultados.mkdir(parents=True, exist_ok=True)

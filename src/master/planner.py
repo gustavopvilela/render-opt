@@ -4,13 +4,17 @@ encerramentos e redistribuir os jobs.
 """
 
 from __future__ import annotations
+import logging
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Optional, Sequence
 import numpy as np
 from comum.protocolo import DecisaoExcesso, Progresso
 from comum.util import versao_tupla
 from master.config import ConfigMestre
+
+log = logging.getLogger("renderopt.master")
 
 @dataclass
 class Maquina:
@@ -25,13 +29,58 @@ class Cena:
     caminho: str
     versao: str
 
+@dataclass
+class IA:
+    preditor: "Preditor"
+    blenders: dict[str, str]
+    pasta_cache: Path
+    conservadora: bool
+
+_ia: Optional[IA] = None
+
+def configurar_ia (config: ConfigMestre) -> None:
+    """
+    Carrega o modelo uma vez, na subida do mestre. Sem 'modelo' na configuração,
+    o mestre segue com a estimativa provisória.
+    """
+    global _ia
+    if config.modelo is None:
+        _ia = None
+        return
+    from predict.preditor import Preditor
+    _ia = IA(Preditor(config.modelo), config.blender, config.pasta_dados / "features", config.estimativa_conservadora)
+    log.info(f"IA carregada de {config.modelo}")
+
+def _provisoria (maquina: Maquina, n: int) -> np.ndarray:
+    return np.full(n, 60.0 / float(maquina.hardware.get("fator_velocidade") or 1.0))
+
+def _versao_da_maquina (maquina: Maquina, versao_cena: str) -> str:
+    """A versão que o trabalhador vai usar: a menor que abre a cena (a regra do worker.trabalhador)."""
+    compativeis = sorted((v for v in maquina.versoes_blender if versao_tupla(v) >= versao_tupla(versao_cena)),
+                         key=versao_tupla)
+    return compativeis[0] if compativeis else versao_cena
+
+def _com_ia (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> np.ndarray:
+    import pandas as pd
+    from comum.util import sha256_arquivo
+    from predict import features_cena
+    from predict.hardware import linha_maquina
+    caminho = Path(cena.caminho)
+    blender = features_cena.escolher_blender(_ia.blenders, cena.versao)
+    atributos = features_cena.extrair(blender, caminho, frames, _ia.pasta_cache)
+    linhas = pd.DataFrame([linha_maquina(m.dispositivo, m.hardware, _versao_da_maquina(m, cena.versao), m.id)
+                           for m in maquinas])
+    return _ia.preditor.prever_matriz_p(atributos, linhas, sha256_arquivo(caminho), _ia.conservadora)
+
 def estimar_matriz_p (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> np.ndarray:
     elegivel = matriz_elegibilidade(cena, maquinas)
 
-    # TODO: AQUI VEM A IA, O CÓDIGO A SEGUIR É PROVISÓRIO
-    P = np.empty((len(frames), len(maquinas)))
-    for k, maquina in enumerate(maquinas):
-        P[:, k] = 60.0 / float(maquina.hardware.get("fator_velocidade", 1.0))
+    if _ia is None or not frames or not maquinas:
+        P = np.empty((len(frames), len(maquinas)))
+        for k, maquina in enumerate(maquinas):
+            P[:, k] = _provisoria(maquina, len(frames))
+    else:
+        P = _com_ia(cena, frames, maquinas)
 
     P[:, ~elegivel] = math.inf
     return P

@@ -12,6 +12,7 @@ class Hardware (BaseModel):
     nome_maquina: str
     cpu: str
     threads: int
+    nucleos: Optional[int] = None # Núcleos físicos
     ram_gb: Optional[float] = None
     gpus: list[str] = []
     fator_velocidade: Optional[float] = None

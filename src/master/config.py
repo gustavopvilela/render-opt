@@ -28,6 +28,9 @@ class ConfigMestre (BaseModel):
     fator_teto: float = 4.0
     limite_sem_saida_s: float = 600 # Se o Blender ficar calado por mais de 10 minutos, considera como travado
 
+    modelo: Optional[Path] = None # Pasta do artefato do predict.treinar; None = estimativa provisória
+    estimativa_conservadora: bool = False # True: planeja com o limite pessimista (vazão q10, custo q90)
+
     @property
     def caminho_db (self) -> Path:
         return self.pasta_dados / "estado.sqlite3"

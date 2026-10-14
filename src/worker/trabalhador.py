@@ -42,7 +42,7 @@ class Batimento (threading.Thread):
         super().__init__(name="heartbeat", daemon=True)
         self.cliente = ClienteMestre(cfg.mestre, cfg.trabalhador_id, cfg.token)
         self.intervalo = intervalo
-        self.job_atual = Optional[str] = None
+        self.job_atual: Optional[str] = None
         self.precisa_registrar = threading.Event()
 
     def run(self) -> None:
