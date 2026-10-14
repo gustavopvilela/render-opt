@@ -1,0 +1,17 @@
+importância média |SHAP| (log do alvo); [cena] = atributo de cena:
+  num_texturas                 0.5232 [cena]
+  num_instancias               0.1678 [cena]
+  host_ano                     0.1134 
+  etapa                        0.1104 
+  num_nodes_shader             0.1088 [cena]
+  hw_familia                   0.0953 
+  sistema                      0.0952 
+  dispositivo_tipo             0.0929 
+  num_cpu_cores                0.0899 
+  num_cpu_threads              0.0742 
+  hw_notebook                  0.0733 
+  hw_ano                       0.0712 
+  num_objetos_mesh             0.0662 [cena]
+  versao_blender_major         0.0428 
+  log_triangulos               0.0297 [cena]
+figuras em C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\experiments\predict\figuras

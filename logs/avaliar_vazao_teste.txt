@@ -1,0 +1,8 @@
+          rmse_log  dp_rmse  fator_mediano  erro_rel_mediano  dentro_20pct  avaliacoes
+modelo                                                                                
+B0          1.4660      NaN         2.7729            0.8290        0.0993           1
+B1          1.0805      NaN         1.8185            0.5470        0.2002           1
+B2          0.6826      NaN         1.4125            0.3412        0.3251           1
+ridge       0.5908      NaN         1.3491            0.2848        0.3548           1
+floresta    0.3998      NaN         1.1357            0.1261        0.6600           1
+lgbm        0.3879      NaN         1.1421            0.1323        0.6887           1

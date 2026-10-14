@@ -1,0 +1,8 @@
+﻿submissões: 1,020,304; sentinelas descartadas: 6
+custo fixo acima de 20x a mediana da cena: 0 linhas -> NaN
+
+linhas: 6,841   máquinas: 1,293
+por tipo: {'CPU': 4533, 'OPTIX': 1174, 'HIP': 405, 'METAL': 405, 'CUDA': 225, 'ONEAPI': 99}
+por versão: {3: 2624, 4: 3149, 5: 1068}
+hw_ano preenchido: 96.6%
+escrito: C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\processed\opendata.parquet

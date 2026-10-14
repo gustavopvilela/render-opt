@@ -1,0 +1,49 @@
+﻿funil:
+  linhas lidas                              43,174
+  sem duplicatas                            26,888
+  Blender >= 3.0                            17,091
+  com resultado (teste não falhou)          15,541
+  backend com par no Open Data              15,532
+  dispositivo identificado                  15,523
+  uma GPU só (backends de GPU)              15,523
+  repetições estáveis (CV <= 10%)           15,476
+
+carregamento antes de imputar: {'observado': 10856, 'dedutivo': 4569, 'ausente': 43, 'descartado': 8}
+carregamento depois de imputar: {'observado': 10856, 'dedutivo': 4569, 'imputado_celula_0': 50, 'imputado_celula_2': 1}
+carregamento atípico (marcado, mantido): 399
+vazão calculada: 100.0% das linhas
+
+OB agregado: 3,202 linhas, 539 máquinas
+por cena: {'bmw27': 668, 'fishy_cat': 591, 'classroom_pts': 590, 'pabellon': 559, 'barbershop': 495, 'junkshop': 299}
+por tipo: {'CPU': 1985, 'OPTIX': 517, 'CUDA': 424, 'HIP': 190, 'ONEAPI': 70, 'METAL': 16}
+por versão: {3: 1255, 4: 1670, 5: 277}
+hw_ano preenchido: 93.9%
+
+final: 10,043 linhas, 1,519 máquinas (259 presentes nas duas fontes)
+linhas com log_vazao: {'openbenchmarking': 3202, 'opendata': 6841}
+linhas com log_custo_fixo: {'openbenchmarking': 0, 'opendata': 6841}
+carregamento no Open Data: {'imputado_ob_1': 5212, 'imputado_ob_0': 1341, 'imputado_ob_2': 288}
+escrito: C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\processed\openbenchmarking.parquet
+         C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\processed\medicoes_publicas.parquet
+
+[1] custo fixo por razão, cena deixada de fora (Open Data, por submissão)
+    cena        |erro| mediano log c   |erro| mediano log v
+    classroom                1.433                0.045
+    junkshop                 1.681                0.098
+    monster                  0.512                0.020
+
+[2] ponte junkshop: 145 pares (máquina, versão maior)
+    com custo fixo imputado    viés +0.074  |erro| mediano 0.169  correlação 0.978
+    limite inferior (c = 0)    viés +0.051  |erro| mediano 0.165  correlação 0.977
+      CPU     n= 87  viés +0.182
+      CUDA    n=  6  viés -0.097
+      HIP     n= 11  viés -0.151
+      OPTIX   n= 41  viés -0.090
+
+[3] carregamento imputado sem a cena, cena deixada de fora (OB, por envio)
+    barbershop     n= 2350  viés -1.313  |erro| mediano 1.313
+    bmw27          n= 3420  viés +0.304  |erro| mediano 0.405
+    classroom_pts  n= 2659  viés +0.514  |erro| mediano 0.529
+    fishy_cat      n= 2880  viés -0.214  |erro| mediano 0.238
+    junkshop       n= 1440  viés -0.079  |erro| mediano 0.213
+    pabellon       n= 2676  viés +0.126  |erro| mediano 0.244

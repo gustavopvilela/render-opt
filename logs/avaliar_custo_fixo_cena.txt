@@ -1,0 +1,21 @@
+          rmse_log  dp_rmse  fator_mediano  erro_rel_mediano  dentro_20pct  avaliacoes
+modelo                                                                                
+B0          1.0004   0.6205   2.779600e+00            0.9598        0.1790           8
+B1          0.9971   0.6397   2.819400e+00            0.9535        0.1832           8
+B2          0.9164   0.6720   2.873200e+00            1.0236        0.1981           8
+ridge       8.1133  18.8407   6.880377e+22            1.8140        0.0128           8
+floresta    0.6328   0.3519   1.777400e+00            0.4982        0.2583           8
+lgbm        0.8058   0.5229   2.411300e+00            0.8056        0.1907           8
+
+fator mediano por cena deixada de fora:
+modelo                                      B0     B1     B2  floresta   lgbm         ridge
+recorte                                                                                    
+cena:barbershop|etapa:carregar           3.749  3.800  3.774     2.728  4.026  5.504302e+23
+cena:bmw27|etapa:carregar                1.532  1.546  1.407     1.274  1.367  2.584000e+00
+cena:classroom_pts|etapa:carregar        1.828  1.822  1.710     1.334  1.268  6.785000e+00
+cena:classroom|etapa:preparar_finalizar  4.913  4.913  5.718     2.299  2.477  7.542000e+00
+cena:fishy_cat|etapa:carregar            1.260  1.260  1.288     1.336  1.325  2.885000e+00
+cena:junkshop|etapa:carregar             1.344  1.289  1.266     1.957  2.311  1.241000e+00
+cena:junkshop|etapa:preparar_finalizar   6.672  7.073  6.936     2.712  4.411  5.631000e+00
+cena:monster|etapa:preparar_finalizar    1.489  1.500  1.390     1.519  3.381  2.613000e+00
+cena:pabellon|etapa:carregar             1.387  1.324  1.217     1.131  1.211  3.428000e+00

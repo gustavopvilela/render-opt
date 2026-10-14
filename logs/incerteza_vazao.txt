@@ -1,0 +1,21 @@
+[máquina nova] cobertura desejada 90%  (quantil 0.10, lado inferior)
+          cru  conformal     n
+tipo                          
+CPU     0.787      0.907  5336
+CUDA    0.763      0.857   482
+HIP     0.801      0.848   402
+METAL   0.797      0.868   355
+ONEAPI  0.852      0.874   135
+OPTIX   0.842      0.904  1380
+todos   0.797      0.898  8090
+folga conformal média (log): 0.1062
+
+[cena nova] cobertura por cena deixada de fora (desejada 90%)
+  classroom_pts  n=  468  cru 0.756  com folga de cena nova (0.455) 0.994
+  junkshop       n= 2086  cru 0.900  com folga de cena nova (0.466) 0.959
+  fishy_cat      n=  467  cru 0.317  com folga de cena nova (0.428) 0.852
+  bmw27          n=  535  cru 0.996  com folga de cena nova (0.383) 1.000
+  barbershop     n=  386  cru 0.093  com folga de cena nova (0.219) 0.194
+  pabellon       n=  442  cru 0.934  com folga de cena nova (0.488) 0.995
+  monster        n= 1851  cru 0.550  com folga de cena nova (0.481) 0.995
+  classroom      n= 1855  cru 0.857  com folga de cena nova (0.508) 0.996

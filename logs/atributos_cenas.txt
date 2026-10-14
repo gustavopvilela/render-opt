@@ -1,0 +1,10 @@
+classroom      e2e565f90683  amostras 300  pixels 2073600
+junkshop       197988106ac3  amostras 240  pixels 2000000
+monster        b904c57e9661  amostras 256  pixels 1048576
+bmw27          4f0a12eee016  amostras 1225  pixels 518400
+classroom_pts  07635eb65228  amostras 300  pixels 2073600
+fishy_cat      48490adc01f5  amostras 1000  pixels 460920
+pabellon       b3fb32bfc444  amostras 1000  pixels 921600
+barbershop     95972b561804  amostras 800  pixels 1757184
+colunas numéricas que variam entre as cenas: 50 de 63
+escrito: C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\raw\atributos_cenas.csv

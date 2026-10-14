@@ -1,0 +1,3 @@
+vazao      teste: fator mediano 1.142, rmse_log 0.388; cobertura do quantil 87.2%; folga 0.081, folga de cena nova 0.412
+custo_fixo teste: fator mediano 1.108, rmse_log 0.235; cobertura do quantil 89.6%; folga 0.044, folga de cena nova 1.317
+artefato: models\artefato

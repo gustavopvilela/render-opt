@@ -1,0 +1,20 @@
+classroom_pts pronta
+junkshop pronta
+fishy_cat pronta
+bmw27 pronta
+barbershop pronta
+pabellon pronta
+monster pronta
+classroom pronta
+
+erro mediano em log na cena deixada de fora (média entre cenas ± desvio):
+              mean                  std           
+variante atributos so_maquina atributos so_maquina
+k                                                 
+2            0.498      0.428     0.204      0.237
+3            0.473      0.420     0.224      0.266
+4            0.400      0.406     0.243      0.317
+5            0.376      0.375     0.244      0.309
+6            0.353      0.362     0.252      0.318
+7            0.324      0.356     0.248      0.330
+escrito: C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\experiments\predict\curva_cenas.csv

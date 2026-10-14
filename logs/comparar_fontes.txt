@@ -1,0 +1,4 @@
+variante      rmse (log)        Δ pareado vs so_opendata   dobras melhores
+so_opendata   0.3682 ± 0.0331   
+com_ob        0.3541 ± 0.0358   -0.0141 ± 0.0116        13/15
+com_ob_c0     0.3524 ± 0.0332   -0.0158 ± 0.0111        13/15

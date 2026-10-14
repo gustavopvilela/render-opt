@@ -1,0 +1,16 @@
+produção: não usada
+
+treino_vazao: 10,043 linhas, 1,519 máquinas, 8 cenas
+                  linhas    peso  cenas
+fonte                                  
+openbenchmarking    3202  3202.0      6
+opendata            6841  6841.0      3
+
+treino_custo: 10,033 linhas, 1,519 máquinas, 8 cenas
+                                     linhas    peso  cenas
+etapa              fonte                                  
+carregar           openbenchmarking    3192  3192.0      6
+preparar_finalizar opendata            6841  6841.0      3
+
+escrito: C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\processed\treino_vazao.parquet
+         C:\Users\gusta\AppData\Local\Temp\claude\C--Users-gusta-Documents-TCC-Projeto\978f9f6e-4875-458b-805c-88f3f6ac5b18\scratchpad\teste_ia\render-opt\data\processed\treino_custo.parquet

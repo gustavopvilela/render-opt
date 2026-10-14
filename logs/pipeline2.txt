@@ -1,0 +1,28 @@
+>>> ajustar_vazao 10:25:51
+<<< ajustar_vazao rc=0 1007s
+>>> ajustar_custo_fixo 10:42:38
+<<< ajustar_custo_fixo rc=0 474s
+>>> avaliar_vazao_maquina_params 10:50:32
+<<< avaliar_vazao_maquina_params rc=0 23s
+>>> avaliar_custo_fixo_maquina_params 10:50:55
+<<< avaliar_custo_fixo_maquina_params rc=0 25s
+>>> avaliar_vazao_teste 10:51:20
+<<< avaliar_vazao_teste rc=0 14s
+>>> avaliar_custo_fixo_teste 10:51:34
+<<< avaliar_custo_fixo_teste rc=0 12s
+>>> incerteza_vazao 10:51:46
+<<< incerteza_vazao rc=0 92s
+>>> incerteza_custo_fixo 10:53:18
+<<< incerteza_custo_fixo rc=0 172s
+>>> explicar_vazao 10:56:10
+<<< explicar_vazao rc=0 17s
+>>> explicar_custo_fixo 10:56:27
+<<< explicar_custo_fixo rc=0 19s
+>>> curva_cenas 10:56:46
+<<< curva_cenas rc=0 428s
+>>> tres_matrizes 11:03:54
+<<< tres_matrizes rc=1 18s
+>>> tres_matrizes_cena_nova 11:04:12
+<<< tres_matrizes_cena_nova rc=1 192s
+>>> treinar 11:07:24
+<<< treinar rc=0 92s

@@ -1,0 +1,12 @@
+== vazao
+grupos                   6841
+submissoes               980713
+descartadas_quebradas    1078
+fator_mediano_ruido      1.0679
+sigma_ruido_log          0.0776
+== custo_fixo
+grupos                   6841
+submissoes               981622
+descartadas_quebradas    168
+fator_mediano_ruido      1.1464
+sigma_ruido_log          0.2186

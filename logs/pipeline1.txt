@@ -1,0 +1,18 @@
+>>> comparar_fontes 10:08:20
+<<< comparar_fontes rc=0 157s
+>>> avaliar_vazao_maquina 10:10:57
+<<< avaliar_vazao_maquina rc=0 179s
+>>> avaliar_vazao_cena 10:13:56
+<<< avaliar_vazao_cena rc=0 103s
+>>> avaliar_vazao_familia 10:15:39
+<<< avaliar_vazao_familia rc=0 178s
+>>> avaliar_vazao_aleatorio 10:18:37
+<<< avaliar_vazao_aleatorio rc=0 120s
+>>> avaliar_custo_fixo_maquina 10:20:37
+<<< avaliar_custo_fixo_maquina rc=0 119s
+>>> avaliar_custo_fixo_cena 10:22:36
+<<< avaliar_custo_fixo_cena rc=0 36s
+>>> avaliar_custo_fixo_familia 10:23:12
+<<< avaliar_custo_fixo_familia rc=0 60s
+>>> avaliar_custo_fixo_aleatorio 10:24:12
+<<< avaliar_custo_fixo_aleatorio rc=0 92s
