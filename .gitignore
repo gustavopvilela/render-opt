@@ -13,4 +13,4 @@ data/raw/*.zip
 data/raw/**/*.tar.bz2
 docs/
 experiments/irace/instancias
-data/raw
+
