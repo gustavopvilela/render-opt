@@ -1,0 +1,234 @@
+versao_perfil,cena,backend,n_resultados_publicos,linhas_componente
+5.2.x,BMW27,CPU-Only,284,46
+5.2.x,Junkshop,CPU-Only,259,40
+5.2.x,Fishy Cat,CPU-Only,217,39
+5.2.x,Classroom,CPU-Only,217,38
+5.2.x,Pabellon Barcelona,CPU-Only,211,38
+5.2.x,Barbershop,CPU-Only,199,30
+5.2.x,BMW27,NVIDIA CUDA,43,0
+5.2.x,Junkshop,NVIDIA CUDA,38,0
+5.2.x,Barbershop,NVIDIA CUDA,35,0
+5.2.x,BMW27,NVIDIA OptiX,35,0
+5.2.x,Classroom,NVIDIA CUDA,34,0
+5.2.x,Fishy Cat,NVIDIA CUDA,33,0
+5.2.x,Pabellon Barcelona,NVIDIA CUDA,32,0
+5.2.x,Junkshop,NVIDIA OptiX,31,0
+5.2.x,Barbershop,NVIDIA OptiX,28,0
+5.2.x,Classroom,NVIDIA OptiX,28,0
+5.2.x,Fishy Cat,NVIDIA OptiX,27,0
+5.2.x,Pabellon Barcelona,NVIDIA OptiX,26,0
+5.1.x,BMW27,CPU-Only,525,67
+5.1.x,Junkshop,CPU-Only,504,66
+5.1.x,Fishy Cat,CPU-Only,472,64
+5.1.x,Classroom,CPU-Only,441,60
+5.1.x,Pabellon Barcelona,CPU-Only,435,59
+5.1.x,Barbershop,CPU-Only,368,52
+5.1.x,BMW27,NVIDIA OptiX,112,15
+5.1.x,Junkshop,NVIDIA OptiX,105,15
+5.1.x,Pabellon Barcelona,NVIDIA OptiX,105,15
+5.1.x,Classroom,NVIDIA OptiX,104,15
+5.1.x,BMW27,NVIDIA CUDA,102,15
+5.1.x,Barbershop,NVIDIA OptiX,102,15
+5.1.x,Fishy Cat,NVIDIA OptiX,101,14
+5.1.x,Junkshop,NVIDIA CUDA,98,16
+5.1.x,Fishy Cat,NVIDIA CUDA,96,16
+5.1.x,Classroom,NVIDIA CUDA,96,16
+5.1.x,Pabellon Barcelona,NVIDIA CUDA,94,15
+5.1.x,Barbershop,NVIDIA CUDA,91,16
+5.1.x,BMW27,Radeon HIP,41,0
+5.1.x,Classroom,Radeon HIP,39,0
+5.1.x,Junkshop,Radeon HIP,37,0
+5.1.x,Fishy Cat,Radeon HIP,36,0
+5.1.x,Pabellon Barcelona,Radeon HIP,36,0
+5.1.x,Barbershop,Radeon HIP,27,0
+5.0.x,BMW27,CPU-Only,613,67
+5.0.x,Junkshop,CPU-Only,492,57
+5.0.x,Classroom,CPU-Only,472,51
+5.0.x,Fishy Cat,CPU-Only,470,53
+5.0.x,Pabellon Barcelona,CPU-Only,433,52
+5.0.x,Barbershop,CPU-Only,372,44
+5.0.x,BMW27,NVIDIA CUDA,77,0
+5.0.x,BMW27,NVIDIA OptiX,57,7
+5.0.x,Classroom,NVIDIA CUDA,48,0
+5.0.x,Barbershop,NVIDIA OptiX,48,7
+5.0.x,Fishy Cat,NVIDIA CUDA,47,0
+5.0.x,Classroom,NVIDIA OptiX,46,7
+5.0.x,Pabellon Barcelona,NVIDIA OptiX,46,7
+5.0.x,Fishy Cat,NVIDIA OptiX,46,7
+5.0.x,Junkshop,NVIDIA OptiX,44,8
+5.0.x,Barbershop,NVIDIA CUDA,43,0
+5.0.x,Junkshop,NVIDIA CUDA,43,0
+5.0.x,Pabellon Barcelona,NVIDIA CUDA,42,0
+4.5.x,BMW27,CPU-Only,394,50
+4.5.x,Junkshop,CPU-Only,340,48
+4.5.x,Classroom,CPU-Only,322,46
+4.5.x,Pabellon Barcelona,CPU-Only,309,45
+4.5.x,Fishy Cat,CPU-Only,305,45
+4.5.x,Barbershop,CPU-Only,290,43
+4.5.x,BMW27,NVIDIA CUDA,86,11
+4.5.x,BMW27,NVIDIA OptiX,72,10
+4.5.x,Fishy Cat,NVIDIA CUDA,64,9
+4.5.x,Pabellon Barcelona,NVIDIA CUDA,62,10
+4.5.x,Classroom,NVIDIA OptiX,61,10
+4.5.x,Junkshop,NVIDIA OptiX,60,8
+4.5.x,Junkshop,NVIDIA CUDA,60,8
+4.5.x,Classroom,NVIDIA CUDA,60,10
+4.5.x,Barbershop,NVIDIA CUDA,59,9
+4.5.x,Pabellon Barcelona,NVIDIA OptiX,59,10
+4.5.x,Barbershop,NVIDIA OptiX,59,10
+4.5.x,Fishy Cat,NVIDIA OptiX,58,9
+4.5.x,BMW27,Radeon HIP,20,0
+4.5.x,Classroom,Radeon HIP,20,0
+4.4.x,BMW27,CPU-Only,635,61
+4.4.x,Junkshop,CPU-Only,526,57
+4.4.x,Fishy Cat,CPU-Only,523,55
+4.4.x,Classroom,CPU-Only,452,49
+4.4.x,Pabellon Barcelona,CPU-Only,435,50
+4.4.x,Barbershop,CPU-Only,319,35
+4.4.x,BMW27,NVIDIA CUDA,74,13
+4.4.x,BMW27,NVIDIA OptiX,73,13
+4.4.x,Junkshop,NVIDIA OptiX,66,13
+4.4.x,Fishy Cat,NVIDIA OptiX,65,13
+4.4.x,Classroom,NVIDIA OptiX,64,14
+4.4.x,Pabellon Barcelona,NVIDIA OptiX,63,14
+4.4.x,Barbershop,NVIDIA OptiX,63,14
+4.4.x,Pabellon Barcelona,NVIDIA CUDA,60,13
+4.4.x,Junkshop,NVIDIA CUDA,59,13
+4.4.x,Fishy Cat,NVIDIA CUDA,59,13
+4.4.x,Barbershop,NVIDIA CUDA,58,13
+4.4.x,Classroom,NVIDIA CUDA,57,13
+4.4.x,BMW27,Radeon HIP,40,0
+4.4.x,Junkshop,Radeon HIP,24,0
+4.4.x,Pabellon Barcelona,Radeon HIP,24,0
+4.4.x,Fishy Cat,Radeon HIP,23,0
+4.3.x,BMW27,CPU-Only,432,57
+4.3.x,Classroom,CPU-Only,361,52
+4.3.x,Fishy Cat,CPU-Only,340,51
+4.3.x,Junkshop,CPU-Only,339,50
+4.3.x,Barbershop,CPU-Only,336,49
+4.3.x,Pabellon Barcelona,CPU-Only,328,50
+4.3.x,BMW27,NVIDIA OptiX,265,35
+4.3.x,Classroom,NVIDIA CUDA,265,30
+4.3.x,Classroom,NVIDIA OptiX,263,35
+4.3.x,Pabellon Barcelona,NVIDIA CUDA,261,36
+4.3.x,Fishy Cat,NVIDIA CUDA,261,36
+4.3.x,Fishy Cat,NVIDIA OptiX,260,35
+4.3.x,Barbershop,NVIDIA CUDA,260,36
+4.3.x,Pabellon Barcelona,NVIDIA OptiX,260,35
+4.3.x,Barbershop,NVIDIA OptiX,260,35
+4.3.x,Junkshop,NVIDIA OptiX,260,34
+4.3.x,Junkshop,NVIDIA CUDA,258,35
+4.3.x,BMW27,NVIDIA CUDA,218,31
+4.3.x,BMW27,Radeon HIP,120,0
+4.3.x,Classroom,Radeon HIP,120,0
+4.3.x,Fishy Cat,Radeon HIP,119,0
+4.3.x,Junkshop,Radeon HIP,118,0
+4.3.x,Pabellon Barcelona,Radeon HIP,115,0
+4.3.x,Barbershop,Radeon HIP,114,0
+4.3.x,Pabellon Barcelona,Intel oneAPI,51,0
+4.3.x,Classroom,Intel oneAPI,51,0
+4.3.x,Fishy Cat,Intel oneAPI,49,0
+4.3.x,Junkshop,Intel oneAPI,49,0
+4.3.x,Barbershop,Intel oneAPI,48,0
+4.3.x,BMW27,Intel oneAPI,43,0
+4.2.x,BMW27,CPU-Only,414,51
+4.2.x,Junkshop,CPU-Only,350,51
+4.2.x,Classroom,CPU-Only,311,49
+4.2.x,Fishy Cat,CPU-Only,306,47
+4.2.x,Pabellon Barcelona,CPU-Only,305,46
+4.2.x,Barbershop,CPU-Only,295,46
+4.2.x,BMW27,NVIDIA CUDA,59,7
+4.2.x,Junkshop,NVIDIA CUDA,39,0
+4.2.x,Barbershop,NVIDIA CUDA,37,0
+4.2.x,Classroom,NVIDIA CUDA,36,0
+4.2.x,Fishy Cat,NVIDIA CUDA,35,0
+4.2.x,Pabellon Barcelona,NVIDIA CUDA,35,0
+4.2.x,BMW27,NVIDIA OptiX,34,0
+4.2.x,Classroom,NVIDIA OptiX,33,0
+4.2.x,Barbershop,NVIDIA OptiX,31,0
+4.2.x,Junkshop,NVIDIA OptiX,29,0
+4.2.x,Fishy Cat,NVIDIA OptiX,29,0
+4.2.x,Pabellon Barcelona,NVIDIA OptiX,29,0
+4.1.x,BMW27,CPU-Only,918,108
+4.1.x,Junkshop,CPU-Only,801,102
+4.1.x,Fishy Cat,CPU-Only,800,100
+4.1.x,Pabellon Barcelona,CPU-Only,665,94
+4.1.x,Classroom,CPU-Only,593,70
+4.1.x,Barbershop,CPU-Only,477,67
+4.1.x,BMW27,NVIDIA CUDA,48,8
+4.1.x,Classroom,NVIDIA CUDA,38,8
+4.1.x,BMW27,NVIDIA OptiX,36,0
+4.1.x,Junkshop,NVIDIA CUDA,36,8
+4.1.x,Fishy Cat,NVIDIA CUDA,34,0
+4.1.x,Classroom,NVIDIA OptiX,32,0
+4.1.x,Pabellon Barcelona,NVIDIA CUDA,32,0
+4.1.x,Fishy Cat,NVIDIA OptiX,31,0
+4.1.x,Barbershop,NVIDIA CUDA,30,0
+4.1.x,Junkshop,NVIDIA OptiX,29,0
+4.1.x,Barbershop,NVIDIA OptiX,29,0
+4.1.x,Pabellon Barcelona,NVIDIA OptiX,28,0
+4.0.x,BMW27,CPU-Only,483,64
+4.0.x,Fishy Cat,CPU-Only,263,44
+4.0.x,Classroom,CPU-Only,249,41
+4.0.x,Barbershop,CPU-Only,230,34
+4.0.x,Pabellon Barcelona,CPU-Only,229,37
+4.0.x,BMW27,NVIDIA OptiX,93,11
+4.0.x,Classroom,NVIDIA OptiX,87,11
+4.0.x,Fishy Cat,NVIDIA OptiX,86,11
+4.0.x,Pabellon Barcelona,NVIDIA OptiX,85,11
+4.0.x,Barbershop,NVIDIA OptiX,84,11
+4.0.x,BMW27,NVIDIA CUDA,78,13
+4.0.x,Classroom,NVIDIA CUDA,72,14
+4.0.x,Fishy Cat,NVIDIA CUDA,62,12
+4.0.x,Barbershop,NVIDIA CUDA,60,11
+4.0.x,Pabellon Barcelona,NVIDIA CUDA,57,10
+3.6.x,BMW27,CPU-Only,896,89
+3.6.x,Fishy Cat,CPU-Only,629,77
+3.6.x,Classroom,CPU-Only,595,71
+3.6.x,Pabellon Barcelona,CPU-Only,578,73
+3.6.x,Barbershop,CPU-Only,522,67
+3.6.x,BMW27,NVIDIA OptiX,91,10
+3.6.x,Barbershop,NVIDIA OptiX,83,0
+3.6.x,Classroom,NVIDIA OptiX,82,7
+3.6.x,Fishy Cat,NVIDIA OptiX,81,10
+3.6.x,Pabellon Barcelona,NVIDIA OptiX,79,0
+3.6.x,BMW27,NVIDIA CUDA,57,0
+3.6.x,Fishy Cat,NVIDIA CUDA,45,0
+3.6.x,Classroom,NVIDIA CUDA,44,0
+3.6.x,Barbershop,NVIDIA CUDA,39,0
+3.6.x,Pabellon Barcelona,NVIDIA CUDA,39,0
+3.5.x,BMW27,CPU-Only,349,45
+3.5.x,Classroom,CPU-Only,231,42
+3.5.x,Fishy Cat,CPU-Only,217,41
+3.5.x,Barbershop,CPU-Only,216,39
+3.5.x,Pabellon Barcelona,CPU-Only,213,40
+3.5.x,BMW27,NVIDIA OptiX,37,0
+3.5.x,Classroom,NVIDIA OptiX,35,0
+3.5.x,Pabellon Barcelona,NVIDIA OptiX,34,0
+3.5.x,Barbershop,NVIDIA OptiX,34,0
+3.5.x,Fishy Cat,NVIDIA OptiX,32,0
+3.5.x,BMW27,NVIDIA CUDA,23,0
+3.5.x,Classroom,NVIDIA CUDA,21,0
+3.4.x,BMW27,CPU-Only,526,76
+3.4.x,Classroom,CPU-Only,422,50
+3.4.x,Fishy Cat,CPU-Only,370,67
+3.4.x,Pabellon Barcelona,CPU-Only,358,67
+3.4.x,Barbershop,CPU-Only,354,55
+3.4.x,BMW27,NVIDIA CUDA,175,23
+3.4.x,Classroom,NVIDIA CUDA,154,20
+3.4.x,Fishy Cat,NVIDIA CUDA,151,20
+3.4.x,Fishy Cat,NVIDIA OptiX,146,20
+3.4.x,BMW27,NVIDIA OptiX,144,21
+3.4.x,Classroom,NVIDIA OptiX,144,20
+3.4.x,Pabellon Barcelona,NVIDIA CUDA,144,21
+3.4.x,Barbershop,NVIDIA CUDA,143,21
+3.4.x,Pabellon Barcelona,NVIDIA OptiX,138,21
+3.4.x,Barbershop,NVIDIA OptiX,137,21
+3.4.x,BMW27,Radeon HIP,51,0
+3.4.x,Classroom,Radeon HIP,50,0
+3.4.x,Fishy Cat,Radeon HIP,50,0
+3.4.x,Barbershop,Radeon HIP,49,0
+3.4.x,Pabellon Barcelona,Radeon HIP,46,0
+3.4.x,BMW27,Intel oneAPI,30,0
+3.4.x,Pabellon Barcelona,Intel oneAPI,29,0
+3.4.x,Fishy Cat,Intel oneAPI,29,0
