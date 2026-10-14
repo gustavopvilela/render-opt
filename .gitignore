@@ -6,11 +6,13 @@ cmake-build-release-visual-studio/
 *.pyc
 data/raw/jsonl/
 data/raw/**/*.blend
-data/processed/*.parquet
 experiments/**/output_render/
 .pytest_cache/
 data/raw/*.zip
 data/raw/**/*.tar.bz2
 docs/
 experiments/irace/instancias
-
+data/raw/openbenchmarking_xml/
+data/raw/openbenchmarking_xml.tar.xz
+data/raw/arquivos_grandes/
+data/processed/arquivos_grandes/
