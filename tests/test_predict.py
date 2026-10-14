@@ -321,3 +321,16 @@ def test_planner_usa_a_ia_e_mantem_inelegivel (artefato, monkeypatch):
     P = planner.estimar_matriz_p(planner.Cena("c", "c.blend", "5.1"), [1, 2, 3], maquinas)
     assert np.isfinite(P[:, :3]).all() and (P[:, :3] > 0).all()   # nome desconhecido também é previsto
     assert np.isinf(P[:, 3]).all()                                # Blender 4.2 não abre cena 5.1
+
+# ---------------------------------------------------------- tres_matrizes --
+
+def test_ordem_de_chegada_maquina_livre_pega_o_proximo ():
+    from predict.tres_matrizes import makespan, ordem_de_chegada
+    # Máquina 0 é 4x mais rápida: termina cada frame antes e pega mais deles
+    P = np.array([[1.0, 4.0]] * 5)
+    plano = ordem_de_chegada(P)
+    assert plano == [[0, 2, 3, 4], [1]]
+    assert makespan(plano, P) == 4.0
+    # Ignora o custo: o frame caro vai para quem estiver livre, mesmo sendo a máquina lenta
+    P = np.array([[1.0, 1.0], [1.0, 9.0]])
+    assert ordem_de_chegada(P) == [[0], [1]]

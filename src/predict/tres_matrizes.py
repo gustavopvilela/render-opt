@@ -13,7 +13,9 @@ frames das 3 cenas do Open Data com quantidades de amostras variadas. Monta trê
 
 e compara o makespan, sempre AVALIADO em P_real, de:
 
-  (a) round-robin e blocos contíguos  - sem modelo (o que as farms fazem)
+  (a) ordem de chegada                - sem modelo: a "Primitive Render Farm" do manual
+                                        do Blender (e a política do Flamenco)
+  (a') round-robin e blocos contíguos - sem modelo, divisões fixas da lista de frames
   (b) guloso sobre P_prev             - com o modelo
   (b') guloso sobre P_cons
   (c) guloso sobre P_real             - previsão perfeita
@@ -51,6 +53,21 @@ def round_robin (n: int, m: int) -> list[list[int]]:
 def contiguo (n: int, m: int) -> list[list[int]]:
     """Blocos de frames consecutivos do mesmo tamanho, como dividir a timeline entre as máquinas."""
     return [list(bloco) for bloco in np.array_split(np.arange(n), m)]
+
+
+def ordem_de_chegada (P: np.ndarray) -> list[list[int]]:
+    """
+    A máquina que fica livre pega o próximo frame, na ordem da lista, sem olhar custo.
+    P só diz quando cada máquina fica livre; empate (todas livres no início) vai para a de menor índice.
+    """
+    n, m = P.shape
+    fim = np.zeros(m)
+    plano: list[list[int]] = [[] for _ in range(m)]
+    for i in range(n):
+        k = int(np.argmin(fim))
+        plano[k].append(i)
+        fim[k] += P[i, k]
+    return plano
 
 
 def limite_inferior (P: np.ndarray) -> float:
@@ -138,7 +155,7 @@ def instancia (t: pd.DataFrame, rng: np.random.Generator, m: int, n: int) -> dic
     P_real = matriz("custo_fixo_s", "vazao_amostras_pixel_s")
     P_prev, P_cons = matriz("c_prev", "v_prev"), matriz("c_cons", "v_cons")
     planos = {
-        "round_robin": round_robin(n, m), "contiguo": contiguo(n, m),
+        "ordem_de_chegada": ordem_de_chegada(P_real), "round_robin": round_robin(n, m), "contiguo": contiguo(n, m),
         "modelo": gerar_plano_renderizacao(P_prev), "modelo_conservador": gerar_plano_renderizacao(P_cons),
         "oraculo": gerar_plano_renderizacao(P_real),
     }
@@ -168,17 +185,20 @@ def main () -> None:
     destino.parent.mkdir(parents=True, exist_ok=True)
     r.to_csv(destino, index=False)
 
-    colunas = ["cmax_round_robin", "cmax_contiguo", "cmax_modelo", "cmax_modelo_conservador", "cmax_oraculo"]
+    colunas = ["cmax_ordem_de_chegada", "cmax_round_robin", "cmax_contiguo", "cmax_modelo",
+               "cmax_modelo_conservador", "cmax_oraculo"]
     razao = r[colunas].div(r["lb"], axis=0)
     print("makespan / limite inferior (média ± desvio entre instâncias; mediana):")
     for c in colunas:
         print(f"  {c[5:]:20s} {razao[c].mean():6.3f} ± {razao[c].std():.3f}   {razao[c].median():6.3f}")
-    ganho = 1 - r["cmax_modelo"] / r["cmax_contiguo"]
+    # A ordem de chegada é a referência principal: é o método nativo do Blender
+    for base in ["ordem_de_chegada", "contiguo"]:
+        ganho = 1 - r["cmax_modelo"] / r[f"cmax_{base}"]
+        # Wilcoxon pareado
+        teste = wilcoxon(r["cmax_modelo"], r[f"cmax_{base}"], alternative="less")
+        print(f"redução do makespan, modelo vs {base}: {ganho.mean():.1%} ± {ganho.std():.1%}"
+              f"  (Wilcoxon pareado, modelo < {base}: p = {teste.pvalue:.2g})")
     erro = (r["cmax_previsto_modelo"] - r["cmax_modelo"]) / r["cmax_modelo"]
-    print(f"redução do makespan, modelo vs contíguo: {ganho.mean():.1%} ± {ganho.std():.1%}")
-    # Wilcoxon pareado
-    teste = wilcoxon(r["cmax_modelo"], r["cmax_contiguo"], alternative="less")
-    print(f"Wilcoxon pareado (modelo < contíguo): p = {teste.pvalue:.2g}")
     print(f"erro do makespan prometido pelo plano:  {erro.mean():+.1%} ± {erro.std():.1%}")
     print(f"escrito: {destino}")
 
