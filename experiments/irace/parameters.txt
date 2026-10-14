@@ -1,0 +1,9 @@
+# nome              switch                  tipo    faixa
+fator_t0            "--fator_t0 "           r,log   (0.001, 0.5)
+fator_tf            "--fator_tf "           r,log   (0.000001, 0.0001)
+iter_por_temp       "--iter_por_temp "      i,log   (10, 5000)
+taxa                "--taxa "               r       (0.0, 1.0)
+alpha_construcao    "--alpha_construcao "   r       (0.0, 0.5)
+
+[global]
+digits = 8

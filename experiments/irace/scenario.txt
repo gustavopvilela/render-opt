@@ -1,0 +1,8 @@
+parameterFile = "./parameters.txt"
+targetRunner = "./target-runner.bat"
+trainInstancesDir = "./instancias/treino"
+testInstancesDir = "./instancias/teste"
+maxExperiments = 10000
+parallel = 8
+seed = 42
+logFile = "./irace.Rdata"
