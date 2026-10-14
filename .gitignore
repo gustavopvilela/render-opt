@@ -16,3 +16,8 @@ data/raw/openbenchmarking_xml/
 data/raw/openbenchmarking_xml.tar.xz
 data/raw/arquivos_grandes/
 data/processed/arquivos_grandes/
+data/raw/opendata-2026-09-06-000000+0000.jsonl
+data/raw/openbenchmarking_blender_envios.csv
+data/raw/openbenchmarking_blender_envios_completa.csv
+data/raw/openbenchmarking_blender_envios_completa_especificacoes.csv
+data/processed/dataset_opendata_sem_agregar.csv
