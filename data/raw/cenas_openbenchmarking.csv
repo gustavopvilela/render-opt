@@ -1,0 +1,12 @@
+cena_pts,variante,arquivo,sha256,amostras,res_x,res_y,res_pct,adaptativa,denoise,bibliotecas,bibliotecas_ausentes,pixels_totais
+BMW27,cpu,bmw27_cpu.blend,4f0a12eee016342507a672b66c3c0d317925ecef493d42250191c16864878ea9,1225,1920,1080,50,False,False,0,0,518400
+BMW27,gpu,bmw27_gpu.blend,172a6b1c6f25acf59d17cb2682866a6b7a33718b92ad15f4073d55d16ff3af74,1225,1920,1080,50,False,False,0,0,518400
+Classroom,cpu,classroom_cpu.blend,07635eb65228cf541cf64438a624446cd71d74c3df4956832c4a22b7ed5c3cbf,300,1920,1080,100,False,False,11,11,2073600
+Classroom,gpu,classroom_gpu.blend,f38abac1a094021df53bb6c32a69963116a83612edfbcbc4d19a9e3dc16fde98,300,1920,1080,100,False,False,11,11,2073600
+Fishy Cat,cpu,fishy_cat_cpu.blend,48490adc01f5d1516eb0b7a2cd839aaa532dad1a061a1dc19b46160c46be22f6,1000,501,230,200,False,False,0,0,460920
+Fishy Cat,gpu,fishy_cat_gpu.blend,f467c39fff23687c9d7f9c40e909d98f0f34495f3e4bb3c0055d8b32e0479d1a,1000,501,230,200,False,False,0,0,460920
+Pabellon Barcelona,cpu,pavillon_barcelone_cpu.blend,b3fb32bfc44443b2885d475ff5435af987c9fdfae1a0bb04ddd5edf30b148ba4,1000,1280,720,100,False,False,0,0,921600
+Pabellon Barcelona,gpu,pavillon_barcelone_gpu.blend,bf983f24650c11a0db6e4f4fe0d5719c10a9bc20eb0f888f1e58a5a436d57c96,1000,1280,720,100,False,False,0,0,921600
+Barbershop,cpu,barbershop_interior_cpu.blend,95972b56180462cac47ec82f3a755bd9111ec18ca37a6196a319c013db994130,800,2048,858,100,False,False,0,0,1757184
+Barbershop,gpu,barbershop_interior_gpu.blend,4a79ec95e7d96602ab16d475370f6b765a713a546edfa420dd53a4c25e464417,800,2048,858,100,False,False,0,0,1757184
+Junkshop,unica,junkshop.blend,197988106ac3232219cf62d2b26de9541a8326fde960abd0718e043049467afb,240,2000,1000,100,False,False,0,0,2000000
