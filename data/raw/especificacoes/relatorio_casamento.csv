@@ -1,0 +1,1378 @@
+﻿peca,modelo_no_envio,memoria_mb_envio,casamento,modelo_na_base,linhas
+cpu,AMD Ryzen 9 5950X 16-Core,,exato,Ryzen 9 5950X,2136
+cpu,AMD Ryzen 9 7950X 16-Core,,exato,Ryzen 9 7950X,1358
+gpu,AMD Radeon RX 7900 GRE,16384,exato,Radeon RX 7900 GRE,1304
+cpu,AMD Ryzen 9 5900X 12-Core,,exato,Ryzen 9 5900X,1273
+cpu,Intel Core Ultra 9 285K,,exato,Core Ultra 9 285K,1206
+cpu,Intel Xeon Platinum 8380,,exato,Xeon Platinum 8380,936
+gpu,NVIDIA GeForce RTX 3060 Ti,8192,exato,GeForce RTX 3060 Ti,890
+cpu,AMD Ryzen 9 9950X3D 16-Core,,exato,Ryzen 9 9950X3D,885
+gpu,AMD Radeon RX 7900 XTX,24576,exato,Radeon RX 7900 XTX,816
+gpu,NVIDIA GeForce RTX 3090,24576,exato,GeForce RTX 3090,768
+gpu,AMD Radeon RX 6800 XT,16384,exato,Radeon RX 6800 XT,760
+cpu,Intel Xeon Platinum 8280,,exato,Xeon Platinum 8280,740
+cpu,AMD Ryzen 9 9950X 16-Core,,exato,Ryzen 9 9950X,677
+gpu,AMD Radeon RX 5600 OEM/5600 XT / 5700/5700,8192,ambiguo,,644
+cpu,AMD Ryzen 9 3950X 16-Core,,exato,Ryzen 9 3950X,552
+cpu,AMD EPYC 7601 32-Core,,exato,EPYC 7601,505
+cpu,AMD EPYC 7763 64-Core,,exato,EPYC 7763,451
+cpu,Intel Core i9-13900K,,exato,Core i9-13900K,450
+cpu,Intel Xeon Platinum 8259L,,exato_wikipedia,Xeon Platinum 8259L,445
+cpu,Intel Core i9-7980XE,,exato,Core i9-7980XE,436
+gpu,AMD Radeon RX 470/480/570/570X/580/580X,4096,ambiguo,,432
+cpu,Intel Xeon Platinum 8375C,,exato_wikipedia,Xeon Platinum 8375C,426
+cpu,AMD Ryzen Threadripper 3970X 32-Core,,exato,Ryzen Threadripper 3970X,421
+cpu,Intel Core i9-12900K,,exato,Core i9-12900K,418
+cpu,AMD Ryzen Threadripper 3960X 24-Core,,exato,Ryzen Threadripper 3960X,410
+cpu,Intel Xeon Platinum 8272CL,,exato_wikipedia,Xeon Platinum 8272CL,395
+gpu,AMD Radeon RX 470/480/570/570X/580/580X/590,4096,ambiguo,,391
+gpu,NVIDIA GeForce RTX 4090,24576,exato,GeForce RTX 4090,370
+gpu,NVIDIA GeForce RTX 3080,10240,exato,GeForce RTX 3080,369
+cpu,Intel Xeon Gold 6138,,exato_wikipedia,Xeon Gold 6138,362
+cpu,AMD Ryzen Threadripper 3990X 64-Core,,exato,Ryzen Threadripper 3990X,343
+cpu,AMD Ryzen 5 2600 Six-Core,,exato,Ryzen 5 2600,341
+cpu,Intel Core i9-11900K,,exato,Core i9-11900K,340
+gpu,NVIDIA GeForce RTX 3070,8192,exato,GeForce RTX 3070,336
+cpu,Intel Xeon E3-1280 v5,,exato,Xeon E3-1280 v5,310
+cpu,Intel Core i9-10980XE,,exato,Core i9-10980XE,295
+cpu,AMD Ryzen 9 7900X 12-Core,,exato,Ryzen 9 7900X,294
+cpu,AMD Ryzen 9 3900X 12-Core,,exato,Ryzen 9 3900X,292
+cpu,AMD Ryzen 7 5800X 8-Core,,exato,Ryzen 7 5800X,287
+cpu,AMD EPYC 7742 64-Core,,exato,EPYC 7742,284
+gpu,AMD Radeon RX 470/480/570/570X/580/580X/590,8192,ambiguo,,284
+gpu,AMD Radeon VII,16384,exato,Radeon VII,278
+gpu,AMD Radeon,512,sem_match,,276
+cpu,AMD EPYC 9654 96-Core,,exato,EPYC 9654,274
+gpu,NVIDIA GeForce RTX 2080 Ti,11264,exato,GeForce RTX 2080 Ti,267
+cpu,AMD Ryzen 7 1700 Eight-Core,,exato,Ryzen 7 1700,262
+gpu,AMD Radeon RX Vega,8192,sem_match,,262
+gpu,NVIDIA GeForce RTX 4070 SUPER,12288,exato,GeForce RTX 4070 SUPER,261
+gpu,NVIDIA GeForce RTX 2080,8192,exato,GeForce RTX 2080,257
+cpu,Intel Xeon Gold 5220R,,exato_wikipedia,Xeon Gold 5220R,248
+gpu,NVIDIA GeForce RTX 4080 SUPER,16384,exato,GeForce RTX 4080 SUPER,245
+gpu,NVIDIA GeForce GTX 1080,8192,exato,GeForce GTX 1080,242
+cpu,AMD Ryzen 7 7840U,,exato,Ryzen 7 7840U,241
+cpu,AMD Ryzen AI 9 HX 370,,exato,Ryzen AI 9 HX 370,241
+cpu,AMD Ryzen 7 5800X3D 8-Core,,exato,Ryzen 7 5800X3D,240
+cpu,AMD Ryzen 7 3700X 8-Core,,exato,Ryzen 7 3700X,239
+gpu,AMD Radeon RX 56/64,8192,ambiguo,,238
+gpu,NVIDIA GeForce RTX 2060,6144,exato,GeForce RTX 2060,236
+cpu,Intel Core i7-8700K,,exato,Core i7-8700K,233
+gpu,AMD Radeon HD 7770/8760 / R7 250X,1024,ambiguo,,230
+cpu,AMD EPYC 7V13 64-Core,,sem_match,,230
+cpu,AMD EPYC 9755 128-Core,,exato,EPYC 9755,230
+cpu,Intel Core i9-7960X,,exato,Core i9-7960X,228
+gpu,NVIDIA GeForce RTX 3080 Ti,12288,exato,GeForce RTX 3080 Ti,225
+cpu,AMD Ryzen Threadripper 2990WX 32-Core,,exato,Ryzen Threadripper 2990WX,224
+gpu,AMD Renoir,512,sem_match,,221
+cpu,AMD EPYC 7543 32-Core,,exato,EPYC 7543,219
+gpu,AMD Cezanne,512,sem_match,,217
+cpu,AMD Ryzen 7 PRO 5850U,,exato,Ryzen 7 PRO 5850U,217
+gpu,NVIDIA TITAN RTX,24576,exato,TITAN RTX,212
+gpu,AMD Radeon RX 6500 XT,4096,exato,Radeon RX 6500 XT,211
+gpu,NVIDIA GeForce RTX 3070 Ti,8192,exato,GeForce RTX 3070 Ti,209
+cpu,AMD Ryzen 7 2700X Eight-Core,,exato,Ryzen 7 2700X,207
+gpu,AMD Radeon RX 580,8192,exato,Radeon RX 580,206
+gpu,AMD Radeon 780M,512,exato,Radeon 780M,206
+cpu,AMD Ryzen 7 7700X 8-Core,,exato,Ryzen 7 7700X,204
+cpu,Intel Xeon Platinum 8490H,,exato,Xeon Platinum 8490H,204
+cpu,Intel Core i9-9900KS,,exato,Core i9-9900KS,202
+cpu,AMD Ryzen Threadripper 1950X 16-Core,,exato,Ryzen Threadripper 1950X,199
+gpu,NVIDIA GeForce RTX 2060 SUPER,8192,exato,GeForce RTX 2060 SUPER,198
+gpu,AMD Radeon RX 9070 XT,16384,exato,Radeon RX 9070 XT,198
+cpu,AMD Ryzen 7 1800X Eight-Core,,exato,Ryzen 7 1800X,197
+cpu,AMD EPYC 75F3 32-Core,,exato,EPYC 75F3,195
+cpu,AMD EPYC 9684X 96-Core,,exato,EPYC 9684X,194
+cpu,AMD Ryzen 7 7840HS,,exato,Ryzen 7 7840HS,192
+cpu,AMD EPYC 7713 64-Core,,exato,EPYC 7713,191
+cpu,Intel Core i7-1185G7,,exato,Core i7-1185G7,191
+cpu,AMD EPYC 7302 16-Core,,exato,EPYC 7302,186
+cpu,AMD EPYC 7773X 64-Core,,exato,EPYC 7773X,186
+gpu,NVIDIA GeForce RTX 5090,32768,exato,GeForce RTX 5090,186
+gpu,NVIDIA GeForce RTX 2080 SUPER,8192,exato,GeForce RTX 2080 SUPER,185
+gpu,eVGA NVIDIA GeForce RTX 2080 Ti,11264,exato,GeForce RTX 2080 Ti,185
+cpu,Intel Xeon 6980P,,exato,Xeon 6980P,184
+gpu,Intel Kabylake GT2,3072,sem_match,,181
+gpu,NVIDIA GeForce RTX 2070,8192,exato,GeForce RTX 2070,181
+cpu,Intel Core i7-1280P,,exato,Core i7-1280P,181
+cpu,AMD Ryzen 5 5600X 6-Core,,exato,Ryzen 5 5600X,179
+gpu,NVIDIA GeForce RTX 4080,16384,exato,GeForce RTX 4080,179
+gpu,NVIDIA Quadro RTX 4000,8192,exato,Quadro RTX 4000,175
+gpu,AMD Radeon RX 570,4096,exato,Radeon RX 570,175
+cpu,Intel Core Ultra 7 155H,,exato,Core Ultra 7 155H,175
+cpu,AMD EPYC 9655P 96-Core,,exato,EPYC 9655P,172
+cpu,Intel Core i7-6800K,,exato,Core i7-6800K,171
+gpu,AMD Radeon VII,4096,exato,Radeon VII,170
+gpu,AMD Radeon Vega / Mobile,512,ambiguo,,167
+cpu,Intel Core i9-14900K,,exato,Core i9-14900K,167
+cpu,AMD Ryzen Threadripper 7980X 64-Cores,,exato,Ryzen Threadripper 7980X,166
+gpu,NVIDIA GeForce RTX 5080,16384,exato,GeForce RTX 5080,166
+cpu,Intel Xeon W-3275M,,exato_wikipedia,Xeon W-3275M,165
+gpu,AMD Radeon RX 5700,8192,exato,Radeon RX 5700,165
+cpu,AMD EPYC 7502 32-Core,,exato,EPYC 7502,163
+cpu,AMD EPYC 9754 128-Core,,exato,EPYC 9754,162
+cpu,AMD Ryzen 7 PRO 6850U,,exato,Ryzen 7 PRO 6850U,161
+cpu,AMD Ryzen 9 7945HX,,exato,Ryzen 9 7945HX,161
+cpu,AMD EPYC 7R32 48-Core,,sem_match,,160
+cpu,AMD EPYC 7K83 64-Core,,sem_match,,160
+cpu,Intel Core i9-10900K,,exato,Core i9-10900K,159
+cpu,Intel Xeon Silver 4216,,exato_wikipedia,Xeon Silver 4216,158
+gpu,NVIDIA GeForce RTX 4070,12288,exato,GeForce RTX 4070,158
+gpu,eVGA NVIDIA GeForce GTX 970,4096,exato,GeForce GTX 970,157
+cpu,AMD EPYC 7F52 16-Core,,exato,EPYC 7F52,157
+cpu,Intel Xeon Gold 6226R,,exato_wikipedia,Xeon Gold 6226R,155
+cpu,INTEL XEON PLATINUM 8592+,,exato,Xeon Platinum 8592+,152
+gpu,NVIDIA GeForce GTX 1060,6144,memoria,GeForce GTX 1060 6 GB,150
+gpu,AMD Phoenix1,4096,sem_match,,150
+gpu,NVIDIA GeForce GTX 980,4096,exato,GeForce GTX 980,148
+cpu,AMD EPYC 7402 24-Core,,exato,EPYC 7402,148
+cpu,Intel Core i7-5960X,,exato,Core i7-5960X,147
+cpu,AMD RYZEN AI MAX+ PRO 395,,exato,Ryzen AI Max+ PRO 395,147
+cpu,Intel Core i7-6700K,,exato,Core i7-6700K,145
+gpu,NVIDIA GeForce RTX 2070 SUPER,8192,exato,GeForce RTX 2070 SUPER,145
+gpu,AMD Radeon RX 5500/5500M / Pro 5500M,8192,ambiguo,,144
+cpu,AMD Ryzen Threadripper PRO 7995WX 96-Cores,,exato,Ryzen Threadripper PRO 7995WX,144
+cpu,Intel Core i9-9900K,,exato,Core i9-9900K,143
+gpu,NVIDIA GeForce RTX 4070 Ti SUPER,16384,exato,GeForce RTX 4070 Ti SUPER,142
+gpu,Intel Haswell Desktop,1536,sem_match,,140
+cpu,AMD FX-8350 Eight-Core,,exato,FX-8350,140
+cpu,Intel Core i7-1165G7,,exato,Core i7-1165G7,136
+cpu,AMD Ryzen AI 9 365,,exato,Ryzen AI 9 365,135
+cpu,Intel Core i5-7600K,,exato,Core i5-7600K,134
+cpu,AMD Ryzen 7 4700U,,exato,Ryzen 7 4700U,134
+cpu,Intel Core i7-7900X,,sem_match,,133
+gpu,G200eW3,32768,sem_match,,133
+cpu,AMD Ryzen 7 3800X 8-Core,,exato,Ryzen 7 3800X,133
+cpu,Intel Core i7-7700K,,exato,Core i7-7700K,132
+cpu,Intel Xeon Max 9480,,exato,Xeon Max 9480,132
+gpu,NVIDIA NV106,2048,sem_match,,131
+cpu,Intel Core Ultra 7 256V,,exato,Core Ultra 7 256V,131
+gpu,NVIDIA GeForce GTX TITAN X,12288,exato,GeForce GTX TITAN X,125
+cpu,Intel Core i9-10885H,,exato,Core i9-10885H,125
+cpu,INTEL XEON PLATINUM 8570,,exato,Xeon Platinum 8570,125
+gpu,AMD Radeon RX 6800/6800 XT / 6900,16384,ambiguo,,124
+gpu,Intel UHD 630,3072,exato,UHD Graphics 630,122
+cpu,AMD Ryzen 9 3900XT 12-Core,,exato,Ryzen 9 3900XT,122
+gpu,MGA G200eW WPCM450,4096,sem_match,,121
+cpu,AMD Opteron 6282 SE,,exato,Opteron 6282 SE,120
+cpu,Intel Xeon E5-2667 0,,exato,Xeon E5-2667,120
+cpu,AMD Ryzen 5 5600 6-Core,,exato,Ryzen 5 5600,120
+cpu,Intel Xeon Platinum 8470Q,,exato,Xeon Platinum 8470Q,120
+cpu,AMD EPYC 7F32 8-Core,,exato,EPYC 7F32,119
+gpu,AMD Radeon R7 370 / R9 270/370 OEM,4096,ambiguo,,118
+gpu,eVGA NVIDIA GeForce RTX 3060,12288,memoria,GeForce RTX 3060 12 GB,118
+gpu,AMD Radeon 680M,1024,exato,Radeon 680M,117
+gpu,AMD Raphael,512,sem_match,,117
+gpu,Intel HD 530 (Skylake GT2),3072,exato,HD Graphics 530,116
+cpu,Intel Core i5-12600K,,exato,Core i5-12600K,116
+cpu,AMD Ryzen 7 7800X3D 8-Core,,exato,Ryzen 7 7800X3D,116
+cpu,AMD Ryzen 9 9900X 12-Core,,exato,Ryzen 9 9900X,116
+cpu,AMD Ryzen 7 9800X3D 8-Core,,exato,Ryzen 7 9800X3D,116
+gpu,NVIDIA Quadro RTX 5000 with Max-Q Design,16384,exato,Quadro RTX 5000 Max-Q,115
+gpu,NVIDIA RTX 4000 Ada Generation,20480,exato,RTX 4000 Ada Generation,113
+cpu,Intel Core i5-11600K,,exato,Core i5-11600K,111
+cpu,AMD Ryzen 7 5700G,,exato,Ryzen 7 5700G,110
+cpu,AMD Ryzen 5 5600G,,exato,Ryzen 5 5600G,110
+gpu,AMD Radeon RX 6700 XT,12288,exato,Radeon RX 6700 XT,110
+gpu,AMD Vega 20,16384,sem_match,,109
+cpu,AMD Ryzen 7 PRO 7840U,,sem_match,,109
+gpu,Intel Arc MTL,8192,sem_match,,109
+cpu,Intel Core Ultra 7 258V,,exato,Core Ultra 7 258V,109
+gpu,NVIDIA RTX 2000 Ada Generation,16384,exato,RTX 2000 Ada Generation,108
+gpu,AMD Radeon,8192,sem_match,,107
+gpu,Intel LNL,7168,sem_match,,107
+gpu,NVIDIA GeForce GTX 1070,8192,exato,GeForce GTX 1070,106
+cpu,AMD Ryzen 5 4500U,,exato,Ryzen 5 4500U,106
+cpu,AMD EPYC 9554 64-Core,,exato,EPYC 9554,104
+cpu,Intel Xeon 6780E,,exato,Xeon 6780E,104
+cpu,Intel Core i7-3770,,exato,Core i7-3770,103
+gpu,Intel Xe TGL GT2,15360,sem_match,,103
+cpu,Intel Core i7-12700H,,exato,Core i7-12700H,103
+cpu,Apple M4,,sem_match,,103
+gpu,Apple M4,,sem_match,,103
+cpu,Intel Core i5-10600K,,exato,Core i5-10600K,101
+cpu,Intel Core i7-1065G7,,exato,Core i7-1065G7,100
+cpu,Intel Core i7-6700,,exato,Core i7-6700,100
+cpu,AMD Ryzen 9 7950X3D 16-Core,,exato,Ryzen 9 7950X3D,99
+cpu,AMD Ryzen 7 9700X 8-Core,,exato,Ryzen 7 9700X,99
+cpu,AMD EPYC 9965 192-Core,,exato,EPYC 9965,99
+gpu,AMD Radeon HD 4650,512,exato,Radeon HD 4650,98
+cpu,Intel Xeon Platinum 8480+,,exato,Xeon Platinum 8480+,98
+cpu,Intel Xeon E-2288G,,exato,Xeon E-2288G,95
+gpu,NVIDIA RTX A4000,16384,exato,RTX A4000,95
+gpu,AMD Radeon R9 FURY / NANO,4096,ambiguo,,94
+cpu,Intel Xeon Silver 4108,,exato_wikipedia,Xeon Silver 4108,94
+cpu,AMD Ryzen Threadripper PRO 5965WX 24-Cores,,exato,Ryzen Threadripper PRO 5965WX,93
+gpu,AMD Strix Halo [Radeon 8050S 8060S],512,sem_match,,93
+cpu,Intel Core i7-5775C,,exato,Core i7-5775C,92
+cpu,Intel Xeon E5-2680 v4,,exato_wikipedia,Xeon E5-2680 v4,92
+gpu,AMD Radeon RX 460,16128,exato,Radeon RX 460,91
+cpu,AMD EPYC 7642 48-Core,,exato,EPYC 7642,91
+cpu,Intel Core i7-4790K,,exato,Core i7-4790K,90
+gpu,eVGA NVIDIA GeForce GTX 950,2048,exato,GeForce GTX 950,90
+cpu,AMD Ryzen Threadripper 2950X 16-Core,,exato,Ryzen Threadripper 2950X,90
+cpu,AMD Opteron 6276,,exato,Opteron 6276,90
+cpu,Intel Xeon 6766E,,exato,Xeon 6766E,90
+gpu,AMD FirePro V7900,2048,exato,FirePro V7900,89
+cpu,AMD Ryzen Threadripper 7970X 32-Cores,,exato,Ryzen Threadripper 7970X,89
+gpu,NVIDIA GeForce RTX 4060,8192,exato,GeForce RTX 4060,87
+gpu,NV120,12288,sem_match,,86
+cpu,AMD Ryzen 7 2700 Eight-Core,,exato,Ryzen 7 2700,86
+cpu,AMD Ryzen AI 7 PRO 360,,exato,Ryzen AI 7 PRO 360,86
+cpu,Intel Core i5-6600K,,exato,Core i5-6600K,85
+cpu,Intel Xeon Platinum 8275CL,,exato_wikipedia,Xeon Platinum 8275CL,85
+cpu,Intel Core i5-13600K,,exato,Core i5-13600K,85
+gpu,Intel Iris Xe + NVIDIA GeForce RTX 3070 Ti Laptop GPU,8192,exato,GeForce RTX 3070 Ti Mobile,84
+gpu,RAPHAEL_MENDOCINO,2048,sem_match,,84
+cpu,Intel Xeon Gold 6346,,exato,Xeon Gold 6346,83
+cpu,AMD EPYC 8534P 64-Core,,exato,EPYC 8534P,83
+cpu,Apple M1,,sem_match,,82
+gpu,Apple M1,,sem_match,,82
+cpu,AMD Ryzen 5 7600X 6-Core,,exato,Ryzen 5 7600X,82
+gpu,Intel Arc A580 DG2,8192,exato,Arc A580,82
+gpu,Intel UHD 630 CFL GT2,3072,sem_match,,81
+cpu,AMD Ryzen 7 5700X 8-Core,,exato,Ryzen 7 5700X,81
+gpu,AMD Radeon 890M,512,exato,Radeon 890M,81
+cpu,Intel Core i7-9750H,,exato,Core i7-9750H,80
+gpu,AMD Radeon RX 550 640SP / 560/560X,4096,ambiguo,,79
+cpu,AMD Ryzen 9 7900X3D 12-Core,,exato,Ryzen 9 7900X3D,79
+cpu,AMD Ryzen 5 5500U,,exato,Ryzen 5 5500U,78
+cpu,AMD EPYC 4564P 16-Core,,exato,EPYC 4564P,78
+cpu,Intel Core i5-1334U,,exato,Core i5-1334U,77
+cpu,AMD EPYC 7401P 24-Core,,exato,EPYC 7401P,76
+gpu,AMD Radeon RX 6800,16384,exato,Radeon RX 6800,76
+cpu,AMD Ryzen 9 5900HX,,exato,Ryzen 9 5900HX,76
+cpu,AMD Ryzen 7 5700U,,exato,Ryzen 7 5700U,76
+cpu,AMD Ryzen 7 7745HX,,exato,Ryzen 7 7745HX,75
+cpu,AMD Ryzen 5 9600X 6-Core,,exato,Ryzen 5 9600X,75
+cpu,Intel Core i7-8550U,,exato,Core i7-8550U,73
+cpu,Intel Core i7-10700T,,sem_match,,73
+gpu,AMD Lucienne,512,sem_match,,73
+gpu,NVIDIA GeForce GTX 770,2048,exato,GeForce GTX 770,72
+cpu,AMD Opteron 6328,,exato,Opteron 6328,72
+gpu,AMD Radeon RX 5700 XT,8192,exato,Radeon RX 5700 XT,72
+cpu,Intel Xeon Max 9468,,exato,Xeon Max 9468,72
+gpu,RAPHAEL_MENDOCINO,512,sem_match,,72
+gpu,NVIDIA RTX 6000 Ada Generation,49152,exato,RTX 6000 Ada Generation,72
+gpu,Intel LNL,15360,sem_match,,72
+cpu,Intel Xeon E3-1245 v5,,exato,Xeon E3-1245 v5,71
+cpu,AMD Ryzen 5 3600X 6-Core,,exato,Ryzen 5 3600X,71
+gpu,AMD Radeon RX 6750 XT,12288,exato,Radeon RX 6750 XT,71
+cpu,AMD Ryzen 9 7900 12-Core,,exato,Ryzen 9 7900,71
+gpu,Intel ADL-S GT1,15360,sem_match,,70
+cpu,Intel Core i7-8565U,,exato,Core i7-8565U,69
+cpu,AMD Ryzen 5 3600 6-Core,,exato,Ryzen 5 3600,68
+cpu,Intel Core i7-2700K,,exato,Core i7-2700K,68
+gpu,AMD Phoenix1,512,sem_match,,68
+gpu,AMD Radeon RX 7600/7600 XT/7600M XT/7600S/7700S / PRO W7600,512,ambiguo,,68
+cpu,Intel Core i3-7100,,exato,Core i3-7100,67
+gpu,NVIDIA GeForce GTX 1080 Ti,11264,exato,GeForce GTX 1080 Ti,67
+cpu,AMD Ryzen 7 3800XT 8-Core,,exato,Ryzen 7 3800XT,67
+gpu,AMD Radeon RX 6900 XT,16384,exato,Radeon RX 6900 XT,66
+gpu,NVIDIA NV132,11264,sem_match,,65
+cpu,Intel Xeon Gold 5218,,exato_wikipedia,Xeon Gold 5218,65
+cpu,AMD EPYC 7F72 24-Core,,exato,EPYC 7F72,65
+gpu,NVIDIA GeForce GTX 1050 Ti,4096,exato,GeForce GTX 1050 Ti,64
+gpu,AMD Radeon RX 64,8192,sem_match,,64
+cpu,AMD EPYC 7702 64-Core,,exato,EPYC 7702,63
+cpu,Intel Core i5-12400,,exato,Core i5-12400,63
+gpu,AMD Radeon RX 7900 XT,20480,exato,Radeon RX 7900 XT,62
+cpu,AMD Ryzen Threadripper 2970WX 24-Core,,exato,Ryzen Threadripper 2970WX,61
+gpu,NVIDIA GeForce GTX 1660 SUPER,6144,exato,GeForce GTX 1660 SUPER,61
+gpu,Intel Xe TGL GT2,3072,sem_match,,61
+cpu,Intel Core i5-9400F,,exato,Core i5-9400F,60
+gpu,AMD Radeon 540/540X/550/550X / RX 540X/550/550X,2048,ambiguo,,60
+gpu,Intel ADL-S GT1,3072,sem_match,,60
+gpu,GFX1036,512,sem_match,,60
+gpu,AMD Radeon HD 5000/6000/7350/8350,512,ambiguo,,58
+cpu,AMD Ryzen 5 1600 Six-Core,,exato,Ryzen 5 1600,58
+gpu,NVIDIA GeForce RTX 3060,12288,memoria,GeForce RTX 3060 12 GB,58
+cpu,AMD EPYC 9575F 64-Core,,exato,EPYC 9575F,58
+gpu,AMD Strix Halo [Radeon 8050S 8060S],65536,sem_match,,58
+cpu,AMD EPYC 7282 16-Core,,exato,EPYC 7282,57
+gpu,AMD Radeon RX 5600 OEM/5600 XT / 5700/5700,6144,ambiguo,,57
+cpu,AMD EPYC 9124 16-Core,,exato,EPYC 9124,57
+cpu,AMD EPYC 8534PN 64-Core,,exato,EPYC 8534PN,57
+cpu,AMD EPYC 4585PX 16-Core,,exato,EPYC 4585PX,57
+cpu,AMD Ryzen Threadripper 9980X 64-Cores,,exato,Ryzen Threadripper 9980X,57
+gpu,AMD Radeon R9 290/390,4096,ambiguo,,56
+gpu,Intel HD P530 (Skylake GT2),3072,exato,HD Graphics P530,56
+cpu,AMD EPYC 7551 32-Core,,exato,EPYC 7551,56
+gpu,NVIDIA NV120,12288,sem_match,,56
+cpu,Intel Core i7-8700B,,exato,Core i7-8700B,56
+cpu,AMD Ryzen 5 5500,,exato,Ryzen 5 5500,56
+cpu,AMD EPYC 7251 8-Core,,exato,EPYC 7251,55
+gpu,Intel Iris Xe TGL GT2,8192,sem_match,,55
+cpu,AMD RYZEN AI MAX+ 395,,exato,Ryzen AI Max+ 395,55
+gpu,Intel ADL GT2,8192,sem_match,,54
+gpu,NVIDIA A100-SXM4-40GB,40960,exato,A100 SXM4 40 GB,54
+cpu,INTEL XEON PLATINUM 8568Y+,,exato,Xeon Platinum 8568Y+,54
+gpu,AMD Granite Ridge [Radeon],512,sem_match,,54
+gpu,Intel Iris Plus G7,3072,sem_match,,53
+cpu,Intel Core i7-13700KF,,exato,Core i7-13700KF,53
+cpu,Intel Xeon E E-2488,,sem_match,,53
+cpu,Intel Core i5-4670,,exato,Core i5-4670,52
+cpu,AMD EPYC 7302P 16-Core,,exato,EPYC 7302P,52
+gpu,eVGA NVIDIA GeForce GTX 1660 SUPER,6144,exato,GeForce GTX 1660 SUPER,52
+gpu,AMD Radeon RX 470/480,8192,ambiguo,,51
+cpu,Intel Core i7 990X,,exato,Core i7-990X,51
+gpu,NVIDIA GeForce RTX 4070 Ti,12288,exato,GeForce RTX 4070 Ti,51
+gpu,NVIDIA GeForce RTX 4060,4096,exato,GeForce RTX 4060,51
+cpu,AMD Opteron 6380,,exato,Opteron 6380,50
+cpu,Intel Core i5-14600K,,exato,Core i5-14600K,50
+cpu,AMD EPYC 9454P 48-Core,,exato,EPYC 9454P,50
+gpu,Intel Iris Xe ADL GT2,8192,sem_match,,50
+gpu,Intel LNL,31744,sem_match,,50
+cpu,Intel Xeon E5-2687W v3,,exato,Xeon E5-2687W v3,49
+gpu,NVIDIA GeForce GTX 760,2048,exato,GeForce GTX 760,49
+cpu,AMD Ryzen 5 7600 6-Core,,exato,Ryzen 5 7600,49
+cpu,Intel Core i5-2500K,,exato,Core i5-2500K,48
+gpu,NVIDIA GeForce GTX 980 Ti,6144,exato,GeForce GTX 980 Ti,48
+gpu,HIS AMD Radeon HD 6450/7450/8450 / R5 230 OEM,1024,ambiguo,,48
+cpu,AMD EPYC 7402P 24-Core,,exato,EPYC 7402P,48
+gpu,Intel ADL GT2,15360,sem_match,,48
+cpu,Intel Core i9-12900KF,,exato,Core i9-12900KF,48
+gpu,AMD Radeon RX 7800 XT,16384,exato,Radeon RX 7800 XT,48
+gpu,NVIDIA GeForce RTX 5060 Ti,16384,memoria,GeForce RTX 5060 Ti 16 GB,48
+gpu,AMD Radeon RX 9060 XT,16384,memoria,Radeon RX 9060 XT 16 GB,48
+cpu,Intel Core i7-4960X,,exato,Core i7-4960X,47
+cpu,AMD FX-8370E Eight-Core,,exato,FX-8370E,47
+cpu,AMD EPYC,,sem_match,,47
+cpu,AMD EPYC 7532 32-Core,,sem_match,,46
+gpu,Intel Arc A770 DG2,16384,exato,Arc A770,46
+cpu,AMD EPYC 9R14,,sem_match,,46
+cpu,AMD FX-8370 Eight-Core,,exato,FX-8370,45
+cpu,AMD A10-7850K APU with Radeon R7,,sem_match,,45
+gpu,AMD Radeon R9 Fury (FIJI / DRM 3.19.0 / 4.14.2-ck LLVM 5.0.0),4096,ambiguo,,45
+cpu,Intel Xeon E5-2667 v3,,exato,Xeon E5-2667 v3,45
+gpu,AMD Radeon RX 580,4096,exato,Radeon RX 580,45
+cpu,Intel Xeon W-3235,,exato_wikipedia,Xeon W-3235,45
+gpu,Intel Arc MTL,15360,sem_match,,45
+cpu,AMD Ryzen AI 5 340,,exato,Ryzen AI 5 340,44
+gpu,Intel RPL-U,15360,sem_match,,43
+gpu,Intel Xe TGL GT2,8192,sem_match,,43
+cpu,AMD Ryzen 7 8845HS,,exato,Ryzen 7 8845HS,43
+cpu,Intel Xeon E5-1680 v3,,exato,Xeon E5-1680 v3,42
+cpu,Intel Core i5-8400,,exato,Core i5-8400,42
+gpu,AMD Radeon RX 470/480/570/570X/580/580X,8192,ambiguo,,42
+gpu,Intel Arc A380 DG2,6144,exato,Arc A380,42
+cpu,AMD Ryzen 7 7700 8-Core,,exato,Ryzen 7 7700,42
+gpu,eVGA NVIDIA GeForce GT 740,1024,exato,GeForce GT 740,41
+cpu,AMD Ryzen 5 2600X Six-Core,,exato,Ryzen 5 2600X,41
+cpu,Intel Xeon,,sem_match,,41
+gpu,AMD Radeon RX 550,2048,exato,Radeon RX 550,41
+cpu,AMD EPYC 7542 32-Core,,exato,EPYC 7542,41
+cpu,AMD EPYC 7552 48-Core,,exato,EPYC 7552,41
+cpu,AMD EPYC 7343 16-Core,,exato,EPYC 7343,41
+gpu,Intel UHD 630 CML GT2,3072,sem_match,,41
+gpu,Intel Arc A750 DG2,8192,exato,Arc A750,41
+cpu,AMD RYZEN AI MAX PRO 390,,exato,Ryzen AI Max PRO 390,41
+cpu,Intel Core 2 Duo E8600,,exato,Core 2 Duo E8600,40
+gpu,Intel Q45/Q43,2048,ambiguo,,40
+cpu,Intel Xeon Platinum 8259CL,,exato_wikipedia,Xeon Platinum 8259CL,40
+gpu,NVIDIA Tesla T4 + NVIDIA Tesla T4,15360,exato,Tesla T4,40
+cpu,Intel Core i5-1135G7,,exato,Core i5-1135G7,40
+cpu,AMD EPYC 9374F 32-Core,,exato,EPYC 9374F,40
+cpu,Intel Core i9-11900KF,,exato,Core i9-11900KF,40
+cpu,Intel Xeon w9-3495X,,exato,Xeon w9-3495X,40
+gpu,hyperv_fb,,sem_match,,40
+cpu,Intel Xeon Gold 6134,,exato_wikipedia,Xeon Gold 6134,40
+gpu,Intel UHD 620,3072,sem_match,,39
+cpu,Intel Core i7-3930K,,exato,Core i7-3930K,38
+gpu,AMD FirePro V3800,512,exato,FirePro V3800,38
+cpu,Intel Core i7-4770K,,exato,Core i7-4770K,38
+cpu,Intel Xeon Gold 6258R,,exato_wikipedia,Xeon Gold 6258R,38
+cpu,AMD Ryzen 3 3300X 4-Core,,exato,Ryzen 3 3300X,38
+cpu,AMD EPYC 7662 64-Core,,sem_match,,38
+cpu,Intel Core i5-10400F,,exato,Core i5-10400F,38
+cpu,AMD EPYC 9B14,,sem_match,,38
+cpu,Intel Core Ultra 5 245K,,exato,Core Ultra 5 245K,38
+cpu,Intel Core i7-3770K,,exato,Core i7-3770K,37
+cpu,AMD EPYC 7452 32-Core,,exato,EPYC 7452,37
+cpu,Intel Core i5-2520M,,exato,Core i5-2520M,36
+cpu,AMD EPYC 4584PX 16-Core,,exato,EPYC 4584PX,36
+cpu,Apple M4 Pro,,sem_match,,36
+gpu,Apple M4 Pro,,sem_match,,36
+gpu,NVIDIA GeForce RTX 5070,12288,exato,GeForce RTX 5070,36
+cpu,AMD Ryzen Threadripper 9970X 32-Cores,,exato,Ryzen Threadripper 9970X,36
+gpu,AMD Radeon Pro W7500,8192,exato,Radeon PRO W7500,36
+gpu,AMD Radeon R7,1024,exato,Radeon R7 Graphics,35
+gpu,NVIDIA GeForce GTX 1050,2048,exato,GeForce GTX 1050,35
+gpu,AMD Radeon,4096,sem_match,,35
+gpu,NVIDIA Quadro RTX 6000,24576,exato,Quadro RTX 6000,35
+cpu,Intel Core i5-7300U,,exato_wikipedia,Core i5-7300U,35
+gpu,Intel WhiskeyLake-U GT2 [UHD 620],,sem_match,,35
+gpu,Intel TigerLake-LP GT2 [Iris Xe ],,sem_match,,35
+gpu,AMD Krackan [Radeon 840M / 860M],2048,ambiguo,,35
+gpu,MGA G200EH,11264,sem_match,,34
+gpu,NVIDIA GeForce 6600 GT,124,exato,GeForce 6600 GT,34
+gpu,Intel RPL-S,31744,sem_match,,34
+cpu,Intel Core i5-6500,,exato,Core i5-6500,33
+cpu,AMD Ryzen 5 2400G,,exato,Ryzen 5 2400G,33
+gpu,Intel Sandybridge Mobile,2048,sem_match,,33
+gpu,NVIDIA GeForce GTX 1650,4096,exato,GeForce GTX 1650,33
+gpu,NVIDIA GeForce GTX 1660,6144,exato,GeForce GTX 1660,33
+cpu,Intel Xeon Gold 6250,,exato_wikipedia,Xeon Gold 6250,33
+cpu,AMD EPYC 7B13,,sem_match,,33
+gpu,AMD Radeon PRO W7700,15360,exato,Radeon PRO W7700,33
+gpu,AMD Radeon,65536,sem_match,,33
+gpu,HIS AMD Radeon HD 7750/8740 / R7 250E,1024,ambiguo,,32
+gpu,AMD FirePro V4800,1024,exato,FirePro V4800,32
+gpu,Intel UHD 630,2048,exato,UHD Graphics 630,32
+gpu,eVGA NVIDIA NV162,11264,sem_match,,32
+cpu,AMD Ryzen Threadripper PRO 3975WX 32-Cores,,exato,Ryzen Threadripper PRO 3975WX,32
+cpu,AMD Ryzen 7 PRO 4750G,,exato,Ryzen 7 PRO 4750G,32
+gpu,Intel Iris Plus ICL GT2,16384,sem_match,,32
+cpu,AMD Ryzen Z1 Extreme,,exato,Ryzen Z1 Extreme,32
+cpu,AMD Ryzen 5 8600G,,exato,Ryzen 5 8600G,32
+cpu,Intel Core i5-14500,,exato,Core i5-14500,32
+cpu,Intel Core i5-14400F,,exato,Core i5-14400F,32
+cpu,Intel Xeon 6369P,,exato,Xeon 6369P,32
+gpu,AMD FirePro V5900,2048,exato,FirePro V5900,31
+gpu,Intel Ivybridge Desktop,1536,sem_match,,31
+gpu,AMD Radeon R7,512,exato,Radeon R7 Graphics,31
+gpu,Intel Ivybridge Desktop,2048,sem_match,,31
+gpu,Intel RKL GT1,3072,sem_match,,31
+gpu,AMD Radeon RX 5600 XT,6144,exato,Radeon RX 5600 XT,31
+cpu,AMD Ryzen 7 8700G,,exato,Ryzen 7 8700G,31
+gpu,Intel RPL-S,16384,sem_match,,31
+gpu,Intel Raptor Lake-P [UHD],,sem_match,,31
+gpu,AMD FirePro V8700,1024,exato,FirePro V8700,30
+gpu,eVGA AMD Radeon,8192,sem_match,,30
+cpu,Intel Core i7-8809G,,exato,Core i7-8809G,30
+gpu,AMD Radeon RX Vega M GH,4096,exato,Radeon RX Vega M GH,30
+gpu,AMD Lucienne,2048,sem_match,,30
+gpu,AMD Radeon RX 5500 XT,8192,exato,Radeon RX 5500 XT,30
+gpu,eVGA NVIDIA GeForce GTX 1080,8192,exato,GeForce GTX 1080,30
+cpu,Intel Xeon Platinum 8362,,exato,Xeon Platinum 8362,30
+gpu,Intel Xe TGL GT2,16384,sem_match,,30
+cpu,AMD EPYC 9184X 16-Core,,exato,EPYC 9184X,30
+cpu,Intel Xeon E312xx,,sem_match,,30
+gpu,AMD Radeon Pro W7900,46080,exato,Radeon PRO W7900,30
+cpu,AMD EPYC 7303 16-Core,,exato,EPYC 7303,30
+gpu,Intel HD 620 (1100MHz),,sem_match,,30
+gpu,AMD Radeon PRO W7900,46080,exato,Radeon PRO W7900,30
+cpu,AMD EPYC 9655 96-Core,,exato,EPYC 9655,30
+cpu,AMD EPYC 4565P 16-Core,,exato,EPYC 4565P,30
+cpu,AMD Ryzen AI MAX+ PRO 395,,exato,Ryzen AI Max+ PRO 395,30
+cpu,AMD Ryzen Threadripper PRO 9995WX 96-Cores,,exato,Ryzen Threadripper PRO 9995WX,30
+gpu,AMD Radeon + NVIDIA GeForce RTX 5090 D,32768,exato,GeForce RTX 5090 D,30
+gpu,AMD Radeon RX 6950 XT,16384,exato,Radeon RX 6950 XT,29
+cpu,AMD FX-8150 Eight-Core,,exato,FX-8150,28
+gpu,AMD FirePro V5800,1024,exato,FirePro V5800,28
+cpu,AMD EPYC 7232P 8-Core,,exato,EPYC 7232P,28
+cpu,AMD EPYC 7502P 32-Core,,exato,EPYC 7502P,28
+cpu,AMD Ryzen 5 3600XT 6-Core,,exato,Ryzen 5 3600XT,28
+cpu,Intel Xeon W-3175X,,exato,Xeon W-3175X,28
+cpu,Intel Xeon E5-2686 v4,,exato_wikipedia,Xeon E5-2686 v4,28
+gpu,Intel UHD 630 CML GT2,30720,sem_match,,28
+gpu,AMD Renoir [Radeon RX Vega 6,512,sem_match,,28
+cpu,AMD Ryzen 9 9900X3D 12-Core,,exato,Ryzen 9 9900X3D,28
+gpu,AMD Radeon 8060S,65536,exato,Radeon 8060S,28
+cpu,Intel Core Ultra 7 255H,,exato,Core Ultra 7 255H,28
+gpu,AMD Radeon RX 470/480,4096,ambiguo,,27
+gpu,eVGA NVIDIA GeForce GTX 1050 Ti,4096,exato,GeForce GTX 1050 Ti,27
+cpu,Intel Core i7-6770HQ,,sem_match,,27
+gpu,eVGA NVIDIA GeForce GTX 1660 Ti,6144,exato,GeForce GTX 1660 Ti,27
+gpu,Intel Sandybridge Desktop,2048,sem_match,,27
+gpu,Intel 2nd Generation Core IGP (1350MHz),,sem_match,,27
+gpu,AMD Radeon Vega / Mobile,1024,ambiguo,,27
+gpu,Intel HD P630 (1150MHz),,sem_match,,27
+cpu,Intel Xeon Silver 4416+,,exato,Xeon Silver 4416+,27
+cpu,Intel Core i7-7740K,,sem_match,,26
+cpu,Intel Core i7-8086K,,exato,Core i7-8086K,26
+cpu,AMD EPYC 7352 24-Core,,exato,EPYC 7352,26
+gpu,NVIDIA GeForce GTX 1650 SUPER,4096,exato,GeForce GTX 1650 SUPER,26
+cpu,AMD Custom APU 0405,,sem_match,,26
+gpu,Intel Arctm A380 DG2,6144,exato,Arc A380,26
+cpu,Intel Xeon Gold 6144,,exato_wikipedia,Xeon Gold 6144,26
+gpu,AMD Radeon RX 7600 XT,16384,exato,Radeon RX 7600 XT,26
+gpu,Intel Iris Xe ADL GT2,15360,sem_match,,26
+gpu,AMD Radeon RX 560,4096,exato,Radeon RX 560,25
+gpu,Intel HD 630,3072,exato,HD Graphics 630,25
+cpu,AMD EPYC 7551P 32-Core,,exato,EPYC 7551P,25
+cpu,Intel Xeon E3-1275 v6,,exato_wikipedia,Xeon E3-1275 v6,25
+cpu,AMD EPYC 72F3 8-Core,,exato,EPYC 72F3,25
+gpu,AMD Radeon HD 7850 / R7 265 R9 270 1024SP,,ambiguo,,25
+cpu,AMD Ryzen 5 PRO 3600 6-Core,,sem_match,,25
+cpu,AMD EPYC 9384X 32-Core,,exato,EPYC 9384X,25
+cpu,AMD EPYC 7R13 48-Core,,sem_match,,25
+cpu,Intel Core i9-14900KF,,exato,Core i9-14900KF,25
+gpu,eVGA NVIDIA GeForce GTX 1080 Ti,11264,exato,GeForce GTX 1080 Ti,24
+cpu,AMD Athlon II X3 425,,exato,Athlon II X3 425,24
+cpu,AMD Phenom II X3 710,,exato,Phenom II X3 710,24
+gpu,AMD Radeon HD 4290,384,sem_match,,24
+cpu,AMD EPYC 7351P 16-Core,,exato,EPYC 7351P,24
+gpu,NVIDIA NV106,1024,sem_match,,24
+cpu,AMD Athlon II X4 620,,exato,Athlon II X4 620,24
+cpu,AMD Ryzen 7 4800H,,exato,Ryzen 7 4800H,24
+gpu,Intel ADL-S GT1,14336,sem_match,,24
+cpu,Intel Xeon E-2388G,,exato,Xeon E-2388G,24
+gpu,Intel RocketLake-S [UHD ],,sem_match,,24
+cpu,AMD EPYC 4344P 8-Core,,exato,EPYC 4344P,24
+cpu,AMD EPYC 4364P 8-Core,,exato,EPYC 4364P,24
+cpu,AMD EPYC 4484PX 12-Core,,exato,EPYC 4484PX,24
+cpu,Intel Core i9-14900HX,,exato,Core i9-14900HX,24
+gpu,NVIDIA GeForce RTX 4070 Laptop GPU,8192,exato,GeForce RTX 4070 Mobile,24
+gpu,AMD Radeon PRO W7600,8192,exato,Radeon PRO W7600,24
+cpu,Intel Core i3-3220,,exato,Core i3-3220,24
+gpu,Intel Xeon E3-1200 v2/3rd Gen Core,,ambiguo,,24
+cpu,Intel Core i9-10940X,,exato,Core i9-10940X,24
+cpu,Intel Xeon 6787P,,exato,Xeon 6787P,24
+gpu,NVIDIA Quadro GV100,32768,exato,Quadro GV100,24
+cpu,AMD EPYC 9135 16-Core,,exato,EPYC 9135,24
+gpu,NVIDIA H200 NVL,143360,exato,H200 NVL,24
+gpu,AMD Cezanne [Radeon Vega / Radeon Mobile],1024,ambiguo,,24
+cpu,AMD EPYC 9R14 96-Core,,sem_match,,24
+cpu,AMD EPYC 9V74 80-Core,,sem_match,,24
+cpu,AMD Ryzen 7 1700X Eight-Core,,exato,Ryzen 7 1700X,23
+gpu,AMD Radeon RX 550/550X,2048,ambiguo,,23
+gpu,Intel UHD 620 WHL GT2,15360,sem_match,,23
+cpu,Intel N100,,exato,Processor N100,23
+cpu,Intel Core i7-5600U,,exato,Core i7-5600U,22
+cpu,Intel Xeon E5-2609 v4,,exato_wikipedia,Xeon E5-2609 v4,22
+cpu,Intel Core i7-9850H,,exato,Core i7-9850H,22
+gpu,AMD DIMGREY_CAVEFISH,8192,sem_match,,22
+gpu,AMD Radeon RX 6700 XT,4096,exato,Radeon RX 6700 XT,22
+cpu,Intel Core i7-8700,,exato,Core i7-8700,22
+cpu,Intel Core i5-13400,,exato,Core i5-13400,22
+gpu,NVIDIA GeForce GT 1030,2048,exato,GeForce GT 1030,21
+gpu,NVIDIA GeForce GTX 750 Ti,2048,exato,GeForce GTX 750 Ti,21
+gpu,AMD Rembrandt,1024,sem_match,,21
+cpu,AMD Ryzen 9 7940HS,,exato,Ryzen 9 7940HS,21
+gpu,AMD Custom GPU 0405,1024,sem_match,,21
+cpu,Intel Core i5-12600KF,,exato,Core i5-12600KF,21
+gpu,Intel RPL-P,31744,sem_match,,21
+cpu,AMD Ryzen Threadripper PRO 7965WX 24-Cores,,exato,Ryzen Threadripper PRO 7965WX,21
+cpu,AMD EPYC 9B45,,sem_match,,21
+gpu,AMD Radeon AI PRO R9700,32768,exato,Radeon AI PRO R9700,21
+cpu,Intel Pentium G4400,,exato,Pentium G4400,20
+gpu,Intel HD 510 (Skylake GT1),3072,exato,HD Graphics 510,20
+cpu,Intel Xeon X3440,,exato,Xeon X3440,20
+gpu,AMD Radeon HD 2400 PRO/XT,256,ambiguo,,20
+gpu,AMD Navi 10,8192,sem_match,,20
+cpu,Intel Core i3-10100,,exato,Core i3-10100,20
+gpu,NVIDIA Quadro T1000 + Intel UHD 630,4096,sem_match,,20
+cpu,AMD Eng Sample ZS222445TGG44_32/22/2_2/16,,sem_match,,20
+gpu,AMD Radeon Frontier Edition,16384,sem_match,,20
+gpu,eVGA NVIDIA NV124,4096,sem_match,,20
+gpu,NVIDIA Tesla V100-SXM2-16GB + NVIDIA Tesla V100-SXM2-16GB + NVIDIA Tesla V100-SXM2-16GB + NVIDIA Tesla V100-SXM2-16GB,16384,exato,Tesla V100 SXM2 16 GB,20
+gpu,AMD Radeon Pro WX 7100,8192,exato,Radeon Pro WX 7100,20
+cpu,AMD Eng Sample: 100-000000163_43/29_Y,,sem_match,,20
+gpu,AMD Radeon RX 5700 + AMD Radeon RX 5700,4096,exato,Radeon RX 5700,20
+cpu,Intel Xeon E5-2690 0,,exato,Xeon E5-2690,20
+cpu,Intel Core i7-12700K,,exato,Core i7-12700K,20
+gpu,NVIDIA NV134,8192,sem_match,,20
+cpu,Intel Core i9-11980HK,,exato,Core i9-11980HK,20
+gpu,NVIDIA GeForce RTX 3080 Laptop GPU + Intel UHD,16384,exato,GeForce RTX 3080 Mobile,20
+gpu,Intel Arc A770,16384,exato,Arc A770,20
+cpu,QEMU Virtual 2.5+,,sem_match,,20
+cpu,Intel Xeon Platinum 8468,,exato,Xeon Platinum 8468,20
+gpu,AMD Radeon,16384,sem_match,,20
+cpu,AMD EPYC 8324P 32-Core,,exato,EPYC 8324P,20
+cpu,Intel Xeon E5640,,exato,Xeon E5640,20
+gpu,NVIDIA GeForce GTX 960,2048,exato,GeForce GTX 960,20
+cpu,Intel Core i7-13700,,exato,Core i7-13700,20
+cpu,AMD Ryzen 9 7945HX3D,,exato,Ryzen 9 7945HX3D,20
+gpu,NVIDIA GeForce RTX 4090 Laptop GPU,16384,exato,GeForce RTX 4090 Mobile,20
+cpu,Intel Xeon W-3223,,exato_wikipedia,Xeon W-3223,20
+cpu,AMD EPYC 9845 160-Core,,exato,EPYC 9845,20
+cpu,AMD EPYC 4345P 8-Core,,exato,EPYC 4345P,20
+gpu,Intel BMG G21,12288,sem_match,,20
+gpu,AMD Radeon 780M,1024,exato,Radeon 780M,20
+gpu,AMD Rembrandt [Radeon 680M],1024,sem_match,,20
+cpu,Intel Xeon Max 9470C,,sem_match,,20
+gpu,Intel Iris Pro 580 (Skylake GT4e),3072,sem_match,,20
+gpu,AMD Radeon Vega 8 Mobile,1024,exato,Radeon Vega 8 Mobile,19
+cpu,AMD Ryzen 5 3500X 6-Core,,exato,Ryzen 5 3500X,19
+cpu,AMD EPYC 7272 12-Core,,exato,EPYC 7272,19
+cpu,Intel Core i7-6500U,,exato_wikipedia,Core i7-6500U,19
+gpu,Intel Skylake GT2 [HD 520],3072,sem_match,,19
+gpu,AMD Radeon HD 6570/7570/8550,16128,ambiguo,,19
+cpu,AMD Ryzen Threadripper PRO 3945WX 12-Cores,,exato,Ryzen Threadripper PRO 3945WX,19
+gpu,NVIDIA Quadro P2200,5120,exato,Quadro P2200,19
+cpu,AMD EPYC 7713P 64-Core,,exato,EPYC 7713P,19
+gpu,AMD Radeon RX 6400/6500 XT/6500M,,ambiguo,,19
+gpu,AMD Radeon RX 7700S/7600/7600S/7600M XT/PRO W7600,512,ambiguo,,19
+gpu,NVIDIA T400,4096,exato,T400,19
+cpu,AMD Ryzen Threadripper 7960X 24-Cores,,exato,Ryzen Threadripper 7960X,19
+cpu,Intel Core Ultra 7 165U,,exato,Core Ultra 7 165U,19
+cpu,AMD A10-7870K Radeon R7 12 Compute Cores 4C+8G,,sem_match,,18
+cpu,Intel Core i3-4130,,exato,Core i3-4130,18
+gpu,Intel Haswell,1536,sem_match,,18
+gpu,Intel HD,3072,sem_match,,18
+cpu,Intel Core i5-3570,,exato,Core i5-3570,18
+cpu,Intel Xeon Gold 5218R,,exato_wikipedia,Xeon Gold 5218R,18
+cpu,AMD Ryzen 7 4800U,,exato,Ryzen 7 4800U,18
+gpu,eVGA NVIDIA GeForce GTX 980,4096,exato,GeForce GTX 980,18
+gpu,GFX1103_R1,512,sem_match,,18
+gpu,AMD Radeon 780M + AMD Radeon RX 7700S,512,exato,Radeon RX 7700S,18
+gpu,NVIDIA GeForce RTX 4090 + Intel UHD 770 + NVIDIA GeForce RTX 4090 + DisplayLink USB Device + DisplayLink USB Device,24576,exato,GeForce RTX 4090,18
+cpu,AMD EPYC 4464P 12-Core,,exato,EPYC 4464P,18
+gpu,AMD Radeon PRO W7500,8192,exato,Radeon PRO W7500,18
+gpu,Intel Arc A580,2048,exato,Arc A580,18
+cpu,AMD EPYC 4545P 16-Core,,exato,EPYC 4545P,18
+gpu,NVIDIA RTX PRO 1000 Blackwell Generation Laptop GPU + Intel Arc 140T GPU,8192,sem_match,,18
+gpu,Intel HD 630 (Kaby Lake GT2),3072,exato,HD Graphics 630,17
+gpu,AMD Radeon RX Vega,4096,sem_match,,17
+gpu,NVIDIA Quadro K5200,8192,exato,Quadro K5200,17
+cpu,Intel Core i7 860,,exato,Core i7-860,17
+gpu,Intel ADL-S GT1,16384,sem_match,,17
+cpu,Intel Core i7-1370P,,exato,Core i7-1370P,17
+gpu,AMD Radeon RX 470/480,8064,ambiguo,,16
+gpu,NV138,2048,sem_match,,16
+gpu,NVIDIA NV162,11264,sem_match,,16
+cpu,Intel Xeon Platinum 8253,,exato,Xeon Platinum 8253,16
+cpu,Intel Celeron G6900,,exato,Celeron G6900,16
+cpu,Intel Core i7-4770,,exato,Core i7-4770,16
+cpu,Intel Core i3-12100,,exato,Core i3-12100,16
+cpu,Intel Xeon Gold 6338,,exato_wikipedia,Xeon Gold 6338,16
+cpu,Intel Xeon Gold 6342,,exato,Xeon Gold 6342,16
+cpu,Intel Core i7-1260P,,exato,Core i7-1260P,16
+cpu,Intel Core i7-13700HX,,exato,Core i7-13700HX,16
+cpu,Intel Core Ultra X7 358H,,exato,Core Ultra X7 358H,16
+gpu,Intel PTL,30720,sem_match,,16
+cpu,Intel Pentium G3258,,exato,Pentium G3258,16
+gpu,eVGA NVIDIA GeForce GTX 1070,8192,exato,GeForce GTX 1070,15
+gpu,Intel Device 5917,,sem_match,,15
+gpu,NVD9,1024,sem_match,,15
+cpu,AMD Ryzen 5 3400G,,exato,Ryzen 5 3400G,15
+gpu,Intel HD 5500,3072,sem_match,,15
+cpu,Intel Xeon Gold 5217,,exato_wikipedia,Xeon Gold 5217,15
+gpu,AMD FirePro V4800,8064,exato,FirePro V4800,15
+cpu,Intel Xeon E3-1235L v5,,exato,Xeon E3-1235L v5,15
+gpu,AMD FirePro V4900,1024,exato,FirePro V4900,15
+gpu,eVGA NVIDIA GeForce RTX 3090,24576,exato,GeForce RTX 3090,15
+gpu,NVIDIA GeForce RTX 3060 Laptop GPU,6144,exato,GeForce RTX 3060 Mobile,15
+gpu,Intel ADL-S GT0.5,3072,sem_match,,15
+cpu,Intel Xeon W-1290P,,exato,Xeon W-1290P,15
+gpu,NVIDIA GeForce RTX 3050,8192,memoria,GeForce RTX 3050 8 GB,15
+gpu,AMD Radeon RX 6400,4096,exato,Radeon RX 6400,15
+cpu,Intel Core i5-1035G1,,exato,Core i5-1035G1,15
+cpu,Intel Xeon Gold 6421N,,exato,Xeon Gold 6421N,15
+gpu,AMD Phoenix1,16384,sem_match,,15
+gpu,AMD Radeon 780M,4096,exato,Radeon 780M,15
+gpu,AMD Radeon RX 6700/6700 XT/6750 XT / 6800M/6850M,10240,ambiguo,,15
+gpu,Intel Arctm A770 DG2,8192,exato,Arc A770,15
+cpu,AMD EPYC 9254 24-Core,,exato,EPYC 9254,15
+cpu,AMD EPYC 9334 32-Core,,exato,EPYC 9334,15
+gpu,NVIDIA NV174,16384,sem_match,,15
+cpu,AMD EPYC 8534PN 32-Core,,exato,EPYC 8534PN,15
+gpu,eVGA NVIDIA GeForce GTX 1060,6144,memoria,GeForce GTX 1060 6 GB,14
+gpu,eVGA NVIDIA GeForce GTX 960,2048,exato,GeForce GTX 960,14
+gpu,AMD Radeon Vega / Mobile,2048,ambiguo,,14
+cpu,AMD EPYC 7262 8-Core,,exato,EPYC 7262,14
+cpu,Intel Core i7-10875H,,exato,Core i7-10875H,14
+cpu,Intel Xeon E-2336,,exato,Xeon E-2336,14
+cpu,Ampere Altra Max,,sem_match,,14
+gpu,Microsoft Remote Display,,sem_match,,14
+cpu,AMD Ryzen 5 8400F 6-Core,,exato,Ryzen 5 8400F,14
+gpu,AMD Radeon 8060S,4096,exato,Radeon 8060S,14
+cpu,AMD Ryzen 3 1300X,,exato,Ryzen 3 1300X,13
+cpu,AMD Ryzen 5 1600X Six-Core,,exato,Ryzen 5 1600X,13
+gpu,Intel Haswell Desktop,2048,sem_match,,13
+cpu,Intel Xeon W3530,,exato,Xeon W3530,13
+gpu,AMD FirePro 2260,256,sem_match,,13
+gpu,eVGA NVIDIA GeForce GTX 980 Ti,6144,exato,GeForce GTX 980 Ti,13
+gpu,AMD Renoir,2048,sem_match,,13
+gpu,Intel DG2,8192,sem_match,,13
+cpu,AMD EPYC 9354P 32-Core,,exato,EPYC 9354P,13
+cpu,Intel Core i3-14100,,exato,Core i3-14100,13
+gpu,hyperv_drmdrmfb,,sem_match,,13
+gpu,AMD Radeon RX 470/480/580,8064,ambiguo,,12
+gpu,NVE4,2048,sem_match,,12
+gpu,NVIDIA GeForce GTX 680,2048,exato,GeForce GTX 680,12
+gpu,AMD Baffin [Polaris11],4096,sem_match,,12
+gpu,NV134,8192,sem_match,,12
+gpu,NVIDIA GeForce GT 710,2048,exato,GeForce GT 710,12
+gpu,AMD Radeon RX 5700 / XT,8192,ambiguo,,12
+cpu,Intel Core i7-6700HQ,,sem_match,,12
+gpu,NVIDIA Quadro RTX 3000 Mobile / Max-Q,,ambiguo,,12
+gpu,NVIDIA GeForce RTX 2060 Mobile,6144,exato,GeForce RTX 2060 Mobile,12
+gpu,NVIDIA Quadro M1000M,2048,exato,Quadro M1000M,12
+gpu,AMD Radeon R7 260X/360,2048,ambiguo,,12
+gpu,AMD Radeon Pro W5500,8192,exato,Radeon Pro W5500,12
+gpu,GFX1100,24576,sem_match,,12
+cpu,Snapdragon Compute,,sem_match,,12
+gpu,Microsoft Remote Display + Qualcomm Adreno 8cx Gen 3,,sem_match,,12
+cpu,Intel Core i3-12100F,,exato,Core i3-12100F,12
+gpu,Intel UHD ADL-S GT1,64512,sem_match,,12
+gpu,NVIDIA GeForce RTX 3070 Ti Laptop GPU,8192,exato,GeForce RTX 3070 Ti Mobile,12
+gpu,Intel Arctm MTL,31744,sem_match,,12
+cpu,AMD EPYC 4244P 6-Core,,exato,EPYC 4244P,12
+cpu,Intel Xeon E5-1620 v4,,exato,Xeon E5-1620 v4,12
+gpu,AMD Radeon RX 7600M XT,8192,exato,Radeon RX 7600M XT,12
+gpu,AMD Phoenix3,8192,sem_match,,12
+gpu,AMD Radeon RX 7700 XT,12288,exato,Radeon RX 7700 XT,12
+cpu,INTEL XEON GOLD 5515+,,exato,Xeon Gold 5515+,12
+gpu,NVIDIA Device,16384,sem_match,,12
+cpu,Intel Xeon 6728P,,exato,Xeon 6728P,12
+gpu,AMD Radeon RX 7600,8192,exato,Radeon RX 7600,12
+gpu,AMD Radeon RX 9070,16384,exato,Radeon RX 9070,12
+gpu,AMD Navi 48 [RX 9070/9070 XT],16384,ambiguo,,12
+gpu,NVIDIA RTX 6000 Ada Generation + ASPEED (WDDM) + NVIDIA RTX 6000 Ada Generation,49152,exato,RTX 6000 Ada Generation,12
+cpu,AMD Ryzen 5 5500GT,,exato,Ryzen 5 5500GT,12
+cpu,AMD EPYC 9745 128-Core,,exato,EPYC 9745,12
+cpu,Intel Core Ultra 7 270K Plus,,exato,Core Ultra 7 270K Plus,12
+cpu,AMD A10-5800K APU,,sem_match,,12
+gpu,AMD Radeon HD 7850 / R7 265 / R9 270 1024SP,,ambiguo,,12
+cpu,Intel Core i7-5557U,,exato,Core i7-5557U,11
+gpu,Intel Iris 6100 (1100MHz),,sem_match,,11
+gpu,NV132,11264,sem_match,,11
+cpu,Intel Core i7-3960X,,exato,Core i7-3960X,11
+gpu,NVIDIA GeForce GTX 1070 Ti,8192,exato,GeForce GTX 1070 Ti,11
+gpu,Intel Iris Pro 6200,3072,exato,Iris Pro Graphics 6200,11
+gpu,AMD Picasso,2048,sem_match,,11
+gpu,MGA G200e [Pilot],,sem_match,,11
+cpu,AMD EPYC 7V12 64-Core,,sem_match,,11
+gpu,Intel ADL GT2,31744,sem_match,,11
+gpu,NVIDIA GeForce RTX 4060 Laptop GPU,8192,exato,GeForce RTX 4060 Mobile,11
+gpu,NVIDIA Device,12288,sem_match,,11
+gpu,Intel RPL-U,8192,sem_match,,11
+gpu,NVIDIA GeForce RTX 5070 Ti,16384,exato,GeForce RTX 5070 Ti,11
+gpu,Intel TigerLake-LP GT2 [Iris Xe],,sem_match,,11
+cpu,Intel Core i5-2400S,,exato,Core i5-2400S,11
+gpu,Intel Sandybridge Desktop,1536,sem_match,,11
+gpu,NVIDIA GeForce GTX 780 Ti,3072,exato,GeForce GTX 780 Ti,10
+gpu,NV136,6144,sem_match,,10
+gpu,NVIDIA GeForce GTX 1070 + Intel HD 530,8192,exato,GeForce GTX 1070,10
+gpu,mgadrmfb,,sem_match,,10
+cpu,Intel Xeon E-2278GEL,,exato,Xeon E-2278GEL,10
+gpu,AMD Radeon RX550/550,2048,ambiguo,,10
+cpu,Intel Xeon E3-1270 V2,,exato,Xeon E3-1270 v2,10
+gpu,Intel UHD + NVIDIA Quadro RTX 5000 with Max-Q Design,16384,exato,Quadro RTX 5000 Max-Q,10
+cpu,AMD EPYC 7443 24-Core,,exato,EPYC 7443,10
+cpu,Intel Xeon W-2235,,exato_wikipedia,Xeon W-2235,10
+cpu,AMD Ryzen 9 5900 12-Core,,exato,Ryzen 9 5900,10
+cpu,AMD EPYC 74F3 24-Core,,exato,EPYC 74F3,10
+cpu,Intel Core i7-11800H,,exato,Core i7-11800H,10
+gpu,Intel UHD 630,1024,exato,UHD Graphics 630,10
+gpu,Intel ADL-S GT1 (1500MHz),,sem_match,,10
+cpu,AMD Ryzen 9 PRO 3900 12-Core,,sem_match,,10
+cpu,AMD Ryzen 7 PRO 3700 8-Core,,exato,Ryzen 7 PRO 3700,10
+cpu,QEMU Virtual 4.2.0,,sem_match,,10
+cpu,Intel Xeon E5-2620 v2,,exato,Xeon E5-2620 v2,10
+gpu,NVIDIA Quadro K2000,2048,exato,Quadro K2000,10
+cpu,AMD Ryzen Threadripper 1900X 8-Core,,exato,Ryzen Threadripper 1900X,10
+gpu,AMD RENOIR,2048,sem_match,,10
+gpu,MGA G200eH3,,sem_match,,10
+cpu,AMD FX-8320 Eight-Core,,exato,FX-8320,10
+gpu,DisplayLink USB Device + NVIDIA GeForce GTX 970 + DisplayLink USB Device,4096,exato,GeForce GTX 970,10
+gpu,Intel UHD,1024,sem_match,,10
+cpu,Intel Xeon Silver 4314,,exato,Xeon Silver 4314,10
+gpu,NVIDIA GeForce RTX 2080 Ti,22528,exato,GeForce RTX 2080 Ti,10
+cpu,Intel Xeon Platinum 8168,,exato_wikipedia,Xeon Platinum 8168,10
+cpu,AMD EPYC 7V73X 64-Core,,sem_match,,10
+cpu,AMD EPYC 9V33X 96-Core,,sem_match,,10
+cpu,Intel Xeon Gold 6154,,exato,Xeon Gold 6154,10
+gpu,Microsoft Remote Display + VMware SVGA 3D,,sem_match,,10
+gpu,NAVI31,20480,sem_match,,10
+gpu,NAVI31,46080,sem_match,,10
+gpu,NVIDIA A100,81920,sem_match,,10
+cpu,AMD EPYC 7543P 32-Core,,exato,EPYC 7543P,10
+gpu,Intel ARL,8192,sem_match,,10
+gpu,Intel Iris Xe TGL GT2,15360,sem_match,,10
+cpu,Intel Core i5-3470,,exato,Core i5-3470,10
+cpu,AMD EPYC 7501 32-Core,,exato,EPYC 7501,9
+gpu,AMD Radeon PRO SSG,16384,exato,Radeon Pro SSG,9
+cpu,Intel Core i5-6600,,exato,Core i5-6600,9
+gpu,eVGA NVIDIA NV137,4096,sem_match,,9
+cpu,Intel Xeon Gold 6254,,exato_wikipedia,Xeon Gold 6254,9
+cpu,Intel Xeon Silver 4215R,,exato_wikipedia,Xeon Silver 4215R,9
+cpu,Intel Xeon Silver 4214R,,exato_wikipedia,Xeon Silver 4214R,9
+gpu,NVIDIA GeForce GTX 1060,3072,memoria,GeForce GTX 1060 3 GB,9
+cpu,AMD EPYC 7252 8-Core,,exato,EPYC 7252,9
+gpu,AMD Radeon RX 5700 XT,4096,exato,Radeon RX 5700 XT,9
+cpu,AMD Ryzen 7 4800HS,,exato,Ryzen 7 4800HS,9
+cpu,Intel Pentium G4600,,exato,Pentium G4600,9
+gpu,AMD Radeon R9 290X/390X,4096,ambiguo,,9
+gpu,NVIDIA NV137,2048,sem_match,,9
+cpu,AMD Ryzen 7 5800U,,exato,Ryzen 7 5800U,9
+gpu,AMD Radeon,1024,sem_match,,9
+gpu,AMD Cezanne,1024,sem_match,,9
+cpu,Intel Xeon W-2295,,exato_wikipedia,Xeon W-2295,9
+cpu,Intel Core i5-1350P,,exato,Core i5-1350P,9
+cpu,Intel Core i5-1345U,,exato,Core i5-1345U,9
+cpu,AMD Ryzen 9 5900HS,,exato,Ryzen 9 5900HS,9
+gpu,NVIDIA GeForce RTX 3080 Mobile / Max-Q,8192,ambiguo,,9
+cpu,Intel $0000%,,sem_match,,9
+gpu,AMD Radeon RX 7900 XT/7900 XTX/7900M,,ambiguo,,9
+gpu,AMD Radeon 840M,2048,sem_match,,9
+cpu,AMD Ryzen 7 255,,sem_match,,9
+cpu,Intel Core i7-6900K,,exato,Core i7-6900K,9
+gpu,NVIDIA Quadro K620,2048,exato,Quadro K620,8
+gpu,AMD Radeon RX 470/480/580,8192,ambiguo,,8
+gpu,Intel Kabylake GT1.5,3072,sem_match,,8
+gpu,AMD Radeon HD 4250,256,exato,Radeon HD 4250,8
+gpu,Intel UHD,3072,sem_match,,8
+gpu,i915drmfb (1200MHz),,sem_match,,8
+gpu,Intel HD 630 (1150MHz),,exato,HD Graphics 630,8
+gpu,Intel Xeon E3-1200 v3/4th Gen Core IGP (1200MHz),,ambiguo,,8
+gpu,Intel HD 530 + AMD Radeon Pro 450,2048,exato,Radeon Pro 450,8
+gpu,NVIDIA GeForce 7300 GS,,exato,GeForce 7300 GS,8
+cpu,Intel Core i7-6820HQ,,sem_match,,8
+cpu,Intel Core i7-10810U,,exato,Core i7-10810U,8
+gpu,NVIDIA GeForce GTX 1660 Ti Mobile,6144,exato,GeForce GTX 1660 Ti Mobile,8
+gpu,Microsoft Hyper-V virtual VGA,,sem_match,,8
+cpu,AMD EPYC 7J13 64-Core,,exato,EPYC 7J13,8
+gpu,Intel HD 630 KBL GT2,3072,sem_match,,8
+gpu,Intel CoffeeLake-H GT2 [UHD 630] (1200MHz),,sem_match,,8
+gpu,Intel HD 4000,2048,exato,HD Graphics 4000,8
+cpu,AMD Opteron 8378,,sem_match,,8
+cpu,Intel Celeron J3455,,exato_wikipedia,Celeron J3455,8
+gpu,Intel HD 500 (750MHz),,sem_match,,8
+cpu,Intel Xeon Platinum 8462Y+,,exato,Xeon Platinum 8462Y+,8
+cpu,Intel Xeon Silver 4208,,exato_wikipedia,Xeon Silver 4208,8
+cpu,Intel Xeon Gold 6252,,exato_wikipedia,Xeon Gold 6252,8
+gpu,NVIDIA GeForce GTX 970,4096,exato,GeForce GTX 970,7
+gpu,Intel UHD 620 (1150MHz),,sem_match,,7
+gpu,Intel Sandybridge Desktop (1350MHz),,sem_match,,7
+gpu,Intel Iris Xe,1024,sem_match,,7
+cpu,Intel Core,,sem_match,,7
+gpu,Intel UHD CML GT2,3072,sem_match,,7
+cpu,Intel Core i5-4570,,exato,Core i5-4570,7
+gpu,Intel Arc 140V GPU,2048,sem_match,,7
+cpu,Intel Xeon E3-1231 v3,,exato,Xeon E3-1231 v3,6
+cpu,Intel Xeon X5650,,exato,Xeon X5650,6
+gpu,AMD Radeon HD 4890,1024,exato,Radeon HD 4890,6
+gpu,NVIDIA GeForce GTX 650,1024,exato,GeForce GTX 650,6
+gpu,AMD Radeon RX Vega,8176,sem_match,,6
+gpu,NV124,4096,sem_match,,6
+cpu,Intel Xeon X5550,,exato,Xeon X5550,6
+cpu,AMD Ryzen Threadripper 2920X 12-Core,,exato,Ryzen Threadripper 2920X,6
+gpu,Intel UHD 630 (1200MHz),,exato,UHD Graphics 630,6
+cpu,Intel Core i7-3770S,,exato,Core i7-3770S,6
+gpu,Intel HD P530,3072,exato,HD Graphics P530,6
+gpu,AMD Radeon RX 5500/5500M / Pro 5500M,4096,ambiguo,,6
+gpu,NVIDIA Quadro P620,2048,exato,Quadro P620,6
+gpu,NVIDIA Quadro M4000,8192,exato,Quadro M4000,6
+cpu,Intel Xeon E5-2678 v3,,exato,Xeon E5-2678 v3,6
+cpu,AMD Opteron 4386,,exato,Opteron 4386,6
+cpu,Intel Core i7-4700MQ,,exato,Core i7-4700MQ,6
+cpu,Intel Core i3-8100T,,exato,Core i3-8100T,6
+cpu,Intel Xeon E5-2643 v4,,exato_wikipedia,Xeon E5-2643 v4,6
+cpu,Intel Core i7-10850H,,exato,Core i7-10850H,6
+gpu,AMD Cezanne,4096,sem_match,,6
+cpu,AMD EPYC-Rome,,sem_match,,6
+cpu,Intel Core i9-12900H,,exato,Core i9-12900H,6
+cpu,Intel Core i5-7500T,,exato,Core i5-7500T,6
+gpu,Intel HD 630 (1100MHz),,exato,HD Graphics 630,6
+gpu,AMD Radeon RX 6600,8192,exato,Radeon RX 6600,6
+gpu,Intel HD 530,3072,exato,HD Graphics 530,6
+gpu,AMD Radeon RX 6800,4096,exato,Radeon RX 6800,6
+cpu,AMD EPYC 7413 24-Core,,exato,EPYC 7413,6
+cpu,AMD EPYC 7513 32-Core,,exato,EPYC 7513,6
+gpu,AMD Radeon RX 7700S/7600S/7600M XT,8192,ambiguo,,6
+cpu,Intel Xeon E5-2690 v4,,exato_wikipedia,Xeon E5-2690 v4,6
+gpu,AMD Phoenix1,8192,sem_match,,6
+cpu,AMD Ryzen 5 8500G,,exato,Ryzen 5 8500G,6
+gpu,AMD Phoenix2,512,sem_match,,6
+cpu,Intel Xeon E5-2682 v4,,exato_wikipedia,Xeon E5-2682 v4,6
+gpu,NVIDIA GeForce RTX 3090 Ti,24576,exato,GeForce RTX 3090 Ti,6
+gpu,Intel Alder Lake-P GT2 [Iris Xe ],,sem_match,,6
+cpu,AMD EPYC 4124P 4-Core,,exato,EPYC 4124P,6
+cpu,Intel Core i7-10750H,,exato,Core i7-10750H,6
+gpu,i915drmfb (1300MHz),,sem_match,,6
+gpu,Intel Arc A770,2048,exato,Arc A770,6
+gpu,Intel Arc B580,2048,exato,Arc B580,6
+gpu,Intel ARL,15360,sem_match,,6
+cpu,AMD Ryzen Threadripper PRO 3955WX 16-Cores,,exato,Ryzen Threadripper PRO 3955WX,6
+gpu,NVIDIA RTX PRO 6000 Blackwell Workstation Edition,98304,sem_match,,6
+gpu,Parsec Virtual Display + Microsoft Remote Display + Red Hat VirtIO GPU DOD + NVIDIA GeForce RTX 5090,32768,exato,GeForce RTX 5090,6
+gpu,NVIDIA GeForce RTX 5090 + ASPEED (WDDM),32768,exato,GeForce RTX 5090,6
+gpu,NVIDIA GeForce RTX 5090 + NVIDIA GeForce RTX 5090 + NVIDIA GeForce RTX 5090 + ASPEED (WDDM) + NVIDIA GeForce RTX 5090,32768,exato,GeForce RTX 5090,6
+gpu,Parsec Virtual Display + Microsoft Remote Display + NVIDIA GeForce RTX 5090 + Red Hat VirtIO GPU DOD,32768,exato,GeForce RTX 5090,6
+cpu,unknown,,sem_match,,6
+cpu,AMD EPYC 7C13 64-Core,,exato,EPYC 7C13,6
+gpu,eVGA NVIDIA GeForce RTX 3070 Ti,8192,exato,GeForce RTX 3070 Ti,6
+cpu,Intel Core i7-14650HX,,exato,Core i7-14650HX,6
+cpu,AMD Ryzen 7 9850X3D 8-Core,,exato,Ryzen 7 9850X3D,6
+cpu,AMD Ryzen 9 9950X3D2 16-Core,,sem_match,,6
+gpu,eVGA NVIDIA GeForce GTX 1060,3072,memoria,GeForce GTX 1060 3 GB,6
+cpu,Intel 0000,,sem_match,,5
+gpu,AMD POLARIS10,3968,sem_match,,5
+gpu,AMD POLARIS10 (DRM 3.15.0 / 4.12.0-999-generic LLVM 5.0.0),8192,ambiguo,,5
+gpu,AMD POLARIS10,8192,sem_match,,5
+cpu,AMD Ryzen 3 1200,,exato,Ryzen 3 1200,5
+cpu,Intel Core i7-7500U,,exato_wikipedia,Core i7-7500U,5
+gpu,Intel HD 620,3072,sem_match,,5
+cpu,POWER9 altivec supported,,sem_match,,5
+cpu,Intel Xeon E5-2683 v4,,exato_wikipedia,Xeon E5-2683 v4,5
+cpu,Intel Core i7-3517U,,exato,Core i7-3517U,5
+gpu,AMD Radeon R7 240/340,2048,ambiguo,,5
+cpu,AMD Opteron 6386 SE,,exato,Opteron 6386 SE,5
+gpu,Intel HD 530,2147483648,exato,HD Graphics 530,5
+gpu,NVIDIA GeForce RTX 2080 Ti Rev. A,11264,sem_match,,5
+gpu,Intel Iris Plus,3072,sem_match,,5
+cpu,AMD Opteron 6272,,exato,Opteron 6272,5
+gpu,AMD Radeon 550,2048,exato,Radeon 550,5
+gpu,NVIDIA NVA5,1024,sem_match,,5
+cpu,Intel Core i7-10510U,,exato,Core i7-10510U,5
+gpu,AMD Radeon RX 5500 XT,4096,exato,Radeon RX 5500 XT,5
+cpu,Intel Xeon Gold 6230R,,exato_wikipedia,Xeon Gold 6230R,5
+gpu,NVIDIA GeForce GTX 660,2048,exato,GeForce GTX 660,5
+cpu,AMD Ryzen 5 PRO 4650G,,exato,Ryzen 5 PRO 4650G,5
+gpu,NVIDIA NV166,6144,sem_match,,5
+cpu,Intel Xeon E5-2620 0,,exato,Xeon E5-2620,5
+gpu,NVIDIA GeForce GTX 750,1024,exato,GeForce GTX 750,5
+gpu,Intel HD 530 (1150MHz),,exato,HD Graphics 530,5
+cpu,AMD Ryzen 5 3500U,,exato,Ryzen 5 3500U,5
+gpu,Intel UHD 750,1024,exato,UHD Graphics 750,5
+cpu,Intel Core i7-11700K,,exato,Core i7-11700K,5
+gpu,Intel Iris Plus G7 (1100MHz),,sem_match,,5
+gpu,Intel Iris Plus ICL GT2,3072,sem_match,,5
+cpu,Intel Xeon E-2124,,exato,Xeon E-2124,5
+cpu,Intel Core i3-9100F,,exato,Core i3-9100F,5
+gpu,AMD Radeon HD 8570 / R5 430 OEM R7 240/340 520,,ambiguo,,5
+gpu,Intel UHD 770,,exato,UHD Graphics 770,5
+gpu,Intel AlderLake-S GT1 (1550MHz),,sem_match,,5
+cpu,Intel Core i5-10210U,,exato,Core i5-10210U,5
+cpu,AMD Ryzen 9 4900H,,exato,Ryzen 9 4900H,5
+gpu,Intel HD 620 KBL GT2,3072,sem_match,,5
+cpu,Common KVM,,sem_match,,5
+cpu,Intel Xeon X5680,,exato,Xeon X5680,5
+cpu,Intel Xeon L5640,,exato,Xeon L5640,5
+gpu,NVIDIA GeForce RTX 2080 Rev. A,8192,sem_match,,5
+gpu,AMD Radeon RX 6600/6600 XT/6600M,,ambiguo,,5
+cpu,Intel Xeon E5-2650 v3,,exato,Xeon E5-2650 v3,5
+gpu,AMD Radeon RX 6600 XT,8192,exato,Radeon RX 6600 XT,5
+cpu,Intel Core i7-3615QM,,exato,Core i7-3615QM,5
+gpu,NVIDIA GeForce RTX 3080 Laptop GPU,8192,exato,GeForce RTX 3080 Mobile,5
+cpu,Intel Core i7-13700K,,exato,Core i7-13700K,5
+gpu,Intel UHD ICL GT1,8192,sem_match,,5
+cpu,Intel Celeron J6413,,exato,Celeron J6413,5
+gpu,Intel Elkhart Lake [UHD Gen11 16EU] (800MHz),,sem_match,,5
+gpu,NVIDIA GA102GL [RTX A5000],24576,sem_match,,5
+gpu,NVIDIA Quadro RTX 5000,15360,exato,Quadro RTX 5000,5
+gpu,Microsoft Remote Display + NVIDIA GeForce RTX 3090,24576,exato,GeForce RTX 3090,5
+gpu,NVIDIA GeForce GTX 750 Ti,4096,exato,GeForce GTX 750 Ti,5
+cpu,Intel Xeon Platinum 8471N,,exato,Xeon Platinum 8471N,5
+cpu,Intel Core i9-10900X,,exato,Core i9-10900X,5
+gpu,AMD VanGogh [AMD Custom GPU 0405],,sem_match,,5
+gpu,Intel Iris Xe + Microsoft Remote Display,1024,sem_match,,5
+gpu,NVIDIA GA104GL [RTX A4000],,sem_match,,5
+gpu,Intel Arc,1024,sem_match,,5
+cpu,Intel Xeon Silver 4110,,exato_wikipedia,Xeon Silver 4110,5
+gpu,NVIDIA GV100 [TITAN V],12288,sem_match,,5
+cpu,Intel Core i5-6500T,,exato,Core i5-6500T,5
+gpu,Intel HD 530 SKL GT2,16384,sem_match,,5
+cpu,Intel Xeon E5-2696 v4,,exato_wikipedia,Xeon E5-2696 v4,5
+gpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4096,exato,GeForce RTX 3050 Ti Mobile,5
+gpu,NVIDIA NV167,4096,sem_match,,5
+gpu,NVIDIA GeForce RTX 4060 Ti,16384,memoria,GeForce RTX 4060 Ti 16 GB,5
+cpu,AMD EPYC 9474F 48-Core,,exato,EPYC 9474F,5
+gpu,AMD Radeon + Microsoft Remote Display + AMD Radeon RX 7700 XT,512,exato,Radeon RX 7700 XT,5
+cpu,Intel Xeon D-2775TE,,exato,Xeon D-2775TE,5
+gpu,AMD Radeon RX Vega 11,2048,exato,Radeon RX Vega 11,5
+gpu,AMD Radeon RX 7900 GRE,4096,exato,Radeon RX 7900 GRE,5
+gpu,AMD Radeon RX 7900 GRE + AMD Radeon,4096,exato,Radeon RX 7900 GRE,5
+gpu,AMD Radeon RX 460/560D / Pro 450/455/460/555/555X/560/560X,2048,ambiguo,,5
+cpu,AMD Ryzen 9 8945HS,,exato,Ryzen 9 8945HS,5
+cpu,Intel Core i5-14600,,exato,Core i5-14600,5
+gpu,AMD Radeon Pro W6400,4096,exato,Radeon PRO W6400,5
+cpu,AMD EPYC-Milan,,sem_match,,5
+cpu,Intel Core i7-14700KF,,exato,Core i7-14700KF,5
+cpu,AMD Ryzen 7 7435HS,,exato,Ryzen 7 7435HS,5
+gpu,AMD Radeon RX 480,8192,exato,Radeon RX 480,5
+cpu,Intel Celeron G3930,,exato,Celeron G3930,5
+gpu,Intel Kabylake GT1,3072,sem_match,,5
+gpu,Device,11264,sem_match,,4
+gpu,AMD Radeon RX 460,2048,exato,Radeon RX 460,4
+cpu,Intel Core i7-7820X,,exato,Core i7-7820X,4
+gpu,AMD Radeon R9 200,4096,sem_match,,4
+gpu,AMD Radeon RX 480,4095,exato,Radeon RX 480,4
+gpu,AMD Radeon RX 470/480/570/580,8192,ambiguo,,4
+cpu,Intel Core i7-8750H,,exato,Core i7-8750H,4
+gpu,AMD Radeon RX Vega 64,8176,exato,Radeon RX Vega 64,4
+cpu,AMD EPYC 7571,,sem_match,,4
+cpu,Intel Core i7 720Q,,sem_match,,4
+cpu,Intel Core i7-4558U,,exato,Core i7-4558U,4
+cpu,AMD Phenom II X3 B77,,exato,Phenom II X3 B77,4
+cpu,Intel Core i5-8250U,,exato,Core i5-8250U,4
+gpu,NVIDIA NV120,6144,sem_match,,4
+cpu,AMD Ryzen 5 PRO 2400GE w/ Radeon Vega,,sem_match,,4
+gpu,NVIDIA GeForce MX250,2048,exato,GeForce MX250,4
+cpu,Intel Core i7-3820,,exato,Core i7-3820,4
+cpu,Intel Xeon E5-2620 v3,,exato,Xeon E5-2620 v3,4
+gpu,G200eR2,,sem_match,,4
+gpu,AMD SIENNA_CICHLID,16384,sem_match,,4
+cpu,Intel Xeon E5-2667 v2,,exato,Xeon E5-2667 v2,4
+gpu,Tesla V100-SXM2-16GB,16384,exato,Tesla V100 SXM2 16 GB,4
+gpu,AMD Radeon 550X,2048,exato,Radeon 550X,4
+cpu,Intel Pentium G3220,,exato,Pentium G3220,4
+gpu,eVGA NVIDIA GeForce GTX 960,4096,exato,GeForce GTX 960,4
+cpu,AMD EPYC 7B12,,sem_match,,4
+gpu,Intel WhiskeyLake-U GT2 [UHD 620] (1150MHz),,sem_match,,4
+cpu,Intel Xeon E5-2697 v3,,exato,Xeon E5-2697 v3,4
+cpu,AMD EPYC 7313 16-Core,,exato,EPYC 7313,4
+gpu,AMD Radeon R7 370 R9 270X/370X,,ambiguo,,4
+cpu,Intel Xeon X5667,,exato,Xeon X5667,4
+gpu,AMD Radeon RX 460/560D / Pro 450/455/460/555/555X/560/560X,4096,ambiguo,,4
+gpu,AMD Radeon HD 7750/8740 / R7 250E,1024,ambiguo,,4
+gpu,AMD ES1000,,exato,ES1000,4
+cpu,Intel Xeon E3-1260L v5,,exato,Xeon E3-1260L v5,4
+gpu,Intel HD P530 SKL GT2,3072,sem_match,,4
+cpu,AMD Ryzen Threadripper PRO 5975WX 32-Cores,,exato,Ryzen Threadripper PRO 5975WX,4
+gpu,Zkladn grafick adaptr Microsoft + Intel HD 530,1024,exato,HD Graphics 530,4
+cpu,Intel Xeon Gold 6132,,exato_wikipedia,Xeon Gold 6132,4
+cpu,Intel Xeon Gold 6354,,exato,Xeon Gold 6354,4
+cpu,AMD Ryzen 7 6800U,,exato,Ryzen 7 6800U,4
+gpu,AMD Rembrandt,512,sem_match,,4
+cpu,Intel Xeon Gold 6438N,,exato,Xeon Gold 6438N,4
+gpu,AMD Radeon RX 6950 XT,4096,exato,Radeon RX 6950 XT,4
+gpu,Intel UHD 730 ADL-S GT1,16384,sem_match,,4
+gpu,Intel UHD 770 ADL-S GT1,16384,sem_match,,4
+cpu,Intel Core i7-14700K,,exato,Core i7-14700K,4
+cpu,Intel Core i7-12700,,exato,Core i7-12700,4
+gpu,Intel UHD + NVIDIA GeForce RTX 4070 Laptop GPU,8192,exato,GeForce RTX 4070 Mobile,4
+cpu,Intel Xeon Gold 6148,,exato_wikipedia,Xeon Gold 6148,4
+cpu,Intel Core i7-1185G7E,,exato,Core i7-1185G7E,4
+gpu,Intel TigerLake-LP GT2 [Iris Xe ] (1350MHz),,sem_match,,4
+gpu,NVIDIA RTX A6000,49152,exato,RTX A6000,4
+cpu,AMD Ryzen 7 5700X3D 8-Core,,exato,Ryzen 7 5700X3D,4
+cpu,Intel Xeon Gold 6444Y,,exato,Xeon Gold 6444Y,4
+gpu,Intel Lunar Lake [Intel Arc 130V / 140V],,ambiguo,,4
+cpu,AMD EPYC-Genoa,,sem_match,,4
+gpu,AMD Radeon 8050S,512,exato,Radeon 8050S,4
+cpu,Intel Core Ultra 7 265K,,exato,Core Ultra 7 265K,4
+cpu,Intel Core i7-12650H,,exato,Core i7-12650H,4
+gpu,Intel ADL GT2,4096,sem_match,,4
+gpu,NVIDIA GeForce RTX 5060 Laptop GPU,8192,exato,GeForce RTX 5060 Mobile,4
+gpu,AMD Radeon R9 Fury,4096,exato,Radeon R9 FURY,4
+gpu,AMD Radeon R9 200,2048,sem_match,,4
+cpu,Intel Xeon X5677,,exato,Xeon X5677,4
+gpu,NVIDIA GeForce GTX TITAN Black,6144,exato,GeForce GTX TITAN BLACK,4
+gpu,Intel Iris Pro 580 (950MHz),,sem_match,,4
+gpu,AMD Radeon RX 460,4096,exato,Radeon RX 460,4
+gpu,AMD Radeon RX 470/480,3968,ambiguo,,4
+gpu,AMD Radeon RX 470,4096,exato,Radeon RX 470,4
+gpu,AMD Radeon HD 7970/8970 OEM / R9 280X,3072,ambiguo,,3
+cpu,AMD Phenom II X4 955,,sem_match,,3
+cpu,Intel Core i7 920,,exato,Core i7-920,3
+gpu,NV117,1024,sem_match,,3
+gpu,AMD Radeon Vega 8 Mobile,2048,exato,Radeon Vega 8 Mobile,3
+gpu,Intel HD 4000,2112,exato,HD Graphics 4000,3
+cpu,Intel Core i7 840Q,,sem_match,,3
+gpu,NVIDIA Quadro FX 3800M,1024,exato,Quadro FX 3800M,3
+gpu,NVIDIA Quadro FX 880M,1024,exato,Quadro FX 880M,3
+gpu,Intel 3rd Gen Core,1024,sem_match,,3
+cpu,Intel Core i7-4720HQ,,sem_match,,3
+gpu,NVIDIA GeForce GTX 960M,2048,exato,GeForce GTX 960M,3
+cpu,Intel Pentium Silver J5005,,exato,Pentium Silver J5005,3
+gpu,Intel UHD 605,3072,sem_match,,3
+cpu,Intel Core i3-8100,,exato,Core i3-8100,3
+cpu,Intel Core i7-9700K,,exato,Core i7-9700K,3
+gpu,Intel Iris Pro 580,3072,sem_match,,3
+cpu,Intel Core i5-8265U,,exato,Core i5-8265U,3
+cpu,Intel Xeon W-1270,,exato,Xeon W-1270,3
+gpu,i915drmfb (1150MHz),,sem_match,,3
+cpu,Intel Xeon W-10885M,,exato_wikipedia,Xeon W-10885M,3
+gpu,Intel UHD P630 (1250MHz),,exato,UHD Graphics P630,3
+cpu,Intel Core i7-5820K,,exato,Core i7-5820K,3
+cpu,Intel Core i5-4278U,,sem_match,,3
+gpu,Intel Iris,2048,sem_match,,3
+cpu,AMD Ryzen 3 3100 4-Core,,exato,Ryzen 3 3100,3
+gpu,AMD Radeon RX 6800 XT,4096,exato,Radeon RX 6800 XT,3
+cpu,AMD Ryzen Threadripper 1920X 12-Core,,exato,Ryzen Threadripper 1920X,3
+gpu,Device,8192,sem_match,,3
+cpu,AMD Ryzen 5 3550H,,exato,Ryzen 5 3550H,3
+gpu,Intel HD 4600,2048,exato,HD Graphics 4600,3
+cpu,Intel Xeon E3-1225 v6,,exato_wikipedia,Xeon E3-1225 v6,3
+gpu,AMD RENOIR,512,sem_match,,3
+cpu,Intel Xeon Gold 6130,,exato_wikipedia,Xeon Gold 6130,3
+gpu,NICE DCV Virtual Display,,sem_match,,3
+cpu,AMD Ryzen 7 PRO 4750U,,exato,Ryzen 7 PRO 4750U,3
+cpu,AMD Ryzen 3 3200G,,exato,Ryzen 3 3200G,3
+gpu,AMD RENOIR,1024,sem_match,,3
+gpu,Intel UHD 620,1024,sem_match,,3
+gpu,Intel HD 3000,2048,exato,HD Graphics 3000,3
+gpu,Intel UHD CML GT2,6144,sem_match,,3
+gpu,Intel RocketLake-S GT1 [UHD 750] (1300MHz),,sem_match,,3
+gpu,Intel RKL GT1,31744,sem_match,,3
+gpu,Intel UHD 620 WHL GT2,14336,sem_match,,3
+cpu,AMD Eng Sample,,sem_match,,3
+gpu,i915drmfb (950MHz),,sem_match,,3
+cpu,AMD Ryzen 9 6900HX,,exato,Ryzen 9 6900HX,3
+gpu,AMD Radeon 680M,2048,exato,Radeon 680M,3
+gpu,nouveaudrmfb,,sem_match,,3
+gpu,Intel UHD 630 CML GT2,31744,sem_match,,3
+gpu,Intel UHD 730 ADL-S GT1,31744,sem_match,,3
+gpu,AMD Radeon RX 7900 XT/7900 XTX,24576,ambiguo,,3
+cpu,Intel Core i5-8500,,exato,Core i5-8500,3
+gpu,D3D12,81920,sem_match,,3
+gpu,GFX1036,1024,sem_match,,3
+gpu,AMD Radeon PRO W7700,16384,exato,Radeon PRO W7700,3
+gpu,NVIDIA Quadro P6000,24576,exato,Quadro P6000,3
+gpu,Intel Xe TGL GT2,19456,sem_match,,3
+cpu,INTEL XEON GOLD 6548Y+,,exato,Xeon Gold 6548Y+,3
+gpu,Intel UHD CML GT2,31744,sem_match,,3
+gpu,Intel UHD CML GT2,4096,sem_match,,3
+gpu,Intel HD 4600 HSW GT2,2048,sem_match,,3
+cpu,Intel Core i5-8350U,,exato,Core i5-8350U,3
+gpu,Intel UHD 620 KBL GT2,15360,sem_match,,3
+cpu,Intel Core Ultra 9 185H,,exato,Core Ultra 9 185H,3
+gpu,Intel Arctm MTL,48128,sem_match,,3
+gpu,AMD Radeon RX 7900 XT/7900 XTX/7900 GRE/7900M,,ambiguo,,3
+gpu,AMD Radeon 780M,3072,exato,Radeon 780M,3
+gpu,AMD Navi 33 [Radeon Pro W7500],,sem_match,,3
+cpu,Intel Core i7-12800H,,exato,Core i7-12800H,3
+cpu,Intel Xeon E5645,,exato,Xeon E5645,3
+gpu,NVIDIA Quadro NVS 450,256,sem_match,,3
+gpu,AMD POLARIS10,4096,sem_match,,3
+gpu,Intel HD 530 (Skylake GT2) (1150MHz),,exato,HD Graphics 530,3
+cpu,AMD Phenom II X6 1090T,,sem_match,,2
+gpu,Intel HD 5500 (Broadwell GT2),3072,sem_match,,2
+cpu,Intel Core 2 Quad Q9505,,exato,Core 2 Quad Q9505,2
+gpu,Intel 82Q35 IGP,,sem_match,,2
+cpu,AMD Ryzen 5 1400,,exato,Ryzen 5 1400,2
+cpu,Intel Core i5-4670K,,exato,Core i5-4670K,2
+gpu,NVIDIA GeForce GTX 1070 with Max-Q Design,8192,exato,GeForce GTX 1070 Max-Q,2
+cpu,AMD FX-8320E Eight-Core,,exato,FX-8320E,2
+cpu,Intel Core i7-7700,,exato,Core i7-7700,2
+gpu,Intel 2nd Generation Core Family IGP (1300MHz),,sem_match,,2
+gpu,Intel Haswell-ULT IGP (1200MHz),,sem_match,,2
+gpu,Intel HD 5500 (950MHz),,sem_match,,2
+cpu,AMD EPYC 7371 16-Core,,exato,EPYC 7371,2
+cpu,AMD Ryzen 3 2200G,,exato,Ryzen 3 2200G,2
+cpu,AMD Athlon II X2 B24,,sem_match,,2
+cpu,AMD Phenom II X2 B59,,sem_match,,2
+gpu,Device,4096,sem_match,,2
+cpu,Intel Core i7-7800X,,exato,Core i7-7800X,2
+gpu,AMD Radeon HD 4830,512,exato,Radeon HD 4830,2
+gpu,Intel UHD,6144,sem_match,,2
+gpu,NVIDIA Quadro T2000,4096,sem_match,,2
+gpu,NVIDIA GeForce GTX 980 + Microsoft Remote Display,4096,exato,GeForce GTX 980,2
+cpu,Intel Core i9-10900KF,,exato,Core i9-10900KF,2
+cpu,Intel Core i9-9880H,,exato,Core i9-9880H,2
+gpu,Intel UHD 630 + AMD Radeon Pro 5500M,2048,exato,Radeon Pro 5500M,2
+cpu,Intel Core i7-2600K,,exato,Core i7-2600K,2
+gpu,NVIDIA GeForce GT 730,4096,exato,GeForce GT 730,2
+cpu,AMD Ryzen 3 PRO 4450U,,exato,Ryzen 3 PRO 4450U,2
+cpu,Intel Xeon E5-2660 v3,,exato,Xeon E5-2660 v3,2
+cpu,Intel Xeon E3-1225 v5,,exato,Xeon E3-1225 v5,2
+gpu,Intel HD P530 (1150MHz),,exato,HD Graphics P530,2
+gpu,Intel TigerLake GT2 [Iris Xe ] (1300MHz),,sem_match,,2
+cpu,Intel Xeon E5-2640 v4,,exato_wikipedia,Xeon E5-2640 v4,2
+cpu,Intel Xeon E5-2698 v4,,exato_wikipedia,Xeon E5-2698 v4,2
+gpu,Intel UHD 620 WHL GT2,3072,sem_match,,2
+gpu,Intel TigerLake-LP GT2 [Iris Xe ] (1300MHz),,sem_match,,2
+cpu,Intel Xeon W-1370P,,exato,Xeon W-1370P,2
+gpu,AMD Radeon Vega 8,256,exato,Radeon Vega 8,2
+cpu,Intel Celeron N3450,,exato_wikipedia,Celeron N3450,2
+gpu,Intel HD 500 (700MHz),,sem_match,,2
+gpu,AMD RV770,1024,sem_match,,2
+cpu,AMD A10-7850K APU,,sem_match,,2
+cpu,Intel Xeon E-2334,,exato,Xeon E-2334,2
+gpu,Intel HD 4000 IVB GT2,2048,sem_match,,2
+cpu,AMD Ryzen 9 6900HS,,exato,Ryzen 9 6900HS,2
+gpu,AMD Radeon RX 6650 XT,8192,exato,Radeon RX 6650 XT,2
+cpu,Intel Core i3-6100T,,sem_match,,2
+gpu,Intel HD 530 (950MHz),,exato,HD Graphics 530,2
+cpu,Intel Core i5-8300H,,exato,Core i5-8300H,2
+gpu,NVIDIA GeForce GTX 1050 Ti + Intel UHD 630,4096,exato,GeForce GTX 1050 Ti,2
+cpu,Intel Xeon Platinum 8481C,,exato,Xeon Platinum 8481C,2
+gpu,AMD Radeon RX 7900 XTX + AMD Radeon,4096,exato,Radeon RX 7900 XTX,2
+cpu,Intel Core i5-11400,,exato,Core i5-11400,2
+gpu,Intel UHD 730,1024,exato,UHD Graphics 730,2
+cpu,AMD Ryzen 5 4600H,,exato,Ryzen 5 4600H,2
+cpu,Intel Core i5-12600HL,,sem_match,,2
+gpu,Intel UHD 630 CFL GT2,4096,sem_match,,2
+gpu,G200eW3,14336,sem_match,,2
+cpu,AMD Athlon X4 860K Quad Core,,sem_match,,2
+cpu,AMD Ryzen 7 5800H,,exato,Ryzen 7 5800H,2
+cpu,Intel Core i7-8665U,,exato,Core i7-8665U,2
+cpu,Intel Core i5-2400,,exato,Core i5-2400,2
+gpu,Intel UHD 770 ADL-S GT1,31744,sem_match,,2
+gpu,Intel RPL-S (1600MHz),,sem_match,,2
+cpu,Intel Core i7-14700,,exato,Core i7-14700,2
+cpu,Intel Core i7-8559U,,exato,Core i7-8559U,2
+gpu,Intel CoffeeLake-U GT3e [Iris Plus 655],,sem_match,,2
+cpu,Snapdragon X Elite X1E78100 Qualcomm Oryon,,sem_match,,2
+gpu,Snapdragon X Elite X1E78100 Qualcomm Adreno GPU,,sem_match,,2
+cpu,Intel N97,,exato,Processor N97,2
+gpu,AMD Radeon 880M,512,exato,Radeon 880M,2
+cpu,Intel Core i5-12450H,,exato,Core i5-12450H,2
+gpu,VirtualBox,,sem_match,,2
+gpu,Intel Arc MTL,16384,sem_match,,2
+cpu,Intel Core i3-N305,,exato,Core i3-N305,2
+gpu,Intel ADL-N,16384,sem_match,,2
+cpu,AMD Ryzen 3 5425U,,exato,Ryzen 3 5425U,2
+gpu,AMD Barcelo,2048,sem_match,,2
+gpu,AMD Strix [Radeon 880M / 890M],512,ambiguo,,2
+cpu,Intel Xeon E5-2630L v4,,exato_wikipedia,Xeon E5-2630L v4,2
+gpu,AMD Radeon 8060S,512,exato,Radeon 8060S,2
+gpu,NVIDIA GeForce RTX 5060 Laptop GPU + Intel UHD,8192,exato,GeForce RTX 5060 Mobile,2
+cpu,Intel Core i3-1215U,,exato,Core i3-1215U,2
+gpu,Intel Alder Lake-UP3 GT1 [UHD],,sem_match,,2
+gpu,NVIDIA GeForce GTX 660 Ti,2048,exato,GeForce GTX 660 Ti,2
+cpu,Intel Core i5-3570K,,exato,Core i5-3570K,2
+cpu,Intel Core 2 Quad Q9550,,exato,Core 2 Quad Q9550,2
+cpu,AMD Athlon II X4 640,,exato,Athlon II X4 640,2
+gpu,eVGA NVIDIA GeForce GTS 450,1024,exato,GeForce GTS 450,1
+gpu,NVIDIA GeForce GTX 580,1536,exato,GeForce GTX 580,1
+cpu,Intel Core i7-6850K,,exato,Core i7-6850K,1
+cpu,AMD Phenom II X4 840,,exato,Phenom II X4 840,1
+gpu,HIS AMD Radeon HD 6870,1024,sem_match,,1
+cpu,Intel Core i9-7900X,,exato,Core i9-7900X,1
+gpu,AMD JUNIPER,1024,sem_match,,1
+gpu,AMD Radeon,3840,sem_match,,1
+cpu,Intel Xeon E5-2470 0,,exato,Xeon E5-2470,1
+gpu,s G200eR2,,sem_match,,1
+gpu,NVIDIA GeForce GTS 450 Rev. 2,964,exato,GeForce GTS 450 Rev. 2,1
+cpu,AMD Athlon 200GE,,exato,Athlon 200GE,1
+gpu,AMD Radeon Vega / Radeon Vega Mobile,1024,ambiguo,,1
+gpu,AMD Radeon RX Vega 64,8192,exato,Radeon RX Vega 64,1
+gpu,AMD Radeon RX 460/560D / Pro 450/455/460/555/560,2048,ambiguo,,1
+cpu,AMD Opteron 6212,,exato,Opteron 6212,1
+gpu,NVIDIA NV137,4096,sem_match,,1
+cpu,Intel Core i3-2120,,exato,Core i3-2120,1
+cpu,Intel Core i7-4930K,,exato,Core i7-4930K,1
+gpu,Intel Haswell,2048,sem_match,,1
+gpu,Intel UHD 620 (1100MHz),,sem_match,,1
+cpu,Intel Xeon E5-2696 v3,,exato,Xeon E5-2696 v3,1
+gpu,eVGA NVIDIA NVE7,1024,sem_match,,1
+gpu,eVGA NVIDIA NV117,1024,sem_match,,1
+gpu,NVIDIA NVE4,2048,sem_match,,1
+gpu,Intel HD P630,3072,sem_match,,1
+gpu,NVIDIA Quadro P2000,5120,exato,Quadro P2000,1
+gpu,Intel UHD,2048,sem_match,,1
+cpu,AMD Eng Sample 100-000000262-30_Y,,sem_match,,1
+cpu,AMD Ryzen Threadripper PRO 3995WX 64-Cores,,exato,Ryzen Threadripper PRO 3995WX,1
+gpu,AMD Radeon Pro WX 3200,4096,exato,Radeon Pro WX 3200,1
+cpu,AMD FX-6300 Six-Core,,exato,FX-6300,1
+cpu,AMD Phenom 9750,,sem_match,,1
+gpu,AMD Radeon HD 3650/3750/4570/4580,512,ambiguo,,1
+cpu,Intel Xeon X5660,,exato,Xeon X5660,1
+gpu,NVIDIA GeForce GTX 950,2048,exato,GeForce GTX 950,1
+cpu,Intel Core i7-10700,,exato,Core i7-10700,1
+gpu,NVIDIA GeForce RTX 2060 with Max-Q Design,6144,exato,GeForce RTX 2060 Max-Q,1
+cpu,AMD Ryzen 9 4900HS,,exato,Ryzen 9 4900HS,1
+cpu,Intel Core i7 970,,exato,Core i7-970,1
+cpu,Intel Xeon E5520,,exato,Xeon E5520,1
+gpu,Tesla T4,15360,exato,Tesla T4,1
+gpu,Intel 4th Gen Core IGP,4096,sem_match,,1
+cpu,AMD Ryzen Embedded V2718,,exato,Ryzen Embedded V2718,1
+gpu,Intel Iris Pro 6200 (1150MHz),,exato,Iris Pro Graphics 6200,1
+cpu,Intel Core i7-10700K,,exato,Core i7-10700K,1
+cpu,Intel Xeon Gold 6230,,exato_wikipedia,Xeon Gold 6230,1
+cpu,Intel Core i5-4440,,exato,Core i5-4440,1
+gpu,AMD Radeon HD 7450,1024,sem_match,,1
+cpu,Intel Xeon Platinum 8352Y,,exato_wikipedia,Xeon Platinum 8352Y,1
+cpu,Intel Xeon E5-2650 v4,,exato,Xeon E5-2650 v4,1
+cpu,AMD GX-424CC SOC,,sem_match,,1
+gpu,AMD Radeon R4/R5,256,ambiguo,,1
+cpu,Intel Xeon E5-2620 v4,,exato_wikipedia,Xeon E5-2620 v4,1
+gpu,Intel Xeon E3-1200 v3/4th Gen Core IGP,,ambiguo,,1
+cpu,Intel Core i7-10700E,,sem_match,,1
+cpu,Intel Celeron N5100,,exato,Celeron N5100,1
+gpu,Intel JasperLake [UHD ] (800MHz),,sem_match,,1
+cpu,Intel Core i7-8650U,,exato,Core i7-8650U,1
+gpu,NVIDIA GeForce GTX 1060 + Intel UHD 620,6144,memoria,GeForce GTX 1060 6 GB,1
+gpu,NVIDIA GeForce RTX 3080,12288,exato,GeForce RTX 3080,1
+gpu,Millennium G550,,exato,Millennium G550,1
+cpu,Intel Core 2 Duo T9400,,exato,Core 2 Duo T9400,1
+gpu,Mobile Intel GM45,2048,sem_match,,1
+cpu,Intel Core i7-3667U,,exato,Core i7-3667U,1
+gpu,Intel ADL-S GT0.5,16384,sem_match,,1
+gpu,Intel ADL-S GT1,28672,sem_match,,1
+cpu,Intel Xeon Gold 5318N,,exato,Xeon Gold 5318N,1
+cpu,AMD PRO A10-8750B R7 12 Compute Cores 4C+8G,,sem_match,,1
+cpu,Intel Core i3-3217U,,exato,Core i3-3217U,1
+cpu,Intel Core i5-11300H,,exato,Core i5-11300H,1
+cpu,Intel Core i5-4590,,exato,Core i5-4590,1
+gpu,Intel VERDE,4096,sem_match,,1
+cpu,Intel Xeon E5-2695 v3,,exato,Xeon E5-2695 v3,1
+gpu,AMD Navi 23,,sem_match,,1
+cpu,Intel Xeon E7 4860,,exato,Xeon E7-4860,1
+cpu,Intel Core i5-9600K,,exato,Core i5-9600K,1
+gpu,AMD Radeon RX 6900 XT,4096,exato,Radeon RX 6900 XT,1
+gpu,AMD Radeon RX 590,8192,exato,Radeon RX 590,1
+cpu,Intel Core i5-4690K,,exato,Core i5-4690K,1
+cpu,Intel Core i5-7400,,exato,Core i5-7400,1
+gpu,AMD Radeon RX 570,8192,exato,Radeon RX 570,1
+cpu,Intel Xeon Gold 6212U,,exato_wikipedia,Xeon Gold 6212U,1
+cpu,AMD EPYC 9J14 96-Core,,sem_match,,1
+cpu,AMD EPYC 9354 32-Core,,exato,EPYC 9354,1
+cpu,AMD Eng Sample 100-000000897-03,,sem_match,,1
+cpu,AMD EPYC 7643 48-Core,,exato,EPYC 7643,1
+gpu,Intel DG2 [Arc A770] (2400MHz),,sem_match,,1
+cpu,Apple M2,,sem_match,,1
+gpu,Apple M2,,sem_match,,1
+cpu,Intel Core i3-4160T,,exato,Core i3-4160T,1
+gpu,Intel 4th Generation Core IGP (1150MHz),,sem_match,,1
+gpu,Intel CoffeeLake-S GT2 [UHD 630] (1100MHz),,sem_match,,1
+cpu,Apple M3 Max,,sem_match,,1
+gpu,Apple M3 Max,,sem_match,,1
+cpu,Intel Xeon E3-1245 v3,,exato,Xeon E3-1245 v3,1
+gpu,NVIDIA GeForce GT 630,2048,exato,GeForce GT 630,1
+gpu,NVIDIA GeForce GTX 1650 Mobile / Max-Q,4096,ambiguo,,1
+cpu,Intel Core i5-9400,,exato,Core i5-9400,1
+gpu,Intel UHD 630 CFL GT2,16384,sem_match,,1
+cpu,Intel Xeon E5-2699 v4,,exato_wikipedia,Xeon E5-2699 v4,1
+gpu,AMD Lucienne,3072,sem_match,,1
+gpu,Intel Raptor Lake-S GT1 [UHD 770] (1600MHz),,sem_match,,1
+cpu,Intel Xeon Gold 5416S,,exato,Xeon Gold 5416S,1
+cpu,Intel N95,,exato,Processor N95,1
+gpu,Intel Alder Lake-N [UHD ],,sem_match,,1
+cpu,Intel Xeon Platinum 8458P,,exato,Xeon Platinum 8458P,1
+gpu,NVIDIA L20,46080,exato,L20,1
+cpu,AMD Ryzen Threadripper PRO 5995WX 64-Cores,,exato,Ryzen Threadripper PRO 5995WX,1
+gpu,Intel Raptor Lake-P [Iris Xe ],,sem_match,,1
+gpu,(1200MHz),,sem_match,,1
+gpu,Intel Alder Lake-N [UHD ] (1200MHz),,sem_match,,1
+cpu,Intel Xeon Gold 6430,,exato,Xeon Gold 6430,1
+gpu,NVIDIA-drmdrmfb,,sem_match,,1
+gpu,NVIDIA Quadro T400 Mobile,2048,sem_match,,1
+gpu,Intel UHD P630 CML GT2,6144,sem_match,,1
+gpu,NVIDIA GeForce RTX 4080 SUPER + AMD Radeon,16384,exato,GeForce RTX 4080 SUPER,1
+gpu,i915drmfb,,sem_match,,1
+gpu,Intel DG2 [Arc A580],,sem_match,,1
+cpu,Hygon C86-4G,,sem_match,,1
+gpu,Intel RPL-S,15360,sem_match,,1
+cpu,Intel Xeon Silver 4114,,exato_wikipedia,Xeon Silver 4114,1
+gpu,Intel Raptor Lake-P [UHD] (1250MHz),,sem_match,,1
+cpu,Intel Core i7-10700F,,exato,Core i7-10700F,1
+gpu,AMD Cezanne [Radeon Vega / Radeon Mobile],512,ambiguo,,1
+cpu,Intel Core Ultra 9 275HX,,exato,Core Ultra 9 275HX,1
+gpu,NVIDIA GeForce RTX 5080 Laptop GPU,16384,exato,GeForce RTX 5080 Mobile,1
+gpu,AMD Radeon 8060S,98304,exato,Radeon 8060S,1
+cpu,Intel Xeon Silver 4410Y,,exato,Xeon Silver 4410Y,1
+cpu,Intel N250,,exato,Processor N250,1
+gpu,Intel Alder Lake-N [Intel ] (1250MHz),,sem_match,,1
+cpu,Intel Core i7-8700T,,exato,Core i7-8700T,1
+cpu,Intel Core Ultra 5 125H,,exato,Core Ultra 5 125H,1
+gpu,Intel Meteor Lake-P [Intel Arc ] (2200MHz),,sem_match,,1
+gpu,NVIDIA GeForce RTX 5090 D,32768,exato,GeForce RTX 5090 D,1
+cpu,AMD EPYC 9174F 16-Core,,exato,EPYC 9174F,1
+gpu,Intel UHD 620 KBL GT2,4096,sem_match,,1
+cpu,Intel Core i7-7700HQ,,exato,Core i7-7700HQ,1
+gpu,AMD Intel HD 630 + Radeon Pro 555,2048,exato,Radeon Pro 555,1
+gpu,Intel HD 4600 HSW GT2 (1150MHz),,sem_match,,1
+cpu,Intel Core i7-2600,,exato,Core i7-2600,1
+gpu,Intel HD 2000 SNB GT1,2048,sem_match,,1
+cpu,Intel Core i5-6400,,exato,Core i5-6400,1
+gpu,Intel HD 530 SKL GT2,4096,sem_match,,1
+cpu,Intel Core i5-3470S,,exato,Core i5-3470S,1
+gpu,Intel HD 2500 IVB GT1,2048,sem_match,,1
+cpu,Intel Xeon Gold 6240R,,exato_wikipedia,Xeon Gold 6240R,1
+cpu,Intel Core i5-3437U,,exato,Core i5-3437U,1
+cpu,AMD Ryzen 5 230,,exato,Ryzen 5 230,1
+cpu,Intel Core Ultra 5 125U,,exato,Core Ultra 5 125U,1
+gpu,Intel Meteor Lake-P [Intel] (1850MHz),,sem_match,,1
+gpu,AMD Radeon,2048,sem_match,,1
+cpu,Intel Core 2 Duo T9300,,exato,Core 2 Duo T9300,1
+gpu,NVIDIA NV86,128,sem_match,,1
+gpu,Intel 2nd Generation Core IGP,,sem_match,,1
+gpu,Intel Iris 5100 HSW GT3,2048,sem_match,,1
+gpu,Intel UHD 620 KBL GT2,7168,sem_match,,1
+cpu,Intel Xeon E5450,,exato,Xeon E5450,1
+cpu,AMD Phenom II X3 720,,exato,Phenom II X3 720,1
+cpu,Intel Xeon E5-2670 0,,exato,Xeon E5-2670,1
+cpu,AMD A10-7860K Radeon R7 12 Compute Cores 4C+8G,,sem_match,,1
+gpu,AMD Radeon R7,2048,exato,Radeon R7 Graphics,1
+cpu,Intel Core i5-4460,,exato,Core i5-4460,1
+gpu,Intel HD 530,2048,exato,HD Graphics 530,1
+gpu,TITAN X (Pascal),12288,sem_match,,1
+gpu,simple,,sem_match,,1
+cpu,Intel Xeon E5-2676 v3,,exato,Xeon E5-2676 v3,1
+gpu,NVIDIA GeForce GTX 460,768,exato,GeForce GTX 460,1
