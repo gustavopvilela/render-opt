@@ -1,8 +1,10 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <cmath>
 #include <format>
 #include <stdexcept>
+#include "flamenco.hpp"
 #include "simulated_annealing.hpp"
 
 namespace py = pybind11;
@@ -52,6 +54,25 @@ namespace {
         for (int j = 0; j < instancia.jobs; ++j) {
             if (!visto[j])
                 throw std::invalid_argument(std::format("Job {} não foi alocado", j));
+        }
+    }
+
+    void validarTarefas (const Flamenco::Tarefas& tarefas, const SimulatedAnnealing::Instancia& instancia) {
+        std::vector<char> visto(instancia.jobs, 0);
+        for (const auto& tarefa : tarefas) {
+            if (tarefa.empty())
+                throw std::invalid_argument("Toda tarefa precisa de pelo menos um job");
+            for (int job : tarefa) {
+                if (job < 0 || job >= instancia.jobs)
+                    throw std::invalid_argument(std::format("Job {} fora do intervalo [0, {})", job, instancia.jobs));
+                if (visto[job]++)
+                    throw std::invalid_argument(std::format("Job {} aparece mais de uma vez", job));
+            }
+        }
+
+        for (int j = 0; j < instancia.jobs; ++j) {
+            if (!visto[j])
+                throw std::invalid_argument(std::format("Job {} não está em nenhuma tarefa", j));
         }
     }
 
@@ -121,6 +142,38 @@ namespace {
         return py::make_tuple(res.melhorSolucao, res.melhorMakespan, historico);
     }
 
+    py::tuple flamencoPy (
+        const py::object& instancia,
+        std::optional<Flamenco::Tarefas> tarefas,
+        double esperaInicial,
+        double intervaloEntreTarefas
+    ) {
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
+        if (tarefas)
+            validarTarefas(*tarefas, inst);
+        else
+            tarefas = Flamenco::tarefasUnitarias(inst.jobs);
+        if (!(esperaInicial >= 0.0 && std::isfinite(esperaInicial)) || !(intervaloEntreTarefas >= 0.0 && std::isfinite(intervaloEntreTarefas)))
+            throw std::invalid_argument("espera_inicial e intervalo_entre_tarefas devem ser finitos e >= 0");
+
+        Flamenco::ResultadoFlamenco res;
+        {
+            py::gil_scoped_release semGIL;
+            res = Flamenco::simular(inst, *tarefas, {esperaInicial, intervaloEntreTarefas});
+        }
+
+        py::dict detalhes(
+            "maquina"_a = paraNumpy(std::move(res.maquina)),
+            "inicio"_a = paraNumpy(std::move(res.inicio)),
+            "inicio_processamento"_a = paraNumpy(std::move(res.inicioProcessamento)),
+            "fim"_a = paraNumpy(std::move(res.fim)),
+            "tempos_maquinas"_a = paraNumpy(std::move(res.temposMaquinas))
+        );
+
+        return py::make_tuple(res.plano, res.makespan, detalhes);
+    }
+
     py::array_t<double> calcularTemposMaquinasPy (const py::object& instancia, const SimulatedAnnealing::Solucao& solucao) {
         ArrayD processamento, setup, inicial;
         const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
@@ -166,7 +219,7 @@ namespace {
 }
 
 PYBIND11_MODULE(sa_core, m) {
-    m.doc() = "Simulated Annealing para o UPMSP com setup dependente da sequência em C++.";
+    m.doc() = "Simulated Annealing para o UPMSP com setup dependente da sequência e simulação da distribuição do Flamenco, em C++.";
 
     m.def(
         "simulated_annealing", &simulatedAnnealingPy,
@@ -183,6 +236,17 @@ PYBIND11_MODULE(sa_core, m) {
         py::arg("verbose") = true,
         "SA de Santos et al. (2016). Padrões da Tabela 1 do artigo. Sem tempo_limite_segundos nem max_iteracoes, "
         "para no tempo do artigo (tempo_limite_artigo). Devolve (melhor_solucao, melhor_makespan, historico)."
+    );
+
+    m.def(
+        "flamenco", &flamencoPy,
+        py::arg("instancia"),
+        py::kw_only(),
+        py::arg("tarefas") = py::none(),
+        py::arg("espera_inicial") = 0.0,
+        py::arg("intervalo_entre_tarefas") = 0.0,
+        "Simula a distribuição do Flamenco: a máquina que fica livre pega a primeira tarefa da fila que pode executar. "
+        "Sem 'tarefas', cada job é uma tarefa, na ordem dos índices. Devolve (plano, makespan, detalhes)."
     );
 
     m.def("tempo_limite_artigo", &SimulatedAnnealing::tempoLimiteArtigo,

@@ -11,6 +11,7 @@ find_package(pybind11 CONFIG REQUIRED)
 
 pybind11_add_module(sa_core
         cpp/simulated_annealing.cpp
+        cpp/flamenco.cpp
         cpp/bindings.cpp
 )
 
