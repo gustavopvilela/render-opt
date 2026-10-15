@@ -1,10 +1,12 @@
 #include "simulated_annealing.hpp"
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <format>
 #include <limits>
 #include <random>
 #include <numeric>
+#include <stdexcept>
 
 namespace SimulatedAnnealing {
     double calcularTempoMaquina(const std::vector<int> &sequencia, int maquina, const Instancia &instancia) {
@@ -175,10 +177,14 @@ namespace SimulatedAnnealing {
                 const double maiorOutras = (m == maisDemorada) ? segundo : maior;
                 for (int pos = 0; pos <= static_cast<int>(solucao[m].size()); ++pos) {
                     const double aumento = calcularDeltaInsercao(job, m, pos, solucao[m], instancia);
+                    if (!std::isfinite(aumento)) continue;
                     const double makespanVizinho = std::max(tempos[m] + aumento, maiorOutras);
                     custos.push_back({.maquina = m, .pos = pos, .makespan = makespanVizinho, .aumento = aumento});
                 }
             }
+
+            if (custos.empty())
+                throw std::invalid_argument(std::format("Job {} não tem nenhuma máquina com tempo finito", job));
 
             const auto [itMin, itMax] = std::minmax_element(custos.begin(), custos.end(), [](const Candidato& a, const Candidato& b) {
                 return a.makespan < b.makespan;
