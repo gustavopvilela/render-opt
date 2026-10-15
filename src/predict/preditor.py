@@ -50,6 +50,15 @@ class Preditor:
         :param conservador: True usa o limite pessimista (vazão q10 e custo q90, com folga conformal)
         :return: matriz (n_frames, n_maquinas) em segundos
         """
+        P, C = self.prever_matrizes(frames, maquinas, cena_sha256, conservador)
+        return P + C
+
+    def prever_matrizes (self, frames: pd.DataFrame, maquinas: pd.DataFrame,
+                         cena_sha256: Optional[str] = None, conservador: bool = False) -> tuple[np.ndarray, np.ndarray]:
+        """
+        Mesmos parâmetros de prever_matriz_p.
+        :return: (processamento, custo fixo), as duas (n_frames, n_maquinas) em segundos
+        """
         n, m = len(frames), len(maquinas)
         # Colunas presentes nos dois lados pertencem à máquina
         frames = frames.drop(columns=[c for c in maquinas.columns if c in frames.columns])
@@ -60,11 +69,13 @@ class Preditor:
         custo = sum(np.exp(self._prever("custo_fixo", pares.assign(etapa=e), conservador, nova_c))
                     for e in self.etapas)
         trabalho = pares["amostras"].to_numpy(float) * pares["pixels_totais"].to_numpy(float)
-        P = (custo + trabalho / np.exp(log_v)).reshape(n, m)
+        P = (trabalho / np.exp(log_v)).reshape(n, m)
+        C = np.asarray(custo, dtype=float).reshape(n, m)
 
         # Verificação de sanidade
-        ruins = ~np.isfinite(P) | (P <= 0) | (P > LIMITE_S)
+        total = P + C
+        ruins = ~np.isfinite(total) | (total <= 0) | (total > LIMITE_S)
         if ruins.any():
             i, j = map(int, np.argwhere(ruins)[0])
-            raise ValueError(f"Previsão inválida para o frame da linha {i} na máquina da coluna {j}: {P[i, j]}")
-        return P
+            raise ValueError(f"Previsão inválida para o frame da linha {i} na máquina da coluna {j}: {total[i, j]}")
+        return P, C
