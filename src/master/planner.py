@@ -8,13 +8,23 @@ import logging
 import math
 from dataclasses import dataclass
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Optional, Sequence
 import numpy as np
+import sa_core
 from comum.protocolo import DecisaoExcesso, Progresso
 from comum.util import versao_tupla
 from master.config import ConfigMestre
 
 log = logging.getLogger("renderopt.master")
+
+# Melhor configuração do irace (experiments/irace/irace.Rdata, id 1258)
+SA_FATOR_T0 = 0.0090746
+SA_FATOR_TF = 3.12e-06
+SA_ITER_POR_TEMP = 368
+SA_TAXA = 0.16902306
+SA_ALPHA_CONSTRUCAO = 0.3654664
+SA_ORCAMENTO_ITERACOES = 600_000
 
 @dataclass
 class Maquina:
@@ -60,7 +70,7 @@ def _versao_da_maquina (maquina: Maquina, versao_cena: str) -> str:
                          key=versao_tupla)
     return compativeis[0] if compativeis else versao_cena
 
-def _com_ia (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> np.ndarray:
+def _com_ia (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> tuple[np.ndarray, np.ndarray]:
     import pandas as pd
     from comum.util import sha256_arquivo
     from predict import features_cena
@@ -70,20 +80,29 @@ def _com_ia (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> 
     atributos = features_cena.extrair(blender, caminho, frames, _ia.pasta_cache)
     linhas = pd.DataFrame([linha_maquina(m.dispositivo, m.hardware, _versao_da_maquina(m, cena.versao), m.id)
                            for m in maquinas])
-    return _ia.preditor.prever_matriz_p(atributos, linhas, sha256_arquivo(caminho), _ia.conservadora)
+    return _ia.preditor.prever_matrizes(atributos, linhas, sha256_arquivo(caminho), _ia.conservadora)
 
-def estimar_matriz_p (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> np.ndarray:
+def estimar_matrizes (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> tuple[np.ndarray, np.ndarray]:
+    """
+    :return: (processamento, custo fixo), as duas (frames, máquinas) e infinitas nas máquinas inelegíveis
+    """
     elegivel = matriz_elegibilidade(cena, maquinas)
 
     if _ia is None or not frames or not maquinas:
         P = np.empty((len(frames), len(maquinas)))
         for k, maquina in enumerate(maquinas):
             P[:, k] = _provisoria(maquina, len(frames))
+        C = np.zeros_like(P)
     else:
-        P = _com_ia(cena, frames, maquinas)
+        P, C = _com_ia(cena, frames, maquinas)
 
     P[:, ~elegivel] = math.inf
-    return P
+    C[:, ~elegivel] = math.inf
+    return P, C
+
+def estimar_matriz_p (cena: Cena, frames: Sequence[int], maquinas: Sequence[Maquina]) -> np.ndarray:
+    P, C = estimar_matrizes(cena, frames, maquinas)
+    return P + C
 
 def matriz_elegibilidade (cena: Cena, maquinas: Sequence[Maquina]) -> np.ndarray:
     """
@@ -96,23 +115,46 @@ def matriz_elegibilidade (cena: Cena, maquinas: Sequence[Maquina]) -> np.ndarray
         for maquina in maquinas
     ], dtype=bool)
 
-def gerar_plano_renderizacao (P: np.ndarray, semente: Optional[int] = None) -> list[list[int]]:
+def _limite_inferior (T: np.ndarray) -> float:
+    menor_por_job = T.min(axis=1)
+    return max(menor_por_job.max(), menor_por_job.sum() / T.shape[1])
+
+def gerar_plano_renderizacao (P: np.ndarray, C: Optional[np.ndarray] = None, semente: Optional[int] = None) -> list[list[int]]:
+    """
+    Monta o plano com o Simulated Annealing.
+    :param P: processamento (frames, máquinas), infinito nas máquinas inelegíveis
+    :param C: custo fixo (frames, máquinas). Vira o setup entre jobs e, no primeiro job de cada
+    máquina, o setup inicial somado ao processamento
+    """
     n, m = P.shape
     if n == 0:
         return [[] for _ in range(m)]
-    if np.isinf(P).all(axis=1).any():
-        i = int(np.flatnonzero(np.isinf(P).all(axis=1))[0])
+    inelegivel = np.isinf(P)
+    if inelegivel.all(axis=1).any():
+        i = int(np.flatnonzero(inelegivel.all(axis=1))[0])
         raise ValueError(f"O frame da linha {i} não tem nenhuma máquina elegível")
 
-    # TODO: AQUI ENTRA A METAHEURÍSTICA, O CÓDIGO A SEGUIR É PROVISÓRIO
-    custo_minimo = np.where(np.isinf(P), np.nan, P)
-    ordem = np.argsort(-np.nanmin(custo_minimo, axis=1))
-    fim = np.zeros(m)
-    plano: list[list[int]] = [[] for _ in range(m)]
-    for i in ordem:
-        k = int(np.argmin(fim + P[i]))
-        plano[k].append(int(i))
-        fim[k] += P[i, k]
+    C = np.zeros((n, m)) if C is None else C
+    T = P + C
+    instancia = SimpleNamespace(
+        jobs=n,
+        maquinas=m,
+        matriz_processamento=P,
+        matriz_setup=np.broadcast_to(C.T[:, np.newaxis, :], (m, n, n)),
+        setup_inicial=C.T,
+    )
+
+    escala = _limite_inferior(T)
+    t0, tf = SA_FATOR_T0 * escala, SA_FATOR_TF * escala
+    plano, _, _ = sa_core.simulated_annealing(
+        instancia, t0, (tf / t0) ** (SA_ITER_POR_TEMP / SA_ORCAMENTO_ITERACOES), SA_ITER_POR_TEMP,
+        taxa=SA_TAXA,
+        temp_final=tf,
+        semente=semente,
+        intervalo_historico=SA_ORCAMENTO_ITERACOES,
+        alpha_construcao=SA_ALPHA_CONSTRUCAO,
+        verbose=False,
+    )
     return plano
 
 def projetar_total (decorrido: float, progresso: Progresso) -> Optional[float]:

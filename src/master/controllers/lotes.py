@@ -40,13 +40,16 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         if not maquinas:
             raise HTTPException(409, "Nenhum trabalhador disponível.")
 
-        P = np.vstack([planner.estimar_matriz_p(cena, sorted(set(c.frames)), maquinas) for cena, c in zip(cenas, novo.cenas)])
+        matrizes = [planner.estimar_matrizes(cena, sorted(set(c.frames)), maquinas) for cena, c in zip(cenas, novo.cenas)]
+        P = np.vstack([p for p, _ in matrizes])
+        C = np.vstack([c for _, c in matrizes])
 
         try:
-            plano = planner.gerar_plano_renderizacao(P)
+            plano = planner.gerar_plano_renderizacao(P, C)
         except ValueError as erro:
             raise HTTPException(422, str(erro)) from None
 
+        P = P + C
         if sorted(i for seq in plano for i in seq) != list(range(len(jobs))):
             raise HTTPException(500, "O plano não cobre cada frame exatamente uma vez")
 
