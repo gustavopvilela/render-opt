@@ -73,41 +73,29 @@ namespace {
         double taxaResfriamento,
         int iteracoesPorTemperatura,
         std::optional<double> tempoLimiteSegundos,
-        std::optional<long long> maxIteracoesSemMelhoria,
-        double taxa,
-        double temperaturaFinal,
+        std::optional<long long> maxIteracoes,
         std::optional<std::uint64_t> semente,
         std::optional<SimulatedAnnealing::Solucao> solucaoInicial,
-        long long intervaloHistorico,
-        double alphaConstrucao,
+        std::optional<std::vector<bool>> vizinhancas,
         bool verbose
     ) {
         ArrayD processamento, setup, inicial;
         const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
-
-        if (!(taxaResfriamento > 0.0 && taxaResfriamento < 1.0))
-            throw std::invalid_argument("taxa_resfriamento deve estar em (0, 1)");
-        if (!(temperaturaFinal > 0.0))
-            throw std::invalid_argument("temp_final deve ser > 0");
-        if (iteracoesPorTemperatura < 1)
-            throw std::invalid_argument("iteracoes_por_temp deve ser >= 1");
-        if (intervaloHistorico < 1)
-            throw std::invalid_argument("intervalo_historico_deve ser >= 1");
         if (solucaoInicial)
             validarSolucao(*solucaoInicial, inst);
-        validarAlpha(alphaConstrucao);
 
         SimulatedAnnealing::ParametrosSimulatedAnnealing par;
         par.temperaturaInicial = temperaturaInicial;
         par.taxaResfriamento = taxaResfriamento;
         par.iteracoesPorTemperatura = iteracoesPorTemperatura;
-        par.temperaturaFinal = temperaturaFinal;
-        par.probAplicarMovimentoInteligente = taxa;
         par.tempoLimiteSegundos = tempoLimiteSegundos;
-        par.maxIteracoesSemMelhoria = maxIteracoesSemMelhoria;
+        par.maxIteracoes = maxIteracoes;
         par.semente = semente;
-        par.intervaloHistorico = intervaloHistorico;
-        par.alphaConstrucao = alphaConstrucao;
+        if (vizinhancas) {
+            if (vizinhancas->size() != SimulatedAnnealing::NUM_VIZINHANCAS)
+                throw std::invalid_argument(std::format("vizinhancas deve ter {} valores", SimulatedAnnealing::NUM_VIZINHANCAS));
+            std::copy(vizinhancas->begin(), vizinhancas->end(), par.vizinhancas.begin());
+        }
 
         SimulatedAnnealing::ResultadoSimulatedAnnealing res;
         {
@@ -116,13 +104,18 @@ namespace {
         }
 
         if (verbose)
-            py::print(std::format("Simulated Annealing finalizado ({}) -- {} iterações em {:.4f}s", res.motivoParada, res.iteracoes, res.tempoSegundos));
+            py::print(std::format("Simulated Annealing finalizado ({}) -- {} iterações, {} reaquecimentos em {:.4f}s",
+                res.motivoParada, res.iteracoes, res.reaquecimentos, res.tempoSegundos));
 
         py::dict historico(
             "iteracao"_a = paraNumpy(std::move(res.historico.iteracao)),
             "temperatura"_a = paraNumpy(std::move(res.historico.temperatura)),
             "makespan_atual"_a = paraNumpy(std::move(res.historico.makespanAtual)),
-            "melhor_makespan"_a = paraNumpy(std::move(res.historico.melhorMakespan))
+            "melhor_makespan"_a = paraNumpy(std::move(res.historico.melhorMakespan)),
+            "iteracoes"_a = res.iteracoes,
+            "reaquecimentos"_a = res.reaquecimentos,
+            "tempo_segundos"_a = res.tempoSegundos,
+            "motivo_parada"_a = res.motivoParada
         );
 
         return py::make_tuple(res.melhorSolucao, res.melhorMakespan, historico);
@@ -142,6 +135,13 @@ namespace {
         SimulatedAnnealing::Rng rng(semente ? *semente : std::random_device{}());
         py::gil_scoped_release semGIL;
         return SimulatedAnnealing::gerarSolucaoInicial(inst, alpha, rng);
+    }
+
+    SimulatedAnnealing::Solucao gerarSolucaoAleatoriaPy (const py::object& instancia, std::int64_t semente) {
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
+        SimulatedAnnealing::JavaRandom rng(semente);
+        return SimulatedAnnealing::gerarSolucaoAleatoria(inst, rng);
     }
 
     double calcularDeltaInsercaoPy (int job, int maquina, int pos, const std::vector<int>& sequencia, const py::object& instancia) {
@@ -171,20 +171,30 @@ PYBIND11_MODULE(sa_core, m) {
     m.def(
         "simulated_annealing", &simulatedAnnealingPy,
         py::arg("instancia"),
-        py::arg("temp_inicial") = 1000.0,
-        py::arg("taxa_resfriamento") = 0.99,
-        py::arg("iteracoes_por_temp") = 100,
+        py::arg("temp_inicial") = 1.0,
+        py::arg("taxa_resfriamento") = 0.96,
+        py::arg("iteracoes_por_temp") = 1'176'628,
         py::arg("tempo_limite_segundos") = py::none(),
-        py::arg("max_iteracoes_sem_melhora") = py::none(),
+        py::arg("max_iteracoes") = py::none(),
         py::kw_only(),
-        py::arg("taxa") = 0.7,
-        py::arg("temp_final") = 1.0,
         py::arg("semente") = py::none(),
         py::arg("solucao_inicial") = py::none(),
-        py::arg("intervalo_historico") = 1,
-        py::arg("alpha_construcao") = 0.3,
+        py::arg("vizinhancas") = py::none(),
         py::arg("verbose") = true,
-        "Executa o SA e devolve (melhor_solucao, melhor_makespan, historico)."
+        "SA de Santos et al. (2016). Padrões da Tabela 1 do artigo. Sem tempo_limite_segundos nem max_iteracoes, "
+        "para no tempo do artigo (tempo_limite_artigo). Devolve (melhor_solucao, melhor_makespan, historico)."
+    );
+
+    m.def("tempo_limite_artigo", &SimulatedAnnealing::tempoLimiteArtigo,
+        py::arg("jobs"),
+        py::arg("maquinas"),
+        "Tempo limite do artigo em segundos: n * (m / 2) * 50 ms / 2,5."
+    );
+
+    m.def("gerar_solucao_aleatoria", &gerarSolucaoAleatoriaPy,
+        py::arg("instancia"),
+        py::arg("semente"),
+        "Construção aleatória do artigo (seção 4.1), com o mesmo sorteio do java.util.Random."
     );
 
     m.def(
