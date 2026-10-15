@@ -11,7 +11,7 @@ namespace SimulatedAnnealing {
         double tempo = 0.0;
         int anterior = -1;
         for (int job : sequencia) {
-            if (anterior >= 0) tempo += instancia.tempoSetup(maquina, anterior, job);
+            tempo += anterior >= 0 ? instancia.tempoSetup(maquina, anterior, job) : instancia.tempoSetupInicial(maquina, job);
             tempo += instancia.tempoProcessamento(job, maquina);
             anterior = job;
         }
@@ -130,12 +130,11 @@ namespace SimulatedAnnealing {
         const int anterior = pos > 0 ? sequencia[pos - 1] : -1;
         const int proximo = pos < static_cast<int>(sequencia.size()) ? sequencia[pos] : -1;
         double delta = instancia.tempoProcessamento(job, maquina);
-        if (anterior >= 0)
-            delta += instancia.tempoSetup(maquina, anterior, job);
-        if (proximo >= 0)
+        delta += anterior >= 0 ? instancia.tempoSetup(maquina, anterior, job) : instancia.tempoSetupInicial(maquina, job);
+        if (proximo >= 0) {
             delta += instancia.tempoSetup(maquina, job, proximo);
-        if (anterior >= 0 && proximo >= 0)
-            delta -= instancia.tempoSetup(maquina, anterior, proximo);
+            delta -= anterior >= 0 ? instancia.tempoSetup(maquina, anterior, proximo) : instancia.tempoSetupInicial(maquina, proximo);
+        }
         return delta;
     }
 

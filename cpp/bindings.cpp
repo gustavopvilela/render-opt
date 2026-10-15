@@ -11,7 +11,7 @@ using namespace pybind11::literals;
 namespace {
     using ArrayD = py::array_t<double, py::array::c_style | py::array::forcecast>;
 
-    SimulatedAnnealing::Instancia lerInstancia (const py::object& obj, ArrayD& proc, ArrayD& setup) {
+    SimulatedAnnealing::Instancia lerInstancia (const py::object& obj, ArrayD& proc, ArrayD& setup, ArrayD& inicial) {
         const int jobs = obj.attr("jobs").cast<int>();
         const int maquinas = obj.attr("maquinas").cast<int>();
         proc = obj.attr("matriz_processamento").cast<ArrayD>();
@@ -24,7 +24,14 @@ namespace {
         if (setup.ndim() != 3 || setup.shape(0) != maquinas || setup.shape(1) != jobs || setup.shape(2) != jobs)
             throw std::invalid_argument(std::format("matriz_setup seve ter shape (maquinas, jobs, jobs) = ({}, {}, {})", maquinas, jobs, jobs));
 
-        return {jobs, maquinas, proc.data(), setup.data()};
+        const py::object objInicial = py::getattr(obj, "setup_inicial", py::none());
+        if (objInicial.is_none())
+            return {jobs, maquinas, proc.data(), setup.data()};
+
+        inicial = objInicial.cast<ArrayD>();
+        if (inicial.ndim() != 2 || inicial.shape(0) != maquinas || inicial.shape(1) != jobs)
+            throw std::invalid_argument(std::format("setup_inicial deve ter shape (maquinas, jobs) = ({}, {})", maquinas, jobs));
+        return {jobs, maquinas, proc.data(), setup.data(), inicial.data()};
     }
 
     void validarSolucao (const SimulatedAnnealing::Solucao& solucao, const SimulatedAnnealing::Instancia& instancia) {
@@ -75,8 +82,8 @@ namespace {
         double alphaConstrucao,
         bool verbose
     ) {
-        ArrayD processamento, setup;
-        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
 
         if (!(taxaResfriamento > 0.0 && taxaResfriamento < 1.0))
             throw std::invalid_argument("taxa_resfriamento deve estar em (0, 1)");
@@ -122,15 +129,15 @@ namespace {
     }
 
     py::array_t<double> calcularTemposMaquinasPy (const py::object& instancia, const SimulatedAnnealing::Solucao& solucao) {
-        ArrayD processamento, setup;
-        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
         validarSolucao(solucao, inst);
         return paraNumpy(SimulatedAnnealing::calcularTemposMaquinas(solucao, inst));
     }
 
     SimulatedAnnealing::Solucao gerarSolucaoInicialPy (const py::object& instancia, double alpha, std::optional<std::uint64_t> semente) {
-        ArrayD processamento, setup;
-        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
         validarAlpha(alpha);
         SimulatedAnnealing::Rng rng(semente ? *semente : std::random_device{}());
         py::gil_scoped_release semGIL;
@@ -138,8 +145,8 @@ namespace {
     }
 
     double calcularDeltaInsercaoPy (int job, int maquina, int pos, const std::vector<int>& sequencia, const py::object& instancia) {
-        ArrayD processamento, setup;
-        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup);
+        ArrayD processamento, setup, inicial;
+        const SimulatedAnnealing::Instancia inst = lerInstancia(instancia, processamento, setup, inicial);
         auto fora = [](int x, int fim) { return x < 0 || x >= fim; };
 
         if (fora(job, inst.jobs))

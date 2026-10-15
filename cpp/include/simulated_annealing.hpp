@@ -15,6 +15,7 @@ namespace SimulatedAnnealing {
         int maquinas;
         const double* processamento;
         const double* setup;
+        const double* setupInicial = nullptr;
 
         double tempoProcessamento(int job, int maquina) const {
             return processamento[static_cast<std::size_t>(job) * maquinas + maquina];
@@ -22,6 +23,10 @@ namespace SimulatedAnnealing {
 
         double tempoSetup(int maquina, int anterior, int proximo) const {
             return setup[(static_cast<std::size_t>(maquina) * jobs + anterior) * jobs + proximo];
+        }
+
+        double tempoSetupInicial(int maquina, int job) const {
+            return setupInicial ? setupInicial[static_cast<std::size_t>(maquina) * jobs + job] : 0.0;
         }
     };
 
