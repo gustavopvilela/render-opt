@@ -18,14 +18,6 @@ from master.config import ConfigMestre
 
 log = logging.getLogger("renderopt.master")
 
-# Melhor configuração do irace (experiments/irace/irace.Rdata, id 1258)
-SA_FATOR_T0 = 0.0090746
-SA_FATOR_TF = 3.12e-06
-SA_ITER_POR_TEMP = 368
-SA_TAXA = 0.16902306
-SA_ALPHA_CONSTRUCAO = 0.3654664
-SA_ORCAMENTO_ITERACOES = 600_000
-
 @dataclass
 class Maquina:
     id: str
@@ -115,13 +107,10 @@ def matriz_elegibilidade (cena: Cena, maquinas: Sequence[Maquina]) -> np.ndarray
         for maquina in maquinas
     ], dtype=bool)
 
-def _limite_inferior (T: np.ndarray) -> float:
-    menor_por_job = T.min(axis=1)
-    return max(menor_por_job.max(), menor_por_job.sum() / T.shape[1])
-
 def gerar_plano_renderizacao (P: np.ndarray, C: Optional[np.ndarray] = None, semente: Optional[int] = None) -> list[list[int]]:
     """
-    Monta o plano com o Simulated Annealing.
+    Monta o plano com o Simulated Annealing de Santos et al. (2016), com os parâmetros da Tabela 1
+    do artigo e o tempo limite do artigo (sa_core.tempo_limite_artigo: frames * máquinas * 10 ms).
     :param P: processamento (frames, máquinas), infinito nas máquinas inelegíveis
     :param C: custo fixo (frames, máquinas). Vira o setup entre jobs e, no primeiro job de cada
     máquina, o setup inicial somado ao processamento
@@ -135,7 +124,6 @@ def gerar_plano_renderizacao (P: np.ndarray, C: Optional[np.ndarray] = None, sem
         raise ValueError(f"O frame da linha {i} não tem nenhuma máquina elegível")
 
     C = np.zeros((n, m)) if C is None else C
-    T = P + C
     instancia = SimpleNamespace(
         jobs=n,
         maquinas=m,
@@ -144,17 +132,7 @@ def gerar_plano_renderizacao (P: np.ndarray, C: Optional[np.ndarray] = None, sem
         setup_inicial=C.T,
     )
 
-    escala = _limite_inferior(T)
-    t0, tf = SA_FATOR_T0 * escala, SA_FATOR_TF * escala
-    plano, _, _ = sa_core.simulated_annealing(
-        instancia, t0, (tf / t0) ** (SA_ITER_POR_TEMP / SA_ORCAMENTO_ITERACOES), SA_ITER_POR_TEMP,
-        taxa=SA_TAXA,
-        temp_final=tf,
-        semente=semente,
-        intervalo_historico=SA_ORCAMENTO_ITERACOES,
-        alpha_construcao=SA_ALPHA_CONSTRUCAO,
-        verbose=False,
-    )
+    plano, _, _ = sa_core.simulated_annealing(instancia, semente=semente, verbose=False)
     return plano
 
 def projetar_total (decorrido: float, progresso: Progresso) -> Optional[float]:
