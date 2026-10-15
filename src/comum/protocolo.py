@@ -106,3 +106,4 @@ class CenaDoLote (BaseModel):
 class NovoLote (BaseModel):
     lote_id: Id
     cenas: list[CenaDoLote] = Field(min_length=1)
+    distribuicao: Literal["sa", "flamenco"] = "sa"

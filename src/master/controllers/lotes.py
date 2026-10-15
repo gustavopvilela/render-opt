@@ -1,10 +1,12 @@
 from __future__ import annotations
 import time
+from typing import Optional
 import numpy as np
 from fastapi import APIRouter, HTTPException
 from comum.protocolo import NovoLote
 from comum.util import sha256_arquivo
 import master.database as database
+import master.flamenco as flamenco_sim
 import master.planner as planner
 from master.config import ConfigMestre
 from master.enums import TipoEvento
@@ -44,8 +46,14 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         P = np.vstack([p for p, _ in matrizes])
         C = np.vstack([c for _, c in matrizes])
 
+        flamenco = novo.distribuicao == "flamenco"
         try:
-            plano = planner.gerar_plano_renderizacao(P, C)
+            if flamenco:
+                # Só para a estimativa: a distribuição acontece em services.jobs.entregar
+                simulacao = flamenco_sim.simular_farm(P, C)
+                plano, makespan = simulacao.plano, simulacao.makespan
+            else:
+                plano = planner.gerar_plano_renderizacao(P, C)
         except ValueError as erro:
             raise HTTPException(422, str(erro)) from None
 
@@ -53,27 +61,36 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         if sorted(i for seq in plano for i in seq) != list(range(len(jobs))):
             raise HTTPException(500, "O plano não cobre cada frame exatamente uma vez")
 
+        def inserir_job (conexao, i: int, maquina: Optional[str], posicao: Optional[int]) -> None:
+            c, frame = jobs[i]
+            job_id = f"{novo.lote_id}-{c.cena_id}-f{frame:06d}"
+            jobs_sql.inserir(conexao, job_id, novo.lote_id, c.cena_id, c.cena_sha256, c.versao_cena, frame, maquina, posicao)
+            estimativas_sql.inserir(
+                conexao,
+                [(job_id, maquinas[k].id, float(P[i, k])) for k in range(len(maquinas)) if np.isfinite(P[i, k])]
+            )
+
         agora = time.time()
         with db.transacao() as conexao:
-            lotes_sql.inserir(conexao, novo.lote_id, agora)
+            lotes_sql.inserir(conexao, novo.lote_id, agora, novo.distribuicao)
 
-            for k, sequencia in enumerate(plano):
-                for posicao, i in enumerate(sequencia, start=1):
-                    c, frame = jobs[i]
-                    job_id = f"{novo.lote_id}-{c.cena_id}-f{frame:06d}"
-                    jobs_sql.inserir(conexao, job_id, novo.lote_id, c.cena_id, c.cena_sha256, c.versao_cena, frame, maquinas[k].id, posicao)
-                    estimativas_sql.inserir(
-                        conexao,
-                        [(job_id, maquinas[c].id, float(P[i, c])) for c in range(len(maquinas)) if np.isfinite(P[i, c])]
-                    )
+            if flamenco:
+                for i in range(len(jobs)):
+                    inserir_job(conexao, i, None, None)
+            else:
+                for k, sequencia in enumerate(plano):
+                    for posicao, i in enumerate(sequencia, start=1):
+                        inserir_job(conexao, i, maquinas[k].id, posicao)
 
             eventos_sql.registrar_evento(conexao, agora, TipoEvento.LOTE_CRIADO, dados=novo.model_dump_json())
 
-        tempos = [float(sum(P[i, k] for i in seq)) for k, seq in enumerate(plano)]
+        if not flamenco:
+            makespan = max(float(sum(P[i, k] for i in seq)) for k, seq in enumerate(plano))
         return {
             "lote_id": novo.lote_id,
             "jobs": len(jobs),
-            "makespan_estimado_s": max(tempos),
+            "distribuicao": novo.distribuicao,
+            "makespan_estimado_s": makespan,
             "filas": {maquinas[k].id: len(seq) for k, seq in enumerate(plano)},
         }
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 import sqlite3
 from typing import Optional
-from master.enums import EstadoJob
+from master.enums import EstadoJob, EstadoTrabalhador
 
 def buscar (conexao: sqlite3.Connection, job_id: str) -> Optional[sqlite3.Row]:
     return conexao.execute(
@@ -31,8 +31,25 @@ def primeiro_da_fila (conexao: sqlite3.Connection, maquina: str) -> Optional[sql
 def orfao_elegivel (conexao: sqlite3.Connection, maquina: str) -> Optional[sqlite3.Row]:
     return conexao.execute(
         "SELECT j.* FROM jobs j JOIN estimativas e ON e.job_id = j.id AND e.maquina = ? "
-        "WHERE j.estado = ? AND j.maquina IS NULL ORDER BY j.id LIMIT 1",
+        "JOIN lotes l ON l.id = j.lote_id "
+        "WHERE j.estado = ? AND j.maquina IS NULL AND l.distribuicao != 'flamenco' ORDER BY j.id LIMIT 1",
         (maquina, EstadoJob.PENDENTE)
+    ).fetchone()
+
+def proximo_do_conjunto (conexao: sqlite3.Connection, maquina: str) -> Optional[sqlite3.Row]:
+    """
+    Primeiro job do lote flamenco, na ordem de submissão, que a máquina pode executar. Pula o que ela
+    acabou de falhar, se outra máquina disponível puder executá-lo.
+    """
+    return conexao.execute(
+        "SELECT j.* FROM jobs j JOIN estimativas e ON e.job_id = j.id AND e.maquina = :maquina "
+        "JOIN lotes l ON l.id = j.lote_id "
+        "WHERE j.estado = :pendente AND j.maquina IS NULL AND l.distribuicao = 'flamenco' "
+        "AND (j.evitar IS NULL OR j.evitar != :maquina OR NOT EXISTS ("
+        "    SELECT 1 FROM estimativas o JOIN trabalhadores t ON t.id = o.maquina "
+        "    WHERE o.job_id = j.id AND o.maquina != :maquina AND t.estado = :disponivel)) "
+        "ORDER BY l.criado_em, j.rowid LIMIT 1",
+        {"maquina": maquina, "pendente": EstadoJob.PENDENTE, "disponivel": EstadoTrabalhador.DISPONIVEL}
     ).fetchone()
 
 def executando_na_maquina (conexao: sqlite3.Connection, maquina: str) -> list[str]:
@@ -63,8 +80,8 @@ def inserir (
     cena_sha256: str,
     versao_cena: str,
     frame: int,
-    maquina: str,
-    posicao: int
+    maquina: Optional[str],
+    posicao: Optional[int]
 ) -> None:
     conexao.execute(
         "INSERT INTO jobs (id, lote_id, cena_id, cena_sha256, versao_cena, frame, estado, maquina, posicao) "

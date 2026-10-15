@@ -2,6 +2,7 @@
 Submete um lote ao mestre. Roda na máquina do mestre.
 
 python src/master/submit.py D:/cenas --lote L001 --config config/mestre.yaml
+python src/master/submit.py D:/cenas --lote L002 --config config/mestre.yaml --distribuicao flamenco
 """
 
 from __future__ import annotations
@@ -95,6 +96,8 @@ def main (argv: Optional[list[str]] = None) -> int:
     parser.add_argument("pasta", type=Path, help="Pasta com os .blend do lote")
     parser.add_argument("--lote", required=True, help="Identificador do lote, ex.: L001")
     parser.add_argument("--config", type=Path, required=True, help="Config do lote, ex.: config/mestre.yaml")
+    parser.add_argument("--distribuicao", choices=["sa", "flamenco"], default="sa",
+                        help="Plano do Simulated Annealing ou ordem de chegada do Flamenco")
     args = parser.parse_args(argv)
 
     cfg = carregar_config(args.config)
@@ -119,7 +122,7 @@ def main (argv: Optional[list[str]] = None) -> int:
             "frames": frames,
         })
 
-    corpo = {"lote_id": lote_id, "cenas": cenas}
+    corpo = {"lote_id": lote_id, "cenas": cenas, "distribuicao": args.distribuicao}
     cabecalho = {"X-Token": cfg.token} if cfg.token else {}
     host = "127.0.0.1" if cfg.host in ("0.0.0.0", "::") else cfg.host
     resposta = httpx2.post(

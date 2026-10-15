@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS lotes (
     id TEXT PRIMARY KEY,
     criado_em REAL NOT NULL,
     inicio REAL, -- primeiro job entregue
-    fim REAL -- ultimo job concluído
+    fim REAL, -- ultimo job concluído
+    distribuicao TEXT NOT NULL DEFAULT 'sa' -- sa | flamenco
 );
     
 CREATE TABLE IF NOT EXISTS jobs (
@@ -72,6 +73,9 @@ class DB:
         self.conexao.execute("PRAGMA journal_mode=WAL")
         self.conexao.execute("PRAGMA foreign_keys=ON")
         self.conexao.executescript(ESQUEMA)
+        colunas = {linha["name"] for linha in self.conexao.execute("PRAGMA table_info(lotes)")}
+        if "distribuicao" not in colunas:
+            self.conexao.execute("ALTER TABLE lotes ADD COLUMN distribuicao TEXT NOT NULL DEFAULT 'sa'")
         self._trava = threading.Lock()
         self.ultimo_evento = self._maior_evento()
 

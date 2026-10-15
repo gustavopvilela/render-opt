@@ -23,7 +23,11 @@ def cargas (conexao: sqlite3.Connection) -> dict[str, float]:
 def recolocar (conexao: sqlite3.Connection, job_id: str, excluir: Optional[str]) -> None:
     """
     Coloca o job no fim da melhor fila, sem máquina elegível, ele fica órfão.
+    Num lote flamenco, ele volta para o conjunto sem dono.
     """
+    if lotes_sql.distribuicao(conexao, jobs_sql.buscar(conexao, job_id)["lote_id"]) == "flamenco":
+        jobs_sql.tornar_orfao(conexao, job_id)
+        return
     destino = planner.escolher_destino(estimativas_sql.estimativas_do_job(conexao, job_id), cargas(conexao), excluir)
     if destino is None:
         jobs_sql.tornar_orfao(conexao, job_id)
@@ -82,11 +86,15 @@ def entregar (config: ConfigMestre, db: database.DB, trabalhador_id: str) -> Opt
         # 1. A própria fila
         job = jobs_sql.primeiro_da_fila(conexao, trabalhador_id)
 
-        # 2. Jobs órfãos para os quais ele é elegível
+        # 2. Lote flamenco
+        if job is None:
+            job = jobs_sql.proximo_do_conjunto(conexao, trabalhador_id)
+
+        # 3. Jobs órfãos para os quais ele é elegível
         if job is None:
             job = jobs_sql.orfao_elegivel(conexao, trabalhador_id)
 
-        # 3. Roubar do fim da fila de outra máquina
+        # 4. Roubar do fim da fila de outra máquina
         if job is None:
             filas = {m: [j["id"] for j in jobs_sql.fila(conexao, m)] for m in trabalhadores_sql.maquinas_disponiveis(conexao)}
             estimativas = {}
@@ -107,12 +115,15 @@ def entregar (config: ConfigMestre, db: database.DB, trabalhador_id: str) -> Opt
             return None
 
         previsto = estimativas_sql.estimativas_do_job(conexao, job["id"])[trabalhador_id]
-        if job["adiamentos"] >= config.max_adiamentos:
-            checkpoint = None
+        if lotes_sql.distribuicao(conexao, job["lote_id"]) == "flamenco":
+            # O Flamenco não aborta por excesso nem tem teto
+            checkpoint, teto = None, None
         else:
-            checkpoint = max(config.fator_excesso * previsto, previsto + config.folga_minima_s)
-
-        teto = max(config.fator_teto * previsto, (checkpoint or previsto) + config.folga_minima_s)
+            if job["adiamentos"] >= config.max_adiamentos:
+                checkpoint = None
+            else:
+                checkpoint = max(config.fator_excesso * previsto, previsto + config.folga_minima_s)
+            teto = max(config.fator_teto * previsto, (checkpoint or previsto) + config.folga_minima_s)
         token = uuid.uuid4().hex
         jobs_sql.marcar_executando(conexao, job["id"], trabalhador_id, token, agora)
         lotes_sql.marcar_inicio(conexao, job["lote_id"], agora)
