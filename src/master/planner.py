@@ -123,17 +123,20 @@ def gerar_plano_renderizacao (P: np.ndarray, C: Optional[np.ndarray] = None, sem
         i = int(np.flatnonzero(inelegivel.all(axis=1))[0])
         raise ValueError(f"O frame da linha {i} não tem nenhuma máquina elegível")
 
+    plano, _, _ = sa_core.simulated_annealing(montar_instancia(P, C), semente=semente, verbose=False)
+    return plano
+
+def montar_instancia (P: np.ndarray, C: Optional[np.ndarray] = None) -> SimpleNamespace:
+    """S[k, i, j] = setup_inicial[k, j] = C[j, k]: todo frame paga o custo fixo."""
+    n, m = P.shape
     C = np.zeros((n, m)) if C is None else C
-    instancia = SimpleNamespace(
+    return SimpleNamespace(
         jobs=n,
         maquinas=m,
         matriz_processamento=P,
         matriz_setup=np.broadcast_to(C.T[:, np.newaxis, :], (m, n, n)),
         setup_inicial=C.T,
     )
-
-    plano, _, _ = sa_core.simulated_annealing(instancia, semente=semente, verbose=False)
-    return plano
 
 def projetar_total (decorrido: float, progresso: Progresso) -> Optional[float]:
     """
