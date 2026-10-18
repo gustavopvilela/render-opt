@@ -1,35 +1,5 @@
-"""
-O experimento que decide se a IA vale a pena, rodado sem render farm.
-
-    python -m predict.tres_matrizes --instancias 20 --maquinas 6 --frames 200
-    python -m predict.tres_matrizes --cena-nova      # cada cena prevista sem tê-la visto
-
-Cada instância sorteia máquinas do TESTE BLINDADO (nunca vistas pelos modelos) e
-frames das 3 cenas do Open Data com quantidades de amostras variadas. Monta três matrizes:
-
-  P_real   o "oráculo": medianas medidas no Open Data (c + S*W*H / v)
-  P_prev   a previsão dos modelos
-  P_cons   a previsão conservadora (vazão q10, custo q90)
-
-e compara o makespan, sempre AVALIADO em P_real, de:
-
-  (a) ordem de chegada                - sem modelo: a "Primitive Render Farm" do manual
-                                        do Blender (e a política do Flamenco)
-  (a') round-robin e blocos contíguos - sem modelo, divisões fixas da lista de frames
-  (b) guloso sobre P_prev             - com o modelo
-  (b') guloso sobre P_cons
-  (c) guloso sobre P_real             - previsão perfeita
-  LB  relaxação linear de R||Cmax     - ninguém faz melhor que isso
-
-(a)->(b) é quanto a previsão vale; (b)->(c) é quanto ainda falta nela.
-O custo fixo da simulação é só o 'preparar_finalizar', o único que o Open Data mede;
-o 'carregar' fica de fora das três matrizes igualmente.
-"""
-
 from __future__ import annotations
 import argparse
-import json
-from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.optimize import linprog
@@ -37,8 +7,9 @@ from scipy.stats import wilcoxon
 from scipy.sparse import coo_matrix, hstack
 from master.planner import gerar_plano_renderizacao
 from predict import dados, esquema, incerteza, modelos, validacao
+from predict.ajustar import ler_params
+from predict.comparar import metodo_escolhido
 
-# Pixels das cenas do Open Data
 PIXELS = {"classroom": 1920 * 1080, "junkshop": 2000 * 1000, "monster": 1024 * 1024}
 
 
@@ -51,15 +22,10 @@ def round_robin (n: int, m: int) -> list[list[int]]:
 
 
 def contiguo (n: int, m: int) -> list[list[int]]:
-    """Blocos de frames consecutivos do mesmo tamanho, como dividir a timeline entre as máquinas."""
     return [list(bloco) for bloco in np.array_split(np.arange(n), m)]
 
 
 def ordem_de_chegada (P: np.ndarray) -> list[list[int]]:
-    """
-    A máquina que fica livre pega o próximo frame, na ordem da lista, sem olhar custo.
-    P só diz quando cada máquina fica livre; empate (todas livres no início) vai para a de menor índice.
-    """
     n, m = P.shape
     fim = np.zeros(m)
     plano: list[list[int]] = [[] for _ in range(m)]
@@ -71,7 +37,6 @@ def ordem_de_chegada (P: np.ndarray) -> list[list[int]]:
 
 
 def limite_inferior (P: np.ndarray) -> float:
-    """Relaxação linear: min C, sum_j x_ij = 1, sum_i p_ij x_ij <= C, x >= 0."""
     n, m = P.shape
     linhas_i = np.repeat(np.arange(n), m)
     cols = np.arange(n * m)
@@ -86,32 +51,23 @@ def limite_inferior (P: np.ndarray) -> float:
     return float(r.fun)
 
 
-def prever (alvo: str, treino: pd.DataFrame, teste: pd.DataFrame, params: dict | None,
-            cena_nova: bool) -> tuple[np.ndarray, np.ndarray]:
-    """Previsão pontual e conservadora (com folga conformal) para as linhas de teste, em escala original."""
-    cols = esquema.colunas(alvo)
-    y = treino[esquema.COLUNA_ALVO[alvo]].to_numpy(float)
-    w = treino["peso"].to_numpy(float)
-    gm = validacao.grupos_de(treino, "maquina")
-    X_tr, cats = esquema.montar_X(treino, cols)
-    X_te, _ = esquema.montar_X(teste, cols, cats)
-    ponto = modelos.criar("lgbm", alvo, params).ajustar(X_tr, y, gm, w)
+def prever (alvo: str, metodo: str, treino: pd.DataFrame, teste: pd.DataFrame, cena_nova: bool) -> tuple[np.ndarray, np.ndarray]:
+    params = ler_params(metodo, alvo)
+    c = dados.conjunto(treino, alvo)
+    X_te, _ = esquema.montar_X(teste, c.cols, c.categorias)
+    ponto = modelos.criar(metodo, alvo, params).ajustar(c.X, c.y, c.grupos("maquina"), c.w).prever(X_te)
     if cena_nova:
-        folga = incerteza.folga_cena_nova(X_tr, y, gm, validacao.grupos_de(treino, "cena"), alvo, params, w)
-        q = incerteza.ajustar_quantil(X_tr, y, gm, alvo, params, pesos=w)
+        folga = incerteza.folga_cena(incerteza.residuos_cena_nova(c, alvo, metodo, params))
     else:
-        sub_tr, sub_cal = validacao.separar_teste(gm, 0.2, semente=1)
-        q = incerteza.ajustar_quantil(X_tr.iloc[sub_tr], y[sub_tr], gm[sub_tr], alvo, params, pesos=w[sub_tr])
-        folga = incerteza.calibrar(q.prever(X_tr.iloc[sub_cal]), y[sub_cal], alvo)
-    return np.exp(ponto.prever(X_te)), np.exp(incerteza.aplicar(q.prever(X_te), folga, alvo))
+        folga = incerteza.folga_maquina(c, alvo, metodo, params)
+    return np.exp(ponto), np.exp(incerteza.aplicar(ponto, folga, alvo))
 
 
-def preparar (params_v: dict | None, params_c: dict | None, cena_nova: bool) -> pd.DataFrame:
+def preparar (metodo: str, cena_nova: bool) -> pd.DataFrame:
     dv, dc = dados.carregar("vazao"), dados.carregar("custo_fixo")
     dev_v, te_v = validacao.teste_blindado(dv)
     dev_c, _ = validacao.teste_blindado(dc)
     tv, tc = dv.iloc[dev_v], dc.iloc[dev_c]
-    # Simulação com o Open Data das máquinas do teste blindado
     t = dv.iloc[te_v]
     t = t[(t["fonte"] == "opendata") & t["log_custo_fixo"].notna()].assign(etapa="preparar_finalizar")
     if cena_nova:
@@ -122,16 +78,14 @@ def preparar (params_v: dict | None, params_c: dict | None, cena_nova: bool) -> 
     saida = []
     for treino_v, treino_c, alvo_t in partes:
         alvo_t = alvo_t.copy()
-        alvo_t["v_prev"], alvo_t["v_cons"] = prever("vazao", treino_v, alvo_t, params_v, cena_nova)
-        alvo_t["c_prev"], alvo_t["c_cons"] = prever("custo_fixo", treino_c, alvo_t, params_c, cena_nova)
+        alvo_t["v_prev"], alvo_t["v_cons"] = prever("vazao", metodo, treino_v, alvo_t, cena_nova)
+        alvo_t["c_prev"], alvo_t["c_cons"] = prever("custo_fixo", metodo, treino_c, alvo_t, cena_nova)
         saida.append(alvo_t)
         print(f"previsto: {', '.join(sorted(alvo_t['cena'].unique()))}", flush=True)
     t = pd.concat(saida, ignore_index=True)
-    # Uma linha por (máquina, versão, cena): nomes que só diferem antes da normalização viram uma
     chave = ["maquina", "versao_blender_major", "cena"]
     valores = ["custo_fixo_s", "vazao_amostras_pixel_s", "v_prev", "v_cons", "c_prev", "c_cons"]
     t = t.groupby(chave, as_index=False).agg({**{c: "median" for c in valores}, "dispositivo_tipo": "first"})
-    # Só máquinas medidas nas 3 cenas
     completas = t.groupby(["maquina", "versao_blender_major"])["cena"].transform("nunique") == 3
     return t[completas]
 
@@ -151,7 +105,6 @@ def instancia (t: pd.DataFrame, rng: np.random.Generator, m: int, n: int) -> dic
             P[:, k] = sub.loc[cenas, col_c].to_numpy() + trabalho / sub.loc[cenas, col_v].to_numpy()
         return P
 
-    # As três matrizes e os planos avaliados em P_real
     P_real = matriz("custo_fixo_s", "vazao_amostras_pixel_s")
     P_prev, P_cons = matriz("c_prev", "v_prev"), matriz("c_cons", "v_cons")
     planos = {
@@ -172,13 +125,10 @@ def main () -> None:
     ap.add_argument("--maquinas", type=int, default=6)
     ap.add_argument("--frames", type=int, default=200)
     ap.add_argument("--cena-nova", action="store_true")
-    ap.add_argument("--params-vazao", type=Path, default=None)
-    ap.add_argument("--params-custo", type=Path, default=None)
+    ap.add_argument("--metodo", default=None, help="padrão: o do escolha.json")
     args = ap.parse_args()
-    ler = lambda p: json.loads(p.read_text(encoding="utf-8")) if p else None
 
-    # Previsões e instâncias
-    t = preparar(ler(args.params_vazao), ler(args.params_custo), args.cena_nova)
+    t = preparar(args.metodo or metodo_escolhido(), args.cena_nova)
     rng = np.random.default_rng(2026)
     r = pd.DataFrame([instancia(t, rng, args.maquinas, args.frames) for _ in range(args.instancias)])
     destino = dados.PASTA_EXPERIMENTOS / ("tres_matrizes_cena_nova.csv" if args.cena_nova else "tres_matrizes.csv")
@@ -191,10 +141,8 @@ def main () -> None:
     print("makespan / limite inferior (média ± desvio entre instâncias; mediana):")
     for c in colunas:
         print(f"  {c[5:]:20s} {razao[c].mean():6.3f} ± {razao[c].std():.3f}   {razao[c].median():6.3f}")
-    # A ordem de chegada é a referência principal: é o método nativo do Blender
     for base in ["ordem_de_chegada", "contiguo"]:
         ganho = 1 - r["cmax_modelo"] / r[f"cmax_{base}"]
-        # Wilcoxon pareado
         teste = wilcoxon(r["cmax_modelo"], r[f"cmax_{base}"], alternative="less")
         print(f"redução do makespan, modelo vs {base}: {ganho.mean():.1%} ± {ganho.std():.1%}"
               f"  (Wilcoxon pareado, modelo < {base}: p = {teste.pvalue:.2g})")
