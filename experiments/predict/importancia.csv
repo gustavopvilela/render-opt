@@ -1,0 +1,115 @@
+alvo,nivel,nome,colunas,piora_rmse_log,grupo
+vazao,grupo,cena,30,0.11749160000278296,
+vazao,grupo,máquina: especificações,12,0.5848708008896825,
+vazao,grupo,máquina: nome e sistema,12,1.1243017509118107,
+vazao,grupo,versão do Blender,2,0.013091517817565701,
+vazao,coluna,log_triangulos,1,0.00934211201748043,cena
+vazao,coluna,num_instancias,1,0.00029180465260834063,cena
+vazao,coluna,max_niveis_subdiv,1,0.0003386990879405305,cena
+vazao,coluna,objetos_visiveis_camera,1,0.0005303895834623429,cena
+vazao,coluna,profundidade_media,1,0.005876979215977185,cena
+vazao,coluna,usa_particulas,1,0.00020389082197418417,cena
+vazao,coluna,usa_geometry_nodes,1,0.0,cena
+vazao,coluna,cycles_max_bounces,1,0.024126772952944363,cena
+vazao,coluna,cycles_diffuse_bounces,1,0.0003216234894245273,cena
+vazao,coluna,cycles_glossy_bounces,1,3.651496413037414e-06,cena
+vazao,coluna,cycles_transmission_bounces,1,0.0004103019630292026,cena
+vazao,coluna,cycles_transparent_bounces,1,0.00011050121975579863,cena
+vazao,coluna,cycles_volume_bounces,1,0.00033557506363306454,cena
+vazao,coluna,cycles_caustics_refl,1,2.926022770977088e-05,cena
+vazao,coluna,usa_dof,1,0.0,cena
+vazao,coluna,num_materiais,1,0.0001718412410506076,cena
+vazao,coluna,num_nodes_shader,1,0.0005978340752348599,cena
+vazao,coluna,profundidade_max_shader,1,0.0004837417611471384,cena
+vazao,coluna,num_mat_transparentes,1,0.001021324988481842,cena
+vazao,coluna,num_nodes_emissao,1,0.0003602920527532083,cena
+vazao,coluna,num_shaders_caros,1,0.00023863202766907232,cena
+vazao,coluna,num_nodes_volume,1,0.0,cena
+vazao,coluna,num_luzes,1,0.0004145484638617969,cena
+vazao,coluna,num_luz_point,1,9.652554561889737e-05,cena
+vazao,coluna,num_luz_sun,1,-1.022617302162132e-05,cena
+vazao,coluna,num_luz_area,1,0.00028175020277612097,cena
+vazao,coluna,area_emissora_total,1,5.703154181480041e-05,cena
+vazao,coluna,potencia_luzes_total,1,-9.714881591005308e-06,cena
+vazao,coluna,num_nodes_mundo,1,0.005819377529389103,cena
+vazao,coluna,film_transparente,1,2.6990104481927624e-05,cena
+vazao,coluna,dispositivo_tipo,1,0.15854787377756085,máquina: nome e sistema
+vazao,coluna,num_cpu_cores,1,0.17439464899343543,máquina: nome e sistema
+vazao,coluna,num_cpu_threads,1,0.29265631330636704,máquina: nome e sistema
+vazao,coluna,num_cpu_sockets,1,-0.0003618429041548854,máquina: nome e sistema
+vazao,coluna,sistema,1,0.006472292982119021,máquina: nome e sistema
+vazao,coluna,versao_blender_major,1,0.008051745649882047,versão do Blender
+vazao,coluna,versao_blender_minor,1,0.0038038228968235942,versão do Blender
+vazao,coluna,hw_fabricante,1,0.012687201882002097,máquina: nome e sistema
+vazao,coluna,hw_familia,1,0.12796525082259816,máquina: nome e sistema
+vazao,coluna,hw_ano,1,0.10876324793925005,máquina: nome e sistema
+vazao,coluna,hw_classe,1,0.004632191676679475,máquina: nome e sistema
+vazao,coluna,hw_notebook,1,0.005855537914652475,máquina: nome e sistema
+vazao,coluna,hw_nucleos_gpu,1,0.002895600505947238,máquina: nome e sistema
+vazao,coluna,hw_vram_gb,1,0.001694036616684369,máquina: nome e sistema
+vazao,coluna,esp_lancamento,1,0.0031004441436129904,máquina: especificações
+vazao,coluna,esp_tdp_w,1,0.04326789977149455,máquina: especificações
+vazao,coluna,esp_processo_nm,1,0.0005166449055266531,máquina: especificações
+vazao,coluna,esp_clock_ghz,1,0.009845611741335403,máquina: especificações
+vazao,coluna,esp_unidades,1,0.04997452763046264,máquina: especificações
+vazao,coluna,esp_cache_mb,1,0.005344719056039482,máquina: especificações
+vazao,coluna,esp_fp32_tflops,1,0.032508841974756716,máquina: especificações
+vazao,coluna,esp_banda_gbs,1,0.022030959897081058,máquina: especificações
+vazao,coluna,esp_memoria_gb,1,0.017088663711275553,máquina: especificações
+vazao,coluna,esp_rt_cores,1,0.00011883024952101806,máquina: especificações
+vazao,coluna,esp_passmark,1,0.03666079920948,máquina: especificações
+vazao,coluna,esp_arquitetura,1,0.06041440466474213,máquina: especificações
+custo_fixo,grupo,cena,16,1.1510014945435707,
+custo_fixo,grupo,etapa,1,0.11288421542480365,
+custo_fixo,grupo,máquina: especificações,15,0.2880128089561429,
+custo_fixo,grupo,máquina: nome e sistema,15,0.32403527774275376,
+custo_fixo,grupo,versão do Blender,2,0.06873929789081656,
+custo_fixo,coluna,etapa,1,0.11513824415408744,etapa
+custo_fixo,coluna,num_objetos_mesh,1,0.02743698281114091,cena
+custo_fixo,coluna,num_instancias,1,0.08542247796122875,cena
+custo_fixo,coluna,log_triangulos,1,0.002814589309337845,cena
+custo_fixo,coluna,num_modificadores,1,0.25702699830181513,cena
+custo_fixo,coluna,max_niveis_subdiv,1,-5.7006522837688145e-05,cena
+custo_fixo,coluna,usa_geometry_nodes,1,-1.6118470668624596e-05,cena
+custo_fixo,coluna,usa_particulas,1,6.967642854709411e-05,cena
+custo_fixo,coluna,num_texturas,1,0.164144961987179,cena
+custo_fixo,coluna,log_pixels_textura,1,0.1228504776111912,cena
+custo_fixo,coluna,num_materiais,1,0.0005120333000934285,cena
+custo_fixo,coluna,num_nodes_shader,1,0.017889659536659587,cena
+custo_fixo,coluna,num_luzes,1,0.023276417161378803,cena
+custo_fixo,coluna,cycles_denoiser,1,0.0,cena
+custo_fixo,coluna,usa_compositor,1,1.194671427762195e-06,cena
+custo_fixo,coluna,nodes_compositor,1,0.0007750486554196967,cena
+custo_fixo,coluna,pixels_totais,1,2.9378072381791576e-05,cena
+custo_fixo,coluna,dispositivo_tipo,1,0.04033885307891962,máquina: nome e sistema
+custo_fixo,coluna,num_cpu_cores,1,0.05542709264555652,máquina: nome e sistema
+custo_fixo,coluna,num_cpu_threads,1,0.07023407403127338,máquina: nome e sistema
+custo_fixo,coluna,num_cpu_sockets,1,0.00700790481231015,máquina: nome e sistema
+custo_fixo,coluna,sistema,1,0.04409196523856142,máquina: nome e sistema
+custo_fixo,coluna,versao_blender_major,1,0.05826017151908841,versão do Blender
+custo_fixo,coluna,versao_blender_minor,1,0.04536153694674268,versão do Blender
+custo_fixo,coluna,hw_fabricante,1,0.0030636768369452392,máquina: nome e sistema
+custo_fixo,coluna,hw_familia,1,0.0038346083823854182,máquina: nome e sistema
+custo_fixo,coluna,hw_ano,1,0.01838925980063677,máquina: nome e sistema
+custo_fixo,coluna,hw_classe,1,0.0005534467691612699,máquina: nome e sistema
+custo_fixo,coluna,hw_notebook,1,0.0014822099852494718,máquina: nome e sistema
+custo_fixo,coluna,hw_nucleos_gpu,1,-8.429759083850019e-06,máquina: nome e sistema
+custo_fixo,coluna,hw_vram_gb,1,-2.9767101968669607e-05,máquina: nome e sistema
+custo_fixo,coluna,esp_lancamento,1,0.002842205460023628,máquina: especificações
+custo_fixo,coluna,esp_tdp_w,1,0.010264044907300018,máquina: especificações
+custo_fixo,coluna,esp_processo_nm,1,-7.91430791573844e-05,máquina: especificações
+custo_fixo,coluna,esp_clock_ghz,1,0.022061512585450638,máquina: especificações
+custo_fixo,coluna,esp_unidades,1,0.0009362444614439802,máquina: especificações
+custo_fixo,coluna,esp_cache_mb,1,0.014795522338937727,máquina: especificações
+custo_fixo,coluna,esp_fp32_tflops,1,0.0012782505102285624,máquina: especificações
+custo_fixo,coluna,esp_banda_gbs,1,-1.24662344260007e-05,máquina: especificações
+custo_fixo,coluna,esp_memoria_gb,1,0.0012552838026476665,máquina: especificações
+custo_fixo,coluna,esp_rt_cores,1,9.210430159529714e-05,máquina: especificações
+custo_fixo,coluna,esp_passmark,1,0.026191329992572687,máquina: especificações
+custo_fixo,coluna,esp_arquitetura,1,0.00046134454845185856,máquina: especificações
+custo_fixo,coluna,host_familia,1,-0.0004250655895183697,máquina: nome e sistema
+custo_fixo,coluna,host_ano,1,0.010371242367431399,máquina: nome e sistema
+custo_fixo,coluna,host_classe,1,-8.685202948491844e-05,máquina: nome e sistema
+custo_fixo,coluna,host_passmark,1,0.033431117812403155,máquina: especificações
+custo_fixo,coluna,host_clock_ghz,1,0.01210427009149918,máquina: especificações
+custo_fixo,coluna,host_lancamento,1,0.003105512333856786,máquina: especificações
