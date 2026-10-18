@@ -1,0 +1,6 @@
+lgbm      vazao      padrão 0.4229 -> melhor 0.4218 (tentativa 38) -> lgbm_vazao.json
+floresta  vazao      padrão 0.4320 -> melhor 0.4320 (tentativa 0) -> floresta_vazao.json
+rede      vazao      padrão 0.4678 -> melhor 0.4518 (tentativa 24) -> rede_vazao.json
+lgbm      custo_fixo padrão 0.2555 -> melhor 0.2527 (tentativa 31) -> lgbm_custo_fixo.json
+floresta  custo_fixo padrão 0.2798 -> melhor 0.2717 (tentativa 38) -> floresta_custo_fixo.json
+rede      custo_fixo padrão 0.2930 -> melhor 0.2810 (tentativa 17) -> rede_custo_fixo.json

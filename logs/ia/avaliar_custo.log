@@ -1,0 +1,15 @@
+custo_fixo maquina semente 0 pronta
+custo_fixo maquina semente 1 pronta
+custo_fixo maquina semente 2 pronta
+custo_fixo familia semente 0 pronta
+custo_fixo familia semente 1 pronta
+custo_fixo familia semente 2 pronta
+custo_fixo cena semente 0 pronta
+custo_fixo aleatorio semente 0 pronta
+esquema              aleatorio    cena  familia  maquina
+alvo       metodo                                       
+custo_fixo B2           1.1378  0.9525   1.1950   1.1183
+           floresta     0.2622  0.6840   0.3081   0.2713
+           lgbm         0.2248  0.7272   0.2889   0.2529
+           rede         0.2621  1.6222   0.3245   0.2805
+escrito: ../experiments/predict/comparacao_custo.csv

@@ -1,0 +1,11 @@
+vazao      lgbm: teste rmse_log 0.503, fator mediano 1.133; folga 0.293 (cobertura no teste 88.3%), folga de cena nova 0.707
+custo_fixo lgbm: teste rmse_log 0.281, fator mediano 1.120; folga 0.275 (cobertura no teste 89.4%), folga de cena nova 1.469
+         dentro_20pct         fator_mediano           rmse_log        
+alvo       custo_fixo   vazao    custo_fixo   vazao custo_fixo   vazao
+metodo                                                                
+B2             0.1864  0.3209        2.3073  1.4478     1.1164  0.8848
+floresta       0.6880  0.6956        1.1239  1.1239     0.2940  0.5042
+lgbm           0.7084  0.6800        1.1198  1.1332     0.2810  0.5031
+rede           0.6644  0.6370        1.1433  1.1536     0.3014  0.5124
+artefato: ..\models\2026-10-17-ia-v2
+teste blindado: C:\Users\gusta\Documents\TCC\Projeto\render-opt\experiments\predict\teste_blindado.csv

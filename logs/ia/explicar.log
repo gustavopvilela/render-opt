@@ -1,0 +1,44 @@
+vazao pronto
+custo_fixo pronto
+
+custo_fixo (lgbm): piora do rmse_log ao embaralhar
+                   nome  colunas  piora_rmse_log
+                   cena       16          1.1510
+máquina: nome e sistema       15          0.3240
+máquina: especificações       15          0.2880
+                  etapa        1          0.1129
+      versão do Blender        2          0.0687
+                nome                   grupo  piora_rmse_log
+   num_modificadores                    cena          0.2570
+        num_texturas                    cena          0.1641
+  log_pixels_textura                    cena          0.1229
+               etapa                   etapa          0.1151
+      num_instancias                    cena          0.0854
+     num_cpu_threads máquina: nome e sistema          0.0702
+versao_blender_major       versão do Blender          0.0583
+       num_cpu_cores máquina: nome e sistema          0.0554
+versao_blender_minor       versão do Blender          0.0454
+             sistema máquina: nome e sistema          0.0441
+    dispositivo_tipo máquina: nome e sistema          0.0403
+       host_passmark máquina: especificações          0.0334
+
+vazao (lgbm): piora do rmse_log ao embaralhar
+                   nome  colunas  piora_rmse_log
+máquina: nome e sistema       12          1.1243
+máquina: especificações       12          0.5849
+                   cena       30          0.1175
+      versão do Blender        2          0.0131
+              nome                   grupo  piora_rmse_log
+   num_cpu_threads máquina: nome e sistema          0.2927
+     num_cpu_cores máquina: nome e sistema          0.1744
+  dispositivo_tipo máquina: nome e sistema          0.1585
+        hw_familia máquina: nome e sistema          0.1280
+            hw_ano máquina: nome e sistema          0.1088
+   esp_arquitetura máquina: especificações          0.0604
+      esp_unidades máquina: especificações          0.0500
+         esp_tdp_w máquina: especificações          0.0433
+      esp_passmark máquina: especificações          0.0367
+   esp_fp32_tflops máquina: especificações          0.0325
+cycles_max_bounces                    cena          0.0241
+     esp_banda_gbs máquina: especificações          0.0220
+escrito: C:\Users\gusta\Documents\TCC\Projeto\render-opt\experiments\predict\importancia.csv

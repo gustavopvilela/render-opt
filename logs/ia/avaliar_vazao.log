@@ -1,0 +1,15 @@
+vazao maquina semente 0 pronta
+vazao maquina semente 1 pronta
+vazao maquina semente 2 pronta
+vazao familia semente 0 pronta
+vazao familia semente 1 pronta
+vazao familia semente 2 pronta
+vazao cena semente 0 pronta
+vazao aleatorio semente 0 pronta
+esquema         aleatorio    cena  familia  maquina
+alvo  metodo                                       
+vazao B2           0.7994  0.7966   1.3150   0.8645
+      floresta     0.3628  0.4572   0.4841   0.4301
+      lgbm         0.3523  0.4930   0.4930   0.4217
+      rede         0.4203  0.9599   0.5370   0.4611
+escrito: ../experiments/predict/comparacao_vazao.csv

@@ -1,0 +1,12 @@
+previsto: classroom, junkshop, monster
+makespan / limite inferior (média ± desvio entre instâncias; mediana):
+  ordem_de_chegada      1.867 ± 0.671    1.559
+  round_robin          36.823 ± 50.856   14.563
+  contiguo             48.653 ± 78.518   15.555
+  modelo                2.367 ± 3.321    1.354
+  modelo_conservador    2.385 ± 3.375    1.356
+  oraculo               1.015 ± 0.014    1.009
+redução do makespan, modelo vs ordem_de_chegada: -16.5% ± 109.8%  (Wilcoxon pareado, modelo < ordem_de_chegada: p = 0.23)
+redução do makespan, modelo vs contiguo: 83.5% ± 23.3%  (Wilcoxon pareado, modelo < contiguo: p = 1.9e-06)
+erro do makespan prometido pelo plano:  -35.0% ± 27.7%
+escrito: C:\Users\gusta\Documents\TCC\Projeto\render-opt\experiments\predict\tres_matrizes.csv

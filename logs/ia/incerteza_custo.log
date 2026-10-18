@@ -1,0 +1,21 @@
+[máquina nova] lgbm, cobertura desejada 90% (limite superior)
+          cru  conformal
+tipo                    
+CPU     0.561      0.909
+CUDA    0.512      0.888
+HIP     0.545      0.869
+METAL   0.485      0.933
+ONEAPI  0.493      0.822
+OPTIX   0.560      0.919
+todos   0.553      0.906
+folga média (log): 0.2927
+
+[cena nova] cobertura na cena deixada de fora, folga calibrada nas outras
+  classroom_pts  n=  468  sem folga 0.697  folga 1.508 -> 0.989
+  junkshop       n= 5571  sem folga 0.041  folga 1.046 -> 0.119
+  fishy_cat      n=  465  sem folga 0.028  folga 1.513 -> 0.998
+  bmw27          n=  535  sem folga 0.806  folga 1.512 -> 0.994
+  barbershop     n=  384  sem folga 0.000  folga 1.336 -> 0.654
+  pabellon       n=  441  sem folga 0.955  folga 1.515 -> 1.000
+  monster        n= 5362  sem folga 0.993  folga 1.515 -> 1.000
+  classroom      n= 5361  sem folga 0.845  folga 1.514 -> 0.999

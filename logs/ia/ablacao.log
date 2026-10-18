@@ -1,0 +1,24 @@
+vazao maquina semente 0 pronta
+vazao familia semente 0 pronta
+custo_fixo maquina semente 0 pronta
+custo_fixo familia semente 0 pronta
+rmse_log médio (lgbm), avaliado nas mesmas linhas:
+esquema                         familia  maquina
+alvo       variante                             
+custo_fixo A_so_grupos_grandes   0.2706   0.2381
+           B_todas_as_maquinas   0.2770   0.2320
+           C_especificacoes      0.2473   0.2191
+           D_pesos               0.2467   0.2199
+           E_sem_redundancia     0.2451   0.2186
+vazao      A_so_grupos_grandes   0.4162   0.3537
+           B_todas_as_maquinas   0.4167   0.3427
+           C_especificacoes      0.3643   0.2797
+           D_pesos               0.3617   0.2827
+           E_sem_redundancia     0.3646   0.2806
+
+mudança pareada para a variante anterior (média; dobras em que melhorou):
+  custo_fixo familia  B: +0.0064 (4/5)  C: -0.0297 (5/5)  D: -0.0005 (4/5)  E: -0.0016 (4/5)
+  custo_fixo maquina  B: -0.0060 (4/5)  C: -0.0129 (5/5)  D: +0.0007 (1/5)  E: -0.0013 (4/5)
+  vazao      familia  B: +0.0005 (2/5)  C: -0.0524 (5/5)  D: -0.0026 (2/5)  E: +0.0029 (3/5)
+  vazao      maquina  B: -0.0110 (3/5)  C: -0.0630 (5/5)  D: +0.0030 (1/5)  E: -0.0021 (4/5)
+escrito: C:\Users\gusta\Documents\TCC\Projeto\render-opt\experiments\predict\ablacao.csv
