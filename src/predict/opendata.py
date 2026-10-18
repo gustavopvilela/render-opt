@@ -1,16 +1,3 @@
-"""
-O Blender Open Data agregado por (máquina, cena, versão maior do Blender).
-
-Lê o CSV sem agregação gerado por scripts/montar_dataset_opendata.py (uma linha
-por submissão) e produz uma linha por grupo, com a mediana dos alvos.
-
-    python -m predict.opendata --min-medicoes 10
-
-Por que a versão do Blender entra na chave: a mesma placa ficou muito mais
-rápida entre o Blender 3 e o 5. Misturar as versões numa mediana só mistura
-desempenhos diferentes, e a versão vira uma feature sem significado.
-"""
-
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -31,6 +18,8 @@ COLUNAS = [
 ]
 SENTINELA_AMOSTRAS = 2 ** 24
 CORTE_CUSTO_FIXO = 20.0
+Z_MAX = 3.5
+MIN_PARA_FILTRAR = 3
 
 
 def _moda (s: pd.Series):
@@ -41,17 +30,33 @@ def _moda (s: pd.Series):
 def carregar (caminho: Path = CSV_SEM_AGREGAR) -> pd.DataFrame:
     df = pd.read_csv(caminho, usecols=COLUNAS)
     antes = len(df)
-    df = df[df["medido_num_amostras"] < SENTINELA_AMOSTRAS]
-    print(f"submissões: {antes:,}; sentinelas descartadas: {antes - len(df)}")
+    df = df[(df["medido_num_amostras"] < SENTINELA_AMOSTRAS) & (df["vazao_amostras_pixel_s"] > 0)].copy()
+    print(f"submissões: {antes:,}; descartadas (sentinela ou vazão <= 0): {antes - len(df)}")
+    df.loc[df["custo_fixo_s"] <= 0, "custo_fixo_s"] = np.nan
     return df
 
 
-def agregar (df: pd.DataFrame, min_medicoes: int) -> pd.DataFrame:
+def atipicos (log: pd.Series, grupos: list[pd.Series]) -> pd.Series:
+    g = log.groupby(grupos)
+    mediana = g.transform("median")
+    mad = (log - mediana).abs().groupby(grupos).transform("median")
+    z = 0.6745 * (log - mediana) / mad.replace(0, np.nan)
+    return (g.transform("count") >= MIN_PARA_FILTRAR) & (z.abs() > Z_MAX)
+
+
+def agregar (df: pd.DataFrame) -> pd.DataFrame:
+    grupos = [df[c] for c in CHAVE]
+    lv, lc = np.log(df["vazao_amostras_pixel_s"]), np.log(df["custo_fixo_s"])
+    fora_v, fora_c = atipicos(lv, grupos), atipicos(lc, grupos)
+    print(f"atípicos removidos dentro do grupo: vazão {int(fora_v.sum()):,}, custo fixo {int(fora_c.sum()):,}")
+    df = df.assign(log_vazao=lv.where(~fora_v), log_custo_fixo=lc.where(~fora_c))
+
     g = df.groupby(CHAVE, sort=False)
     out = g.agg(
-        n_medicoes=("vazao_amostras_pixel_s", "size"),
-        vazao_amostras_pixel_s=("vazao_amostras_pixel_s", "median"),
-        custo_fixo_s=("custo_fixo_s", "median"),
+        n_medicoes=("log_vazao", "count"),
+        n_medicoes_custo=("log_custo_fixo", "count"),
+        log_vazao=("log_vazao", "median"),
+        log_custo_fixo=("log_custo_fixo", "median"),
         dispositivo_nome=("dispositivo_nome", "first"),
         dispositivo_tipo=("dispositivo_tipo", "first"),
         num_cpu_cores=("num_cpu_cores", "median"),
@@ -61,22 +66,19 @@ def agregar (df: pd.DataFrame, min_medicoes: int) -> pd.DataFrame:
     ).reset_index()
     out["sistema"] = g["sistema"].agg(_moda).values
     out["cpu_nome"] = g["cpu_nome"].agg(_moda).values
-    out = out[out["n_medicoes"] >= min_medicoes].reset_index(drop=True)
+    out = out[out["n_medicoes"] > 0].reset_index(drop=True)
+    out["vazao_amostras_pixel_s"] = np.exp(out["log_vazao"])
+    out["custo_fixo_s"] = np.exp(out["log_custo_fixo"])
 
-    out["log_vazao"] = np.log(out["vazao_amostras_pixel_s"])
-
-    # Custo fixo acima de 20x a mediana da cena vira NaN
-    mediana_cena = out.groupby("cena")["custo_fixo_s"].transform("median")
-    estourado = out["custo_fixo_s"] > CORTE_CUSTO_FIXO * mediana_cena
-    print(f"custo fixo acima de {CORTE_CUSTO_FIXO:.0f}x a mediana da cena: {int(estourado.sum())} linhas -> NaN")
-    out.loc[estourado | (out["custo_fixo_s"] <= 0), "custo_fixo_s"] = np.nan
-    out["log_custo_fixo"] = np.log(out["custo_fixo_s"])
+    estourado = out["custo_fixo_s"] > CORTE_CUSTO_FIXO * out.groupby("cena")["custo_fixo_s"].transform("median")
+    print(f"custo fixo acima de {CORTE_CUSTO_FIXO:.0f}x a mediana da cena: {int(estourado.sum())} grupos -> NaN")
+    out.loc[estourado, ["custo_fixo_s", "log_custo_fixo"]] = np.nan
+    out.loc[estourado, "n_medicoes_custo"] = 0
     return out
 
 
 def acrescentar_hardware (df: pd.DataFrame) -> pd.DataFrame:
     hw = pd.DataFrame([features_hardware(n, t) for n, t in zip(df["dispositivo_nome"], df["dispositivo_tipo"])])
-    # CPU hospedeira
     host = pd.DataFrame([features_hardware(n, "CPU") for n in df["cpu_nome"]])
     host = host[["hw_familia", "hw_ano", "hw_classe"]].add_prefix("host_")
     host.columns = [c.replace("host_hw_", "host_") for c in host.columns]
@@ -87,18 +89,17 @@ def main () -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entrada", type=Path, default=CSV_SEM_AGREGAR)
     ap.add_argument("--saida", type=Path, default=SAIDA)
-    ap.add_argument("--min-medicoes", type=int, default=10)
     args = ap.parse_args()
 
-    # Agregação e atributos de hardware
-    df = acrescentar_hardware(agregar(carregar(args.entrada), args.min_medicoes))
+    df = acrescentar_hardware(agregar(carregar(args.entrada)))
     args.saida.parent.mkdir(parents=True, exist_ok=True)
     df.to_parquet(args.saida, index=False)
 
+    n = df["n_medicoes"]
     print(f"\nlinhas: {len(df):,}   máquinas: {df['maquina'].nunique():,}")
+    print(f"submissões por grupo: 1 -> {(n == 1).mean():.1%}, 2-9 -> {n.between(2, 9).mean():.1%}, >=10 -> {(n >= 10).mean():.1%}")
     print("por tipo:", df["dispositivo_tipo"].value_counts().to_dict())
     print("por versão:", df["versao_blender_major"].value_counts().sort_index().to_dict())
-    print(f"hw_ano preenchido: {df['hw_ano'].notna().mean():.1%}")
     print(f"escrito: {args.saida}")
 
 

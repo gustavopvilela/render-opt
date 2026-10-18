@@ -1,22 +1,9 @@
-"""
-Os dois datasets de treino: medições públicas + atributos das cenas + produção.
-
-    python -m predict.dataset                 # usa data/processed/producao.parquet se existir
-    python -m predict.dataset --sem-producao  # só os dados públicos
-
-treino_vazao.parquet   alvo log_vazao
-treino_custo.parquet   alvo log_custo, uma linha por ETAPA:
-                         carregar            OB (medido ou deduzido) e produção
-                         preparar_finalizar  Open Data e produção
-Valor imputado nunca vira alvo: o 'carregar' imputado do OB e o do Open Data ficam de fora.
-"""
-
 from __future__ import annotations
 import argparse
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from predict import esquema
+from predict import especificacoes, esquema
 
 RAIZ = Path(__file__).resolve().parents[2]
 PUBLICAS = RAIZ / "data" / "processed" / "medicoes_publicas.parquet"
@@ -27,7 +14,6 @@ SAIDA_CUSTO = RAIZ / "data" / "processed" / "treino_custo.parquet"
 
 
 def atributos_de_cena (caminho: Path = ATRIBUTOS) -> pd.DataFrame:
-    """Só as colunas de cena que os modelos usam (mais o trabalho da fórmula), uma linha por cena."""
     a = pd.read_csv(caminho)
     if faltam := [c for c in esquema.COLUNAS_CENA if c not in a.columns]:
         print(f"[aviso] colunas de cena ausentes no CSV (viram NaN): {faltam}")
@@ -40,36 +26,39 @@ def publicas (caminho: Path, atributos: pd.DataFrame) -> pd.DataFrame:
     if sem := sorted(set(d["cena"]) - set(atributos["cena"])):
         print(f"[aviso] cenas sem atributos, linhas descartadas: {sem}")
     d = d.merge(atributos, on="cena", how="inner", validate="many_to_one")
-    d["peso"] = 1.0
-    return d
+    d["peso_base"] = 1.0
+    return especificacoes.acrescentar(d, especificacoes.carregar())
 
 
 def producao (caminho: Path) -> pd.DataFrame | None:
     if not caminho.exists():
         return None
     p = pd.read_parquet(caminho)
-    # Peso: cada (trabalhador, cena) soma 1
-    p["peso"] = 1.0 / p.groupby(["trabalhador_id", "cena_sha256"])["frame"].transform("size")
-    return p
+    p["peso_base"] = 1.0 / p.groupby(["trabalhador_id", "cena_sha256"])["frame"].transform("size")
+    p["n_medicoes"] = p["n_medicoes_custo"] = 1
+    return especificacoes.acrescentar(p, especificacoes.carregar())
 
 
 def montar_vazao (pub: pd.DataFrame, prod: pd.DataFrame | None) -> pd.DataFrame:
     partes = [pub[pub["log_vazao"].notna()]]
     if prod is not None:
         partes.append(prod[prod["log_vazao"].notna()])
-    return pd.concat(partes, ignore_index=True, sort=False)
+    v = pd.concat(partes, ignore_index=True, sort=False)
+    return v.assign(n_obs=v["n_medicoes"].fillna(1).clip(lower=1), peso=v["peso_base"])
 
 
 def montar_custo (pub: pd.DataFrame, prod: pd.DataFrame | None) -> pd.DataFrame:
     ob = pub[(pub["fonte"] == "openbenchmarking") & (pub["carregamento_origem"] == "medido")]
     od = pub[(pub["fonte"] == "opendata") & pub["log_custo_fixo"].notna()]
-    partes = [ob.assign(etapa="carregar", log_custo=np.log(ob["carregamento_s"])),
-              od.assign(etapa="preparar_finalizar", log_custo=od["log_custo_fixo"])]
+    partes = [ob.assign(etapa="carregar", log_custo=np.log(ob["carregamento_s"]), n_obs=ob.get("n_medicoes", 1)),
+              od.assign(etapa="preparar_finalizar", log_custo=od["log_custo_fixo"], n_obs=od.get("n_medicoes_custo", 1))]
     if prod is not None:
-        partes += [prod.assign(etapa="carregar", log_custo=prod["log_carregar"]),
-                   prod.assign(etapa="preparar_finalizar", log_custo=prod["log_preparar"])]
+        partes += [prod.assign(etapa="carregar", log_custo=prod["log_carregar"], n_obs=1),
+                   prod.assign(etapa="preparar_finalizar", log_custo=prod["log_preparar"], n_obs=1)]
     c = pd.concat(partes, ignore_index=True, sort=False)
-    return c[np.isfinite(c["log_custo"])].reset_index(drop=True)
+    c = c[np.isfinite(c["log_custo"])].reset_index(drop=True)
+    c["peso_base"] = c["peso_base"].fillna(1.0) if "peso_base" in c else 1.0
+    return c.assign(n_obs=c["n_obs"].fillna(1).clip(lower=1), peso=c["peso_base"])
 
 
 def resumo (nome: str, d: pd.DataFrame, por: list[str]) -> None:
@@ -86,12 +75,10 @@ def main () -> None:
     ap.add_argument("--sem-producao", action="store_true")
     args = ap.parse_args()
 
-    # Medições públicas com os atributos de cena e produção
     pub = publicas(args.publicas, atributos_de_cena(args.atributos))
     prod = None if args.sem_producao else producao(args.producao)
     print("produção:", "não usada" if prod is None else f"{len(prod):,} relatórios")
 
-    # Datasets de vazão e de custo fixo
     vazao, custo = montar_vazao(pub, prod), montar_custo(pub, prod)
     vazao.to_parquet(SAIDA_VAZAO, index=False)
     custo.to_parquet(SAIDA_CUSTO, index=False)
