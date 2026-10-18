@@ -4,7 +4,7 @@ from typing import Optional
 import numpy as np
 from fastapi import APIRouter, HTTPException
 from comum.protocolo import NovoLote
-from comum.util import sha256_arquivo
+from comum.util import escrever_json_atomico, sha256_arquivo
 import master.database as database
 import master.flamenco as flamenco_sim
 import master.planner as planner
@@ -14,6 +14,7 @@ from master.queries import estimativas as estimativas_sql
 from master.queries import eventos as eventos_sql
 from master.queries import jobs as jobs_sql
 from master.queries import lotes as lotes_sql
+from master.queries import plano as plano_sql
 from master.queries import trabalhadores as trabalhadores_sql
 from master.services.trabalhadores import maquina_de
 
@@ -57,13 +58,27 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
         except ValueError as erro:
             raise HTTPException(422, str(erro)) from None
 
-        P = P + C
         if sorted(i for seq in plano for i in seq) != list(range(len(jobs))):
             raise HTTPException(500, "O plano não cobre cada frame exatamente uma vez")
 
+        cronograma = {}
+        for k, sequencia in enumerate(plano):
+            t = 0.0
+            for posicao, i in enumerate(sequencia, start=1):
+                if flamenco:
+                    inicio, inicio_proc, fim = (float(x[i]) for x in (simulacao.inicio, simulacao.inicio_processamento, simulacao.fim))
+                else:
+                    inicio, inicio_proc = t, t + float(C[i, k])
+                    fim = inicio_proc + float(P[i, k])
+                cronograma[i] = (k, posicao, inicio, inicio_proc - inicio, fim - inicio_proc, fim)
+                t = fim
+
+        P = P + C
+        job_ids = [f"{novo.lote_id}-{c.cena_id}-f{frame:06d}" for c, frame in jobs]
+
         def inserir_job (conexao, i: int, maquina: Optional[str], posicao: Optional[int]) -> None:
             c, frame = jobs[i]
-            job_id = f"{novo.lote_id}-{c.cena_id}-f{frame:06d}"
+            job_id = job_ids[i]
             jobs_sql.inserir(conexao, job_id, novo.lote_id, c.cena_id, c.cena_sha256, c.versao_cena, frame, maquina, posicao)
             estimativas_sql.inserir(
                 conexao,
@@ -82,10 +97,31 @@ def criar_router (config: ConfigMestre, db: database.DB) -> APIRouter:
                     for posicao, i in enumerate(sequencia, start=1):
                         inserir_job(conexao, i, maquinas[k].id, posicao)
 
+            plano_sql.inserir(conexao, [(job_ids[i], novo.lote_id, maquinas[k].id, *resto) for i, (k, *resto) in cronograma.items()])
             eventos_sql.registrar_evento(conexao, agora, TipoEvento.LOTE_CRIADO, dados=novo.model_dump_json())
 
         if not flamenco:
             makespan = max(float(sum(P[i, k] for i in seq)) for k, seq in enumerate(plano))
+
+        escrever_json_atomico(config.pasta_resultados / novo.lote_id / "plano.json", {
+            "lote_id": novo.lote_id,
+            "distribuicao": novo.distribuicao,
+            "criado_em": agora,
+            "makespan_estimado_s": makespan,
+            "maquinas": [{"id": m.id, "dispositivo": m.dispositivo, "hardware": m.hardware} for m in maquinas],
+            "jobs": [{
+                "job_id": job_ids[i],
+                "cena_id": jobs[i][0].cena_id,
+                "frame": jobs[i][1],
+                "maquina": maquinas[k].id,
+                "posicao": posicao,
+                "inicio_s": inicio,
+                "setup_s": setup,
+                "processamento_s": processamento,
+                "fim_s": fim,
+                "estimativas_s": {maquinas[m].id: float(P[i, m]) for m in range(len(maquinas)) if np.isfinite(P[i, m])},
+            } for i, (k, posicao, inicio, setup, processamento, fim) in sorted(cronograma.items())],
+        })
         return {
             "lote_id": novo.lote_id,
             "jobs": len(jobs),
