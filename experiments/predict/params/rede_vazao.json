@@ -1,0 +1,7 @@
+{
+  "camadas": 2,
+  "largura": 491,
+  "alpha": 0.06254424606385087,
+  "learning_rate_init": 0.0038377311652870237,
+  "batch_size": 512
+}
