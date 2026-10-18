@@ -55,6 +55,17 @@ CREATE TABLE IF NOT EXISTS estimativas (
     PRIMARY KEY (job_id, maquina)
 );
     
+CREATE TABLE IF NOT EXISTS plano (
+    job_id TEXT PRIMARY KEY REFERENCES jobs(id),
+    lote_id TEXT NOT NULL REFERENCES lotes(id),
+    maquina TEXT NOT NULL,
+    posicao INTEGER NOT NULL,
+    inicio_s REAL NOT NULL,
+    setup_s REAL NOT NULL,
+    processamento_s REAL NOT NULL,
+    fim_s REAL NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS eventos (
     id INTEGER PRIMARY KEY,
     t REAL NOT NULL,
