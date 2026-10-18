@@ -127,7 +127,7 @@ def entregar (config: ConfigMestre, db: database.DB, trabalhador_id: str) -> Opt
         token = uuid.uuid4().hex
         jobs_sql.marcar_executando(conexao, job["id"], trabalhador_id, token, agora)
         lotes_sql.marcar_inicio(conexao, job["lote_id"], agora)
-        eventos_sql.registrar_evento(conexao, agora, TipoEvento.ENTREGUE, job["id"], trabalhador_id)
+        eventos_sql.registrar_evento(conexao, agora, TipoEvento.ENTREGUE, job["id"], trabalhador_id, token)
 
     return Job(
         job_id=job["id"],
