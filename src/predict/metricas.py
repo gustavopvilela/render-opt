@@ -1,38 +1,26 @@
-"""
-Métricas de predição. Os modelos trabalham em log; as métricas saem nas duas escalas.
-
-Convenção: y e p são log do alvo (real e previsto). Erro relativo = e^(p - y) - 1.
-"""
-
 from __future__ import annotations
 import numpy as np
 
 
-def resumo (y: np.ndarray, p: np.ndarray) -> dict[str, float]:
+def mediana_ponderada (v: np.ndarray, w: np.ndarray) -> float:
+    ordem = np.argsort(v)
+    acumulado = np.cumsum(w[ordem]) / w.sum()
+    return float(v[ordem][min(int(np.searchsorted(acumulado, 0.5)), len(v) - 1)])
+
+
+def resumo (y: np.ndarray, p: np.ndarray, w: np.ndarray | None = None) -> dict[str, float]:
     y, p = np.asarray(y, float), np.asarray(p, float)
+    w = np.ones(len(y)) if w is None else np.asarray(w, float)
     r = p - y
     rel = np.abs(np.expm1(r))
-    ss_tot = float(np.sum((y - y.mean()) ** 2))
+    media_y = np.average(y, weights=w)
+    ss_tot = float(np.sum(w * (y - media_y) ** 2))
     return {
         "n": int(len(y)),
-        "rmse_log": float(np.sqrt(np.mean(r ** 2))),
-        "fator_mediano": float(np.exp(np.median(np.abs(r)))),
-        "erro_rel_mediano": float(np.median(rel)),
-        "mape": float(np.mean(rel)),
-        "dentro_20pct": float(np.mean(rel <= 0.20)),
-        "vies_log": float(np.median(r)),
-        "r2_log": float(1 - np.sum(r ** 2) / ss_tot) if ss_tot > 0 else float("nan"),
+        "rmse_log": float(np.sqrt(np.average(r ** 2, weights=w))),
+        "fator_mediano": float(np.exp(mediana_ponderada(np.abs(r), w))),
+        "erro_rel_mediano": mediana_ponderada(rel, w),
+        "dentro_20pct": float(np.average(rel <= 0.20, weights=w)),
+        "vies_log": mediana_ponderada(r, w),
+        "r2_log": float(1 - np.sum(w * r ** 2) / ss_tot) if ss_tot > 0 else float("nan"),
     }
-
-
-def desfazer_log (p: np.ndarray, residuos_treino: np.ndarray | None = None) -> np.ndarray:
-    """
-    Volta para a escala original.
-
-    Sem resíduos: e^p, que estima a MEDIANA do alvo (é o que o escalonador quer).
-    Com os resíduos do treino: estimador de smearing de Duan (1983), que estima a MÉDIA.
-    """
-    base = np.exp(p)
-    if residuos_treino is None:
-        return base
-    return base * float(np.mean(np.exp(residuos_treino)))
