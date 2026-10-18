@@ -1,0 +1,96 @@
+{
+  "metodo": "lgbm",
+  "ordem": [
+    "lgbm",
+    "floresta",
+    "rede"
+  ],
+  "posto_geral": {
+    "lgbm": 1.3292,
+    "floresta": 1.8208,
+    "rede": 2.85
+  },
+  "posto_por_cenario": {
+    "custo_fixo/cena": {
+      "lgbm": 1.625,
+      "floresta": 1.625,
+      "rede": 2.75
+    },
+    "custo_fixo/familia": {
+      "lgbm": 1.0,
+      "floresta": 2.1333,
+      "rede": 2.8667
+    },
+    "custo_fixo/maquina": {
+      "lgbm": 1.0,
+      "floresta": 2.0,
+      "rede": 3.0
+    },
+    "vazao/cena": {
+      "lgbm": 1.75,
+      "floresta": 1.5,
+      "rede": 2.75
+    },
+    "vazao/familia": {
+      "lgbm": 1.4,
+      "floresta": 1.7333,
+      "rede": 2.8667
+    },
+    "vazao/maquina": {
+      "lgbm": 1.2,
+      "floresta": 1.9333,
+      "rede": 2.8667
+    }
+  },
+  "rmse_medio_por_cenario": {
+    "custo_fixo/cena": {
+      "lgbm": 0.7272,
+      "floresta": 0.684,
+      "rede": 1.6222
+    },
+    "custo_fixo/familia": {
+      "lgbm": 0.2889,
+      "floresta": 0.3081,
+      "rede": 0.3245
+    },
+    "custo_fixo/maquina": {
+      "lgbm": 0.2529,
+      "floresta": 0.2713,
+      "rede": 0.2805
+    },
+    "vazao/cena": {
+      "lgbm": 0.493,
+      "floresta": 0.4572,
+      "rede": 0.9599
+    },
+    "vazao/familia": {
+      "lgbm": 0.493,
+      "floresta": 0.4841,
+      "rede": 0.537
+    },
+    "vazao/maquina": {
+      "lgbm": 0.4217,
+      "floresta": 0.4301,
+      "rede": 0.4611
+    }
+  },
+  "friedman": {
+    "estatistica": 40.22222222222217,
+    "p": 1.844401299352429e-09,
+    "blocos": 36
+  },
+  "wilcoxon_holm": {
+    "lgbm-rede": {
+      "p": 1.2543750926852226e-07,
+      "p_holm": 3.763125278055668e-07
+    },
+    "floresta-rede": {
+      "p": 3.1939998734742403e-06,
+      "p_holm": 6.387999746948481e-06
+    },
+    "lgbm-floresta": {
+      "p": 0.37916652829153463,
+      "p_holm": 0.37916652829153463
+    }
+  }
+}
