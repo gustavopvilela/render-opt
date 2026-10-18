@@ -1,24 +1,3 @@
-"""
-Realimentação: os relatórios que o mestre já grava viram linhas de treino.
-
-    python -m predict.realimentacao --pasta-dados C:/render-opt/mestre
-    python -m predict.realimentacao --pasta-dados C:/render-opt/mestre \
-        --blender "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe"   # extrai o que faltar no cache
-
-Lê (só leitura), dentro de pasta_dados:
-  estado.sqlite3                         jobs (cena_sha256, frame) e trabalhadores (ficha de hardware)
-  resultados/<lote>/relatorios/*.json    um JSON por tentativa de job (comum.protocolo.Relatorio)
-  features/<sha256>.jsonl                atributos dos frames, extraídos pelo mestre ao planejar
-  cenas/<cena_id>.blend                  só com --blender, para frames que não estão no cache
-Escreve data/processed/producao.parquet: uma linha por relatório aproveitado.
-
-Os relógios do relatório (§2.5 do guia):
-  amostragem         = instante_ultima_amostra_s - tempo_preparacao_s   (Sample 0/N .. Sample N/N)
-  carregar           = tempo_total_s - tempo_blender_s                  (abrir o processo, ler o .blend)
-  preparar_finalizar = tempo_blender_s - amostragem                     (BVH, kernels, denoise, gravar)
-  vazão              = amostras_total * pixels_totais / amostragem
-"""
-
 from __future__ import annotations
 import argparse
 import json
@@ -46,7 +25,6 @@ def ler_relatorios (pasta_resultados: Path) -> pd.DataFrame:
 
 
 def ler_banco (caminho_db: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """jobs e trabalhadores, abrindo o SQLite em modo só leitura (o mestre pode estar rodando)."""
     with sqlite3.connect(f"file:{caminho_db.as_posix()}?mode=ro", uri=True) as con:
         jobs = pd.read_sql_query("SELECT id AS job_id, cena_sha256 FROM jobs", con)
         trab = pd.read_sql_query("SELECT id AS trabalhador_id, hardware FROM trabalhadores", con)
@@ -55,7 +33,6 @@ def ler_banco (caminho_db: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def separar_tempos (rel: pd.DataFrame) -> pd.DataFrame:
-    """Calcula os três relógios e o motivo de descarte de cada relatório ('' = aproveitado)."""
     d = rel.copy()
     num = ["tempo_total_s", "tempo_preparacao_s", "tempo_blender_s", "instante_ultima_amostra_s",
            "amostra_final", "amostras_total"]
@@ -77,7 +54,6 @@ def separar_tempos (rel: pd.DataFrame) -> pd.DataFrame:
 
 
 def atributos_dos_frames (d: pd.DataFrame, pasta_dados: Path, blender: str | None) -> pd.DataFrame:
-    """Uma linha de atributos por (cena_sha256, frame), do cache do mestre; extrai o que faltar se houver Blender."""
     partes = []
     for (sha, cena_id), g in d.groupby(["cena_sha256", "cena_id"]):
         frames = sorted(set(int(f) for f in g["frame"]))
@@ -103,7 +79,6 @@ def atributos_dos_frames (d: pd.DataFrame, pasta_dados: Path, blender: str | Non
 
 
 def montar (pasta_dados: Path, blender: str | None) -> pd.DataFrame:
-    # Relatórios, jobs e descartes
     rel = ler_relatorios(pasta_dados / "resultados")
     if rel.empty:
         raise SystemExit(f"Nenhum relatório em {pasta_dados / 'resultados'}")
@@ -115,17 +90,14 @@ def montar (pasta_dados: Path, blender: str | None) -> pd.DataFrame:
     d = d[d["descarte"] == ""].copy()
     d["frame"] = d["frame"].astype(int)
 
-    # Atributos da cena
     cena = atributos_dos_frames(d, pasta_dados, blender)
     d = d.merge(cena, on=["cena_sha256", "frame"], how="inner")
 
-    # Máquina
     fichas = dict(zip(trab["trabalhador_id"], trab["hardware"]))
     maq = pd.DataFrame([linha_maquina(r.dispositivo, fichas.get(r.trabalhador_id, {}), r.versao_blender, r.trabalhador_id)
                         for r in d.itertuples()], index=d.index)
     d = pd.concat([d.drop(columns=[c for c in maq.columns if c in d.columns]), maq], axis=1)
 
-    # Alvos
     d["vazao_amostras_pixel_s"] = d["amostras_total"] * pd.to_numeric(d["pixels_totais"]) / d["amostragem_s"]
     d["log_vazao"] = np.log(d["vazao_amostras_pixel_s"])
     d["log_carregar"] = np.log(d["carregar_s"])
@@ -150,7 +122,6 @@ def main () -> None:
           f"{d['trabalhador_id'].nunique()} trabalhadores, {d['lote_id'].nunique()} lotes")
     print(d.groupby("trabalhador_id")[["carregar_s", "preparar_finalizar_s", "amostragem_s", "tempo_total_s"]]
           .median().round(2).to_string())
-    # Previsto ÷ real do modelo que estava no mestre
     r = np.log(d["tempo_previsto_s"] / d["tempo_total_s"])
     print(f"\nprevisto ÷ real (modelo em uso): fator mediano {np.exp(np.median(np.abs(r))):.3f}, "
           f"viés mediano {np.median(r):+.3f} em log")

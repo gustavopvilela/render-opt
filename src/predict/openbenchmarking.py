@@ -1,19 +1,3 @@
-"""
-O OpenBenchmarking (pts/blender) tratado e somado ao Open Data.
-
-    python -m predict.openbenchmarking                  # gera os dois parquets
-    python -m predict.openbenchmarking --diagnostico    # + validação das imputações
-
-Entradas:
-  data/raw/openbenchmarking_blender_envios_completa_especificacoes.csv   (uma linha por envio x cena x backend)
-  data/raw/cenas_openbenchmarking.csv          (amostras e pixels de cada .blend; scripts/openbenchmarking/cenas.py)
-  data/processed/dataset_opendata_sem_agregar.csv   (só para a razão custo fixo / tempo)
-  data/processed/opendata.parquet              (saída do predict.opendata)
-
-Cada valor que não foi medido diz de onde veio, numa coluna <campo>_origem, e nenhum valor
-imputado entra como alvo de treino: custo_fixo_s fica NaN nas linhas do OpenBenchmarking.
-"""
-
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -31,9 +15,7 @@ SAIDA_OB = RAIZ / "data" / "processed" / "openbenchmarking.parquet"
 SAIDA_FINAL = RAIZ / "data" / "processed" / "medicoes_publicas.parquet"
 
 VERSAO_MINIMA = 3.0
-# Backends com par no Open Data
 TIPO = {"CPU-Only": "CPU", "CUDA": "CUDA", "OptiX": "OPTIX", "HIP": "HIP", "oneAPI": "ONEAPI", "Metal": "METAL"}
-# Nomes das cenas do PTS no dataset
 CENA = {"Junkshop": "junkshop", "Classroom": "classroom_pts", "BMW27": "bmw27", "Fishy Cat": "fishy_cat",
         "Pabellon Barcelona": "pabellon", "Barbershop": "barbershop"}
 SISTEMA = {"Linux": "Linux", "Windows": "Windows", "macOS": "Darwin"}
@@ -50,13 +32,11 @@ COLUNAS = [
 ]
 
 
-# Filtros
 def carregar (caminho: Path = ENVIOS) -> pd.DataFrame:
     return pd.read_csv(caminho, usecols=COLUNAS, low_memory=False)
 
 
 def filtrar (df: pd.DataFrame) -> tuple[pd.DataFrame, list[tuple[str, int]]]:
-    """Aplica os filtros em ordem e devolve o funil (etapa, linhas que sobraram)."""
     funil = [("linhas lidas", len(df))]
 
     def etapa (nome: str, manter: pd.Series) -> None:
@@ -79,21 +59,11 @@ def filtrar (df: pd.DataFrame) -> tuple[pd.DataFrame, list[tuple[str, int]]]:
     df["versao_blender_major"] = df["versao_blender_num"].astype(int)
     df["versao_blender_minor"] = (df["versao_blender_num"] * 10).round().astype(int) % 10
     df["maquina"] = df["dispositivo_render"].map(normalizar) + "|" + df["dispositivo_tipo"]
-    # Núcleos físicos ausentes vêm da base de especificações
     df["num_cpu_cores"] = df["cpu_nucleos_fisicos_completo"].fillna(df["cpu_spec_cores"] * df["cpu_soquetes"])
     return df.reset_index(drop=True), funil
 
 
-# Etapa A: abrir o Blender e carregar a cena
 def carregamento (df: pd.DataFrame) -> pd.DataFrame:
-    """
-    carregamento_s = tempo do processo inteiro - tempo que o Blender reporta (etapa A).
-    observado:  média por rodada, já calculada pelo tabela.py;
-    dedutivo:   envio sem RawString mas com UM tempo total: o 'valor' é a própria rodada;
-    descartado: <= 0 ou >= o próprio render (impossível: erro de medição).
-    Valores com z-escore modificado > 3,5 na (cena, tipo) ficam, marcados em carregamento_atipico.
-    O que continua ausente vai para imputar_carregamento.
-    """
     df = df.copy()
     c = df["carregamento_medio_s"].astype(float)
     origem = pd.Series(np.where(c.notna(), "observado", "ausente"), index=df.index, dtype=object)
@@ -119,7 +89,6 @@ def carregamento (df: pd.DataFrame) -> pd.DataFrame:
 
 
 def imputar_carregamento (df: pd.DataFrame) -> pd.DataFrame:
-    """Mediana da célula (cena, tipo, versão maior), com recuo para (cena, tipo) e para (tipo)."""
     return _imputar_celula(df, "carregamento_s", "carregamento_origem",
                            [["cena", "dispositivo_tipo", "versao_blender_major"], ["cena", "dispositivo_tipo"],
                             ["dispositivo_tipo"]])
@@ -127,10 +96,6 @@ def imputar_carregamento (df: pd.DataFrame) -> pd.DataFrame:
 
 def _imputar_celula (df: pd.DataFrame, col: str, col_origem: str, celulas: list[list[str]],
                      doadores: pd.DataFrame | None = None, rotulo: str = "imputado_celula") -> pd.DataFrame:
-    """
-    Mediana (em log) dos doadores na célula mais fina com >= MIN_DOADORES; recua para a
-    seguinte. 'doadores' permite tirar os doadores de outra tabela (o Open Data usa o OB).
-    """
     df = df.copy()
     doadores = df if doadores is None else doadores
     obs = doadores[doadores[col].notna() & doadores[col_origem].isin(["observado", "dedutivo"])]
@@ -148,9 +113,7 @@ def _imputar_celula (df: pd.DataFrame, col: str, col_origem: str, celulas: list[
     return df
 
 
-# Etapa B: custo fixo do render e vazão
 def fracoes_opendata (caminho: Path = OPENDATA_CSV) -> pd.Series:
-    """Mediana de custo_fixo / tempo_total no Open Data, por (tipo, versão maior), sem a cena."""
     od = pd.read_csv(caminho, usecols=["dispositivo_tipo", "versao_blender_major", "custo_fixo_s",
                                        "medido_total_render_time", "medido_num_amostras"])
     od = od[(od["medido_num_amostras"] < SENTINELA_AMOSTRAS) & (od["custo_fixo_s"] > 0)]
@@ -159,10 +122,6 @@ def fracoes_opendata (caminho: Path = OPENDATA_CSV) -> pd.Series:
 
 
 def vazao (df: pd.DataFrame, fracoes: pd.Series, cenas: pd.DataFrame) -> pd.DataFrame:
-    """
-    v = S*W*H / (T - c), com c imputado por razão: c = fração(tipo, versão) * T.
-    Também grava o limite inferior (c = 0), que não depende de imputação nenhuma.
-    """
     df = df.copy()
     cenas = cenas.assign(cena=cenas["cena_pts"].map(CENA), trabalho=cenas["amostras"] * cenas["pixels_totais"])
     variante = np.where(df["dispositivo_tipo"] == "CPU", "cpu", "gpu")
@@ -178,9 +137,7 @@ def vazao (df: pd.DataFrame, fracoes: pd.Series, cenas: pd.DataFrame) -> pd.Data
     return df
 
 
-# Agregação
 def agregar (df: pd.DataFrame) -> pd.DataFrame:
-    """Uma linha por (máquina, cena, versão maior), como no Open Data."""
     chave = ["maquina", "cena", "versao_blender_major"]
     medido = df["carregamento_origem"].isin(["observado", "dedutivo"])
     df = df.assign(_carreg_medido=df["carregamento_s"].where(medido),
@@ -206,7 +163,6 @@ def agregar (df: pd.DataFrame) -> pd.DataFrame:
     out["cpu_nome"] = g["cpu_modelo"].agg(_moda).values
     out["sistema"] = g["so_familia"].agg(_moda).map(SISTEMA).values
 
-    # Carregamento medido; o imputado só se nada foi medido no grupo
     out["carregamento_s"] = out["carregamento_medido"].fillna(out["carregamento_qualquer"])
     out["carregamento_origem"] = np.where(out["carregamento_medido"].notna(), "medido",
                                           np.where(out["carregamento_s"].notna(), "imputado", "ausente"))
@@ -221,14 +177,7 @@ def agregar (df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-# Junção com o Open Data
 def juntar (ob: pd.DataFrame, od: pd.DataFrame, envios_ob: pd.DataFrame) -> pd.DataFrame:
-    """
-    Concatena as duas fontes. No Open Data:
-    - a máquina passa a usar o nome normalizado (a mesma placa cai no mesmo grupo nas duas fontes);
-    - o carregamento (que ele não mede) é imputado com doadores do OB, na célula
-      (cena, tipo, versão) e, sem doadores da mesma cena, na (tipo, versão).
-    """
     od = od.copy()
     od["maquina"] = od["dispositivo_nome"].map(normalizar) + "|" + od["dispositivo_tipo"]
     od["fonte"] = "opendata"
@@ -243,10 +192,7 @@ def juntar (ob: pd.DataFrame, od: pd.DataFrame, envios_ob: pd.DataFrame) -> pd.D
     return final
 
 
-# Diagnóstico
 def diagnostico (envios: pd.DataFrame, ob: pd.DataFrame, od_agregado: pd.DataFrame, opendata_csv: Path = OPENDATA_CSV) -> None:
-    """Três verificações das imputações."""
-    # Custo fixo por razão, com uma cena do Open Data de fora
     od = pd.read_csv(opendata_csv, usecols=["cena", "dispositivo_tipo", "versao_blender_major", "custo_fixo_s",
                                             "medido_total_render_time", "medido_num_amostras"])
     od = od[(od["medido_num_amostras"] < SENTINELA_AMOSTRAS) & (od["custo_fixo_s"] > 0)]
@@ -261,7 +207,6 @@ def diagnostico (envios: pd.DataFrame, ob: pd.DataFrame, od_agregado: pd.DataFra
         erro_v = np.abs(np.log((T - c) / (T - f * T)))
         print(f"    {cena:10s}  {np.nanmedian(erro_c):18.3f}   {np.nanmedian(erro_v):18.3f}")
 
-    # Ponte: junkshop medido nas duas fontes
     od_j = od_agregado[od_agregado["cena"] == "junkshop"].assign(
         maquina=lambda d: d["dispositivo_nome"].map(normalizar) + "|" + d["dispositivo_tipo"])
     par = ob[ob["cena"] == "junkshop"].merge(od_j[["maquina", "versao_blender_major", "log_vazao"]],
@@ -275,7 +220,6 @@ def diagnostico (envios: pd.DataFrame, ob: pd.DataFrame, od_agregado: pd.DataFra
         e = gg["log_vazao_ob"] - gg["log_vazao_od"]
         print(f"      {tipo:7s} n={len(gg):3d}  viés {e.median():+.3f}")
 
-    # Carregamento por célula sem a cena, com uma cena do OB de fora
     obs = envios[envios["carregamento_origem"].isin(["observado", "dedutivo"])]
     print("\n[3] carregamento imputado sem a cena, cena deixada de fora (OB, por envio)")
     for cena in sorted(obs["cena"].unique()):
@@ -295,23 +239,19 @@ def main () -> None:
     ap.add_argument("--diagnostico", action="store_true")
     args = ap.parse_args()
 
-    # Filtros
     envios, funil = filtrar(carregar(args.envios))
     print("funil:")
     for nome, n in funil:
         print(f"  {nome:40s} {n:7,d}")
 
-    # Etapa A: carregamento observado, deduzido ou imputado
     envios = carregamento(envios)
     print("\ncarregamento antes de imputar:", envios["carregamento_origem"].value_counts().to_dict())
     envios = imputar_carregamento(envios)
     print("carregamento depois de imputar:", envios["carregamento_origem"].value_counts().to_dict())
     print(f"carregamento atípico (marcado, mantido): {int(envios['carregamento_atipico'].sum())}")
-    # Etapa B: vazão com o custo fixo imputado por razão
     envios = vazao(envios, fracoes_opendata(args.opendata_csv), pd.read_csv(args.cenas))
     print(f"vazão calculada: {envios['vazao_amostras_pixel_s'].notna().mean():.1%} das linhas")
 
-    # Agregação e atributos de hardware
     ob = acrescentar_hardware(agregar(envios))
     SAIDA_OB.parent.mkdir(parents=True, exist_ok=True)
     ob.to_parquet(SAIDA_OB, index=False)
@@ -321,7 +261,6 @@ def main () -> None:
     print("por versão:", ob["versao_blender_major"].value_counts().sort_index().to_dict())
     print(f"hw_ano preenchido: {ob['hw_ano'].notna().mean():.1%}")
 
-    # Junção com o Open Data
     od = pd.read_parquet(args.opendata)
     final = juntar(ob, od, envios)
     final.to_parquet(SAIDA_FINAL, index=False)

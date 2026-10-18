@@ -1,21 +1,3 @@
-"""
-Atributos das cenas públicas, lidos pelo MESMO extrator e pelo MESMO caminho que o mestre usa.
-
-    python -m predict.atributos_cenas --blender "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe" \
-        --cena classroom=../scenes/classroom/classroom/main.blend \
-        --cena junkshop=../scenes/junkshop/junkshop/main.blend \
-        --cena monster=../scenes/monster/monster/main.blend \
-        --cena bmw27=D:/pts/bmw27_cpu.blend \
-        --cena classroom_pts=D:/pts/isolado/classroom_cpu.blend \
-        --cena fishy_cat=D:/pts/fishy_cat_cpu.blend \
-        --cena pabellon=D:/pts/pavillon_barcelone_cpu.blend \
-        --cena barbershop=D:/pts/barbershop_interior_cpu.blend
-
-Saída: data/raw/atributos_cenas.csv, uma linha por cena (frame 1), com 'cena',
-'cena_sha256' e todas as colunas do extrator. Os nomes das cenas são os do
-dataset (opendata.py e openbenchmarking.CENA).
-"""
-
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -32,7 +14,6 @@ FRAME = 1
 
 def extrair_cena (blender: str, nome: str, blend: Path, pasta_cache: Path) -> dict:
     linha = features_cena.extrair(blender, blend, [FRAME], pasta_cache).iloc[0].to_dict()
-    # O nome do dataset substitui o nome interno da cena que o extrator devolve
     return {**linha, "cena": nome, "cena_sha256": sha256_arquivo(blend)}
 
 

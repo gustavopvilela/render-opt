@@ -1,18 +1,3 @@
-"""
-O ruído de medição: quanto variam submissões da MESMA máquina, na MESMA cena,
-na MESMA versão maior do Blender. Nenhum modelo explica essa variação.
-
-    python -m predict.piso --alvo vazao
-
-Duas leituras, que não devem ser confundidas:
-
-- O modelo é avaliado contra a MEDIANA de cada grupo. A mediana de 10 ou mais
-  submissões já filtra boa parte do ruído, então o erro do modelo PODE ficar
-  abaixo do ruído de uma submissão sem que isso seja vazamento.
-- O escalonador enfrenta UM render, não a mediana. O erro que ele sente é,
-  aproximadamente, sqrt(rmse_modelo^2 + sigma_ruido^2) em log.
-"""
-
 from __future__ import annotations
 import argparse
 from pathlib import Path
