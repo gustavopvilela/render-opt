@@ -1,0 +1,5 @@
+# Dependencias minimas de uma maquina que so renderiza (versoes iguais as do requirements.txt).
+httpx2==2.13.1
+pydantic==2.13.5
+PyYAML==6.0.3
+psutil==7.2.2
